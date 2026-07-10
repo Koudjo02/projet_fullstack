@@ -1,0 +1,152 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum TournamentRole {
+  PLAYER
+  CAPTAIN
+}
+
+enum TeamRole {
+  CAPTAIN
+  COACH
+  PLAYER
+}
+
+enum Position {
+  GA
+  DC
+  LAD
+  LAG
+  MD
+  MC
+  MO
+  AD
+  AG
+  ATT
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  VOICE
+  STICKER
+}
+
+model User {
+  id                 Int                      @id @default(autoincrement())
+  email              String                   @unique
+  name               String?
+  username           String?                  @unique
+  bio                String?
+  avatarUrl          String?
+  createdTournaments Tournament[]             @relation("TournamentAdmin")
+  participations     TournamentParticipant[]
+  teamMemberships    TeamMember[]
+  messages           Message[]
+  createdAt          DateTime                 @default(now())
+}
+
+model Tournament {
+  id           Int                      @id @default(autoincrement())
+  name         String
+  admin        User                     @relation("TournamentAdmin", fields: [adminId], references: [id])
+  adminId      Int
+  participants TournamentParticipant[]
+  teams        Team[]
+  matches      Match[]
+  createdAt    DateTime                 @default(now())
+}
+
+model TournamentParticipant {
+  id           Int            @id @default(autoincrement())
+  tournament   Tournament     @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  tournamentId Int
+  user         User           @relation(fields: [userId], references: [id])
+  userId       Int
+  role         TournamentRole @default(PLAYER)
+  team         Team?          @relation(fields: [teamId], references: [id])
+  teamId       Int?
+
+  @@unique([tournamentId, userId])
+}
+
+model Team {
+  id           Int                     @id @default(autoincrement())
+  name         String
+  logoUrl      String?
+  tournament   Tournament              @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  tournamentId Int
+  members      TeamMember[]
+  participants TournamentParticipant[]
+  homeMatches  Match[]                 @relation("HomeMatches")
+  awayMatches  Match[]                 @relation("AwayMatches")
+  lineups      Lineup[]
+  messages     Message[]
+  createdAt    DateTime                @default(now())
+}
+
+model TeamMember {
+  id     Int      @id @default(autoincrement())
+  team   Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  teamId Int
+  user   User     @relation(fields: [userId], references: [id])
+  userId Int
+  role   TeamRole @default(PLAYER)
+
+  @@unique([teamId, userId])
+}
+
+model Match {
+  id           Int        @id @default(autoincrement())
+  tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  tournamentId Int
+  homeTeam     Team       @relation("HomeMatches", fields: [homeTeamId], references: [id])
+  homeTeamId   Int
+  awayTeam     Team       @relation("AwayMatches", fields: [awayTeamId], references: [id])
+  awayTeamId   Int
+  matchDate    DateTime?
+  lineups      Lineup[]
+  createdAt    DateTime   @default(now())
+}
+
+model Lineup {
+  id        Int          @id @default(autoincrement())
+  match     Match        @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  matchId   Int
+  team      Team         @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  teamId    Int
+  createdBy Int
+  slots     LineupSlot[]
+  updatedAt DateTime     @updatedAt
+  createdAt DateTime     @default(now())
+
+  @@unique([matchId, teamId])
+}
+
+model LineupSlot {
+  id           Int       @id @default(autoincrement())
+  lineup       Lineup    @relation(fields: [lineupId], references: [id], onDelete: Cascade)
+  lineupId     Int
+  userId       Int
+  jerseyNumber Int?
+  position     Position?
+  isStarter    Boolean   @default(true)
+}
+
+model Message {
+  id        Int         @id @default(autoincrement())
+  team      Team        @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  teamId    Int
+  sender    User        @relation(fields: [senderId], references: [id])
+  senderId  Int
+  type      MessageType @default(TEXT)
+  content   String?
+  createdAt DateTime    @default(now())
+}
