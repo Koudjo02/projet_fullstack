@@ -52,6 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  Conversation: 'Conversation',
+  DirectMessage: 'DirectMessage',
   Tournament: 'Tournament',
   TournamentParticipant: 'TournamentParticipant',
   Team: 'Team',
@@ -85,15 +87,44 @@ export const UserScalarFieldEnum = {
   username: 'username',
   bio: 'bio',
   avatarUrl: 'avatarUrl',
+  phoneNumber: 'phoneNumber',
+  gender: 'gender',
+  city: 'city',
+  district: 'district',
+  favoritePosition: 'favoritePosition',
+  profileCompleted: 'profileCompleted',
   createdAt: 'createdAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const ConversationScalarFieldEnum = {
+  id: 'id',
+  userAId: 'userAId',
+  userBId: 'userBId',
+  createdAt: 'createdAt'
+} as const
+
+export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]
+
+
+export const DirectMessageScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  senderId: 'senderId',
+  type: 'type',
+  content: 'content',
+  createdAt: 'createdAt'
+} as const
+
+export type DirectMessageScalarFieldEnum = (typeof DirectMessageScalarFieldEnum)[keyof typeof DirectMessageScalarFieldEnum]
+
+
 export const TournamentScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  inviteCode: 'inviteCode',
   adminId: 'adminId',
   createdAt: 'createdAt'
 } as const

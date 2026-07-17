@@ -9,6 +9,8 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User.js'
+export type * from './models/Conversation.js'
+export type * from './models/DirectMessage.js'
 export type * from './models/Tournament.js'
 export type * from './models/TournamentParticipant.js'
 export type * from './models/Team.js'

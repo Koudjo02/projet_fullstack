@@ -11,7 +11,8 @@
 
 export const TournamentRole = {
   PLAYER: 'PLAYER',
-  CAPTAIN: 'CAPTAIN'
+  CAPTAIN: 'CAPTAIN',
+  COACH: 'COACH'
 } as const
 
 export type TournamentRole = (typeof TournamentRole)[keyof typeof TournamentRole]
@@ -50,3 +51,21 @@ export const MessageType = {
 } as const
 
 export type MessageType = (typeof MessageType)[keyof typeof MessageType]
+
+
+export const Gender = {
+  HOMME: 'HOMME',
+  FEMME: 'FEMME'
+} as const
+
+export type Gender = (typeof Gender)[keyof typeof Gender]
+
+
+export const FavoritePosition = {
+  GARDIEN: 'GARDIEN',
+  DEFENSEUR: 'DEFENSEUR',
+  MILIEU: 'MILIEU',
+  ATTAQUANT: 'ATTAQUANT'
+} as const
+
+export type FavoritePosition = (typeof FavoritePosition)[keyof typeof FavoritePosition]

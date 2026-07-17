@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { GoogleStrategy } from './strategies/google.strategy';
+import { JwtStrategy } from './strategies/jwt.strategy';
 import { PrismaService } from '../prisma.service';
 
 @Module({
@@ -13,11 +14,13 @@ import { PrismaService } from '../prisma.service';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         secret: configService.get<string>('JWT_SECRET'),
-        signOptions: { expiresIn: configService.get<string>('JWT_EXPIRES_IN') as any },
+        signOptions: {
+          expiresIn: configService.get<string>('JWT_EXPIRES_IN') as any,
+        },
       }),
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, GoogleStrategy, PrismaService],
+  providers: [AuthService, GoogleStrategy, JwtStrategy, PrismaService], // JwtStrategy ajouté ici
 })
 export class AuthModule {}

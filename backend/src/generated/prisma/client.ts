@@ -45,6 +45,16 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
+ * Model Conversation
+ * 
+ */
+export type Conversation = Prisma.ConversationModel
+/**
+ * Model DirectMessage
+ * 
+ */
+export type DirectMessage = Prisma.DirectMessageModel
+/**
  * Model Tournament
  * 
  */

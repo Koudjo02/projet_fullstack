@@ -478,10 +478,6 @@ export type MessageUncheckedUpdateManyWithoutTeamNestedInput = {
   deleteMany?: Prisma.MessageScalarWhereInput | Prisma.MessageScalarWhereInput[]
 }
 
-export type EnumMessageTypeFieldUpdateOperationsInput = {
-  set?: $Enums.MessageType
-}
-
 export type MessageCreateWithoutSenderInput = {
   type?: $Enums.MessageType
   content?: string | null

@@ -11,6 +11,7 @@ datasource db {
 enum TournamentRole {
   PLAYER
   CAPTAIN
+  COACH
 }
 
 enum TeamRole {
@@ -39,23 +40,84 @@ enum MessageType {
   STICKER
 }
 
+enum Gender {
+  HOMME
+  FEMME
+}
+
+enum FavoritePosition {
+  GARDIEN
+  DEFENSEUR
+  MILIEU
+  ATTAQUANT
+}
+
 model User {
   id                 Int                      @id @default(autoincrement())
   email              String                   @unique
   name               String?
-  username           String?                  @unique
+  username            String?                 @unique
   bio                String?
   avatarUrl          String?
+  phoneNumber        String?                  @unique
+  gender             Gender?
+  city               String?
+  district           String?
+  favoritePosition   FavoritePosition?
+  profileCompleted   Boolean                  @default(false)
   createdTournaments Tournament[]             @relation("TournamentAdmin")
   participations     TournamentParticipant[]
   teamMemberships    TeamMember[]
   messages           Message[]
+  directMessages     DirectMessage[]          // messages privés envoyés
+  conversationsAsA   Conversation[]           @relation("ConversationUserA")
+  conversationsAsB   Conversation[]           @relation("ConversationUserB")
   createdAt          DateTime                 @default(now())
 }
+
+// Une conversation privée entre exactement 2 utilisateurs.
+// userA/userB sont toujours ordonnés par id croissant (géré dans le service)
+// pour éviter d'avoir 2 conversations différentes entre les mêmes personnes.
+model Conversation {
+  id        Int             @id @default(autoincrement())
+  userA     User            @relation("ConversationUserA", fields: [userAId], references: [id])
+  userAId   Int
+  userB     User            @relation("ConversationUserB", fields: [userBId], references: [id])
+  userBId   Int
+  messages  DirectMessage[]
+  createdAt DateTime        @default(now())
+
+  @@unique([userAId, userBId])
+}
+model Message {
+  id        Int         @id @default(autoincrement())
+  team      Team        @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  teamId    Int
+  sender    User        @relation(fields: [senderId], references: [id])
+  senderId  Int
+  type      MessageType @default(TEXT)
+  content   String?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model DirectMessage {
+  id             Int          @id @default(autoincrement())
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversationId Int
+  sender         User         @relation(fields: [senderId], references: [id])
+  senderId       Int
+  type           MessageType  @default(TEXT)
+  content        String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
 
 model Tournament {
   id           Int                      @id @default(autoincrement())
   name         String
+  inviteCode   String                   @unique
   admin        User                     @relation("TournamentAdmin", fields: [adminId], references: [id])
   adminId      Int
   participants TournamentParticipant[]
@@ -63,6 +125,7 @@ model Tournament {
   matches      Match[]
   createdAt    DateTime                 @default(now())
 }
+
 
 model TournamentParticipant {
   id           Int            @id @default(autoincrement())

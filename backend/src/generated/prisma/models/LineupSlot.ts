@@ -444,10 +444,6 @@ export type NullableEnumPositionFieldUpdateOperationsInput = {
   set?: $Enums.Position | null
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type LineupSlotCreateWithoutLineupInput = {
   userId: number
   jerseyNumber?: number | null
