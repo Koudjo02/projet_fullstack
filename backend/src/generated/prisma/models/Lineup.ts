@@ -28,86 +28,86 @@ export type AggregateLineup = {
 
 export type LineupAvgAggregateOutputType = {
   id: number | null
+  createdBy: number | null
   matchId: number | null
   teamId: number | null
-  createdBy: number | null
 }
 
 export type LineupSumAggregateOutputType = {
   id: number | null
+  createdBy: number | null
   matchId: number | null
   teamId: number | null
-  createdBy: number | null
 }
 
 export type LineupMinAggregateOutputType = {
   id: number | null
+  createdBy: number | null
   matchId: number | null
   teamId: number | null
-  createdBy: number | null
-  updatedAt: Date | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type LineupMaxAggregateOutputType = {
   id: number | null
+  createdBy: number | null
   matchId: number | null
   teamId: number | null
-  createdBy: number | null
-  updatedAt: Date | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type LineupCountAggregateOutputType = {
   id: number
+  createdBy: number
   matchId: number
   teamId: number
-  createdBy: number
-  updatedAt: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
 
 export type LineupAvgAggregateInputType = {
   id?: true
+  createdBy?: true
   matchId?: true
   teamId?: true
-  createdBy?: true
 }
 
 export type LineupSumAggregateInputType = {
   id?: true
+  createdBy?: true
   matchId?: true
   teamId?: true
-  createdBy?: true
 }
 
 export type LineupMinAggregateInputType = {
   id?: true
+  createdBy?: true
   matchId?: true
   teamId?: true
-  createdBy?: true
-  updatedAt?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type LineupMaxAggregateInputType = {
   id?: true
+  createdBy?: true
   matchId?: true
   teamId?: true
-  createdBy?: true
-  updatedAt?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type LineupCountAggregateInputType = {
   id?: true
+  createdBy?: true
   matchId?: true
   teamId?: true
-  createdBy?: true
-  updatedAt?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -199,11 +199,11 @@ export type LineupGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 
 export type LineupGroupByOutputType = {
   id: number
+  createdBy: number
   matchId: number
   teamId: number
-  createdBy: number
-  updatedAt: Date
   createdAt: Date
+  updatedAt: Date
   _count: LineupCountAggregateOutputType | null
   _avg: LineupAvgAggregateOutputType | null
   _sum: LineupSumAggregateOutputType | null
@@ -231,11 +231,11 @@ export type LineupWhereInput = {
   OR?: Prisma.LineupWhereInput[]
   NOT?: Prisma.LineupWhereInput | Prisma.LineupWhereInput[]
   id?: Prisma.IntFilter<"Lineup"> | number
+  createdBy?: Prisma.IntFilter<"Lineup"> | number
   matchId?: Prisma.IntFilter<"Lineup"> | number
   teamId?: Prisma.IntFilter<"Lineup"> | number
-  createdBy?: Prisma.IntFilter<"Lineup"> | number
-  updatedAt?: Prisma.DateTimeFilter<"Lineup"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Lineup"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Lineup"> | Date | string
   match?: Prisma.XOR<Prisma.MatchScalarRelationFilter, Prisma.MatchWhereInput>
   team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
   slots?: Prisma.LineupSlotListRelationFilter
@@ -243,11 +243,11 @@ export type LineupWhereInput = {
 
 export type LineupOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   matchId?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   match?: Prisma.MatchOrderByWithRelationInput
   team?: Prisma.TeamOrderByWithRelationInput
   slots?: Prisma.LineupSlotOrderByRelationAggregateInput
@@ -259,11 +259,11 @@ export type LineupWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.LineupWhereInput | Prisma.LineupWhereInput[]
   OR?: Prisma.LineupWhereInput[]
   NOT?: Prisma.LineupWhereInput | Prisma.LineupWhereInput[]
+  createdBy?: Prisma.IntFilter<"Lineup"> | number
   matchId?: Prisma.IntFilter<"Lineup"> | number
   teamId?: Prisma.IntFilter<"Lineup"> | number
-  createdBy?: Prisma.IntFilter<"Lineup"> | number
-  updatedAt?: Prisma.DateTimeFilter<"Lineup"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Lineup"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Lineup"> | Date | string
   match?: Prisma.XOR<Prisma.MatchScalarRelationFilter, Prisma.MatchWhereInput>
   team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
   slots?: Prisma.LineupSlotListRelationFilter
@@ -271,11 +271,11 @@ export type LineupWhereUniqueInput = Prisma.AtLeast<{
 
 export type LineupOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   matchId?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.LineupCountOrderByAggregateInput
   _avg?: Prisma.LineupAvgOrderByAggregateInput
   _max?: Prisma.LineupMaxOrderByAggregateInput
@@ -288,17 +288,17 @@ export type LineupScalarWhereWithAggregatesInput = {
   OR?: Prisma.LineupScalarWhereWithAggregatesInput[]
   NOT?: Prisma.LineupScalarWhereWithAggregatesInput | Prisma.LineupScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Lineup"> | number
+  createdBy?: Prisma.IntWithAggregatesFilter<"Lineup"> | number
   matchId?: Prisma.IntWithAggregatesFilter<"Lineup"> | number
   teamId?: Prisma.IntWithAggregatesFilter<"Lineup"> | number
-  createdBy?: Prisma.IntWithAggregatesFilter<"Lineup"> | number
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Lineup"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Lineup"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Lineup"> | Date | string
 }
 
 export type LineupCreateInput = {
   createdBy: number
-  updatedAt?: Date | string
   createdAt?: Date | string
+  updatedAt?: Date | string
   match: Prisma.MatchCreateNestedOneWithoutLineupsInput
   team: Prisma.TeamCreateNestedOneWithoutLineupsInput
   slots?: Prisma.LineupSlotCreateNestedManyWithoutLineupInput
@@ -306,18 +306,18 @@ export type LineupCreateInput = {
 
 export type LineupUncheckedCreateInput = {
   id?: number
+  createdBy: number
   matchId: number
   teamId: number
-  createdBy: number
-  updatedAt?: Date | string
   createdAt?: Date | string
+  updatedAt?: Date | string
   slots?: Prisma.LineupSlotUncheckedCreateNestedManyWithoutLineupInput
 }
 
 export type LineupUpdateInput = {
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   match?: Prisma.MatchUpdateOneRequiredWithoutLineupsNestedInput
   team?: Prisma.TeamUpdateOneRequiredWithoutLineupsNestedInput
   slots?: Prisma.LineupSlotUpdateManyWithoutLineupNestedInput
@@ -325,36 +325,36 @@ export type LineupUpdateInput = {
 
 export type LineupUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.IntFieldUpdateOperationsInput | number
   matchId?: Prisma.IntFieldUpdateOperationsInput | number
   teamId?: Prisma.IntFieldUpdateOperationsInput | number
-  createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   slots?: Prisma.LineupSlotUncheckedUpdateManyWithoutLineupNestedInput
 }
 
 export type LineupCreateManyInput = {
   id?: number
+  createdBy: number
   matchId: number
   teamId: number
-  createdBy: number
-  updatedAt?: Date | string
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type LineupUpdateManyMutationInput = {
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LineupUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.IntFieldUpdateOperationsInput | number
   matchId?: Prisma.IntFieldUpdateOperationsInput | number
   teamId?: Prisma.IntFieldUpdateOperationsInput | number
-  createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LineupListRelationFilter = {
@@ -374,43 +374,43 @@ export type LineupMatchIdTeamIdCompoundUniqueInput = {
 
 export type LineupCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   matchId?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type LineupAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   matchId?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrder
 }
 
 export type LineupMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   matchId?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type LineupMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   matchId?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type LineupSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
   matchId?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrder
 }
 
 export type LineupScalarRelationFilter = {
@@ -518,18 +518,18 @@ export type LineupUpdateOneRequiredWithoutSlotsNestedInput = {
 
 export type LineupCreateWithoutTeamInput = {
   createdBy: number
-  updatedAt?: Date | string
   createdAt?: Date | string
+  updatedAt?: Date | string
   match: Prisma.MatchCreateNestedOneWithoutLineupsInput
   slots?: Prisma.LineupSlotCreateNestedManyWithoutLineupInput
 }
 
 export type LineupUncheckedCreateWithoutTeamInput = {
   id?: number
-  matchId: number
   createdBy: number
-  updatedAt?: Date | string
+  matchId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
   slots?: Prisma.LineupSlotUncheckedCreateNestedManyWithoutLineupInput
 }
 
@@ -564,27 +564,27 @@ export type LineupScalarWhereInput = {
   OR?: Prisma.LineupScalarWhereInput[]
   NOT?: Prisma.LineupScalarWhereInput | Prisma.LineupScalarWhereInput[]
   id?: Prisma.IntFilter<"Lineup"> | number
+  createdBy?: Prisma.IntFilter<"Lineup"> | number
   matchId?: Prisma.IntFilter<"Lineup"> | number
   teamId?: Prisma.IntFilter<"Lineup"> | number
-  createdBy?: Prisma.IntFilter<"Lineup"> | number
-  updatedAt?: Prisma.DateTimeFilter<"Lineup"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Lineup"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Lineup"> | Date | string
 }
 
 export type LineupCreateWithoutMatchInput = {
   createdBy: number
-  updatedAt?: Date | string
   createdAt?: Date | string
+  updatedAt?: Date | string
   team: Prisma.TeamCreateNestedOneWithoutLineupsInput
   slots?: Prisma.LineupSlotCreateNestedManyWithoutLineupInput
 }
 
 export type LineupUncheckedCreateWithoutMatchInput = {
   id?: number
-  teamId: number
   createdBy: number
-  updatedAt?: Date | string
+  teamId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
   slots?: Prisma.LineupSlotUncheckedCreateNestedManyWithoutLineupInput
 }
 
@@ -616,19 +616,19 @@ export type LineupUpdateManyWithWhereWithoutMatchInput = {
 
 export type LineupCreateWithoutSlotsInput = {
   createdBy: number
-  updatedAt?: Date | string
   createdAt?: Date | string
+  updatedAt?: Date | string
   match: Prisma.MatchCreateNestedOneWithoutLineupsInput
   team: Prisma.TeamCreateNestedOneWithoutLineupsInput
 }
 
 export type LineupUncheckedCreateWithoutSlotsInput = {
   id?: number
+  createdBy: number
   matchId: number
   teamId: number
-  createdBy: number
-  updatedAt?: Date | string
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type LineupCreateOrConnectWithoutSlotsInput = {
@@ -649,85 +649,85 @@ export type LineupUpdateToOneWithWhereWithoutSlotsInput = {
 
 export type LineupUpdateWithoutSlotsInput = {
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   match?: Prisma.MatchUpdateOneRequiredWithoutLineupsNestedInput
   team?: Prisma.TeamUpdateOneRequiredWithoutLineupsNestedInput
 }
 
 export type LineupUncheckedUpdateWithoutSlotsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  createdBy?: Prisma.IntFieldUpdateOperationsInput | number
   matchId?: Prisma.IntFieldUpdateOperationsInput | number
   teamId?: Prisma.IntFieldUpdateOperationsInput | number
-  createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LineupCreateManyTeamInput = {
   id?: number
-  matchId: number
   createdBy: number
-  updatedAt?: Date | string
+  matchId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type LineupUpdateWithoutTeamInput = {
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   match?: Prisma.MatchUpdateOneRequiredWithoutLineupsNestedInput
   slots?: Prisma.LineupSlotUpdateManyWithoutLineupNestedInput
 }
 
 export type LineupUncheckedUpdateWithoutTeamInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  matchId?: Prisma.IntFieldUpdateOperationsInput | number
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  matchId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   slots?: Prisma.LineupSlotUncheckedUpdateManyWithoutLineupNestedInput
 }
 
 export type LineupUncheckedUpdateManyWithoutTeamInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  matchId?: Prisma.IntFieldUpdateOperationsInput | number
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  matchId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LineupCreateManyMatchInput = {
   id?: number
-  teamId: number
   createdBy: number
-  updatedAt?: Date | string
+  teamId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type LineupUpdateWithoutMatchInput = {
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   team?: Prisma.TeamUpdateOneRequiredWithoutLineupsNestedInput
   slots?: Prisma.LineupSlotUpdateManyWithoutLineupNestedInput
 }
 
 export type LineupUncheckedUpdateWithoutMatchInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  teamId?: Prisma.IntFieldUpdateOperationsInput | number
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   slots?: Prisma.LineupSlotUncheckedUpdateManyWithoutLineupNestedInput
 }
 
 export type LineupUncheckedUpdateManyWithoutMatchInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  teamId?: Prisma.IntFieldUpdateOperationsInput | number
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  teamId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -763,11 +763,11 @@ export type LineupCountOutputTypeCountSlotsArgs<ExtArgs extends runtime.Types.Ex
 
 export type LineupSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  createdBy?: boolean
   matchId?: boolean
   teamId?: boolean
-  createdBy?: boolean
-  updatedAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   match?: boolean | Prisma.MatchDefaultArgs<ExtArgs>
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
   slots?: boolean | Prisma.Lineup$slotsArgs<ExtArgs>
@@ -776,36 +776,36 @@ export type LineupSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 
 export type LineupSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  createdBy?: boolean
   matchId?: boolean
   teamId?: boolean
-  createdBy?: boolean
-  updatedAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   match?: boolean | Prisma.MatchDefaultArgs<ExtArgs>
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lineup"]>
 
 export type LineupSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  createdBy?: boolean
   matchId?: boolean
   teamId?: boolean
-  createdBy?: boolean
-  updatedAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   match?: boolean | Prisma.MatchDefaultArgs<ExtArgs>
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lineup"]>
 
 export type LineupSelectScalar = {
   id?: boolean
+  createdBy?: boolean
   matchId?: boolean
   teamId?: boolean
-  createdBy?: boolean
-  updatedAt?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type LineupOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "matchId" | "teamId" | "createdBy" | "updatedAt" | "createdAt", ExtArgs["result"]["lineup"]>
+export type LineupOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdBy" | "matchId" | "teamId" | "createdAt" | "updatedAt", ExtArgs["result"]["lineup"]>
 export type LineupInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   match?: boolean | Prisma.MatchDefaultArgs<ExtArgs>
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
@@ -830,11 +830,11 @@ export type $LineupPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    createdBy: number
     matchId: number
     teamId: number
-    createdBy: number
-    updatedAt: Date
     createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["lineup"]>
   composites: {}
 }
@@ -1262,11 +1262,11 @@ export interface Prisma__LineupClient<T, Null = never, ExtArgs extends runtime.T
  */
 export interface LineupFieldRefs {
   readonly id: Prisma.FieldRef<"Lineup", 'Int'>
+  readonly createdBy: Prisma.FieldRef<"Lineup", 'Int'>
   readonly matchId: Prisma.FieldRef<"Lineup", 'Int'>
   readonly teamId: Prisma.FieldRef<"Lineup", 'Int'>
-  readonly createdBy: Prisma.FieldRef<"Lineup", 'Int'>
-  readonly updatedAt: Prisma.FieldRef<"Lineup", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Lineup", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Lineup", 'DateTime'>
 }
     
 

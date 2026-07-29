@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.8.0
- * Query Engine version: 3c6e192761c0362d496ed980de936e2f3cebcd3a
+ * Prisma Client JS version: 7.9.0
+ * Query Engine version: e922089b7d7502aff4249d5da3420f6fa55fc6ad
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.8.0",
-  engine: "3c6e192761c0362d496ed980de936e2f3cebcd3a"
+  client: "7.9.0",
+  engine: "e922089b7d7502aff4249d5da3420f6fa55fc6ad"
 }
 
 /**
@@ -156,6 +156,19 @@ export type Subset<T, U> = {
 };
 
 /**
+ * Resolved type of the argument passed to the `PrismaClient` constructor.
+ *
+ * When called without a narrower options type (the common case), this resolves
+ * to `PrismaClientOptions` directly, which produces a clear TypeScript error
+ * message (`not assignable to parameter of type 'PrismaClientOptions'`) when
+ * the argument is missing or incomplete. When the user supplies a narrower
+ * options type (e.g. via a literal), it falls back to `Subset` to keep
+ * filtering out unknown properties.
+ */
+export type PrismaClientConstructorArgs<Options extends PrismaClientOptions> =
+  [PrismaClientOptions] extends [Options] ? PrismaClientOptions : Subset<Options, PrismaClientOptions>;
+
+/**
  * SelectSubset
  * @desc From `T` pick properties that exist in `U`. Simple version of Intersection.
  * Additionally, it validates, if both select and include are present. If the case, it errors.
@@ -187,7 +200,7 @@ type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 export type XOR<T, U> =
   T extends object ?
   U extends object ?
-    (Without<T, U> & U) | (Without<U, T> & T)
+    ((Without<T, U> & U) | (Without<U, T> & T)) & object
   : U : T
 
 
@@ -385,8 +398,6 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
-  Conversation: 'Conversation',
-  DirectMessage: 'DirectMessage',
   Tournament: 'Tournament',
   TournamentParticipant: 'TournamentParticipant',
   Team: 'Team',
@@ -394,7 +405,9 @@ export const ModelName = {
   Match: 'Match',
   Lineup: 'Lineup',
   LineupSlot: 'LineupSlot',
-  Message: 'Message'
+  Message: 'Message',
+  Conversation: 'Conversation',
+  DirectMessage: 'DirectMessage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -410,7 +423,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "conversation" | "directMessage" | "tournament" | "tournamentParticipant" | "team" | "teamMember" | "match" | "lineup" | "lineupSlot" | "message"
+    modelProps: "user" | "tournament" | "tournamentParticipant" | "team" | "teamMember" | "match" | "lineup" | "lineupSlot" | "message" | "conversation" | "directMessage"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -485,154 +498,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
-        }
-      }
-    }
-    Conversation: {
-      payload: Prisma.$ConversationPayload<ExtArgs>
-      fields: Prisma.ConversationFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.ConversationFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.ConversationFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
-        }
-        findFirst: {
-          args: Prisma.ConversationFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.ConversationFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
-        }
-        findMany: {
-          args: Prisma.ConversationFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>[]
-        }
-        create: {
-          args: Prisma.ConversationCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
-        }
-        createMany: {
-          args: Prisma.ConversationCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.ConversationCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>[]
-        }
-        delete: {
-          args: Prisma.ConversationDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
-        }
-        update: {
-          args: Prisma.ConversationUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
-        }
-        deleteMany: {
-          args: Prisma.ConversationDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.ConversationUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.ConversationUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>[]
-        }
-        upsert: {
-          args: Prisma.ConversationUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
-        }
-        aggregate: {
-          args: Prisma.ConversationAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateConversation>
-        }
-        groupBy: {
-          args: Prisma.ConversationGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ConversationGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.ConversationCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ConversationCountAggregateOutputType> | number
-        }
-      }
-    }
-    DirectMessage: {
-      payload: Prisma.$DirectMessagePayload<ExtArgs>
-      fields: Prisma.DirectMessageFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.DirectMessageFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.DirectMessageFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>
-        }
-        findFirst: {
-          args: Prisma.DirectMessageFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.DirectMessageFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>
-        }
-        findMany: {
-          args: Prisma.DirectMessageFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>[]
-        }
-        create: {
-          args: Prisma.DirectMessageCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>
-        }
-        createMany: {
-          args: Prisma.DirectMessageCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.DirectMessageCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>[]
-        }
-        delete: {
-          args: Prisma.DirectMessageDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>
-        }
-        update: {
-          args: Prisma.DirectMessageUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>
-        }
-        deleteMany: {
-          args: Prisma.DirectMessageDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.DirectMessageUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.DirectMessageUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>[]
-        }
-        upsert: {
-          args: Prisma.DirectMessageUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>
-        }
-        aggregate: {
-          args: Prisma.DirectMessageAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateDirectMessage>
-        }
-        groupBy: {
-          args: Prisma.DirectMessageGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.DirectMessageGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.DirectMessageCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.DirectMessageCountAggregateOutputType> | number
         }
       }
     }
@@ -1228,6 +1093,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Conversation: {
+      payload: Prisma.$ConversationPayload<ExtArgs>
+      fields: Prisma.ConversationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ConversationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ConversationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
+        }
+        findFirst: {
+          args: Prisma.ConversationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ConversationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
+        }
+        findMany: {
+          args: Prisma.ConversationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>[]
+        }
+        create: {
+          args: Prisma.ConversationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
+        }
+        createMany: {
+          args: Prisma.ConversationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ConversationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>[]
+        }
+        delete: {
+          args: Prisma.ConversationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
+        }
+        update: {
+          args: Prisma.ConversationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
+        }
+        deleteMany: {
+          args: Prisma.ConversationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ConversationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ConversationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>[]
+        }
+        upsert: {
+          args: Prisma.ConversationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConversationPayload>
+        }
+        aggregate: {
+          args: Prisma.ConversationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateConversation>
+        }
+        groupBy: {
+          args: Prisma.ConversationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConversationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ConversationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConversationCountAggregateOutputType> | number
+        }
+      }
+    }
+    DirectMessage: {
+      payload: Prisma.$DirectMessagePayload<ExtArgs>
+      fields: Prisma.DirectMessageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DirectMessageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DirectMessageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>
+        }
+        findFirst: {
+          args: Prisma.DirectMessageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DirectMessageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>
+        }
+        findMany: {
+          args: Prisma.DirectMessageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>[]
+        }
+        create: {
+          args: Prisma.DirectMessageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>
+        }
+        createMany: {
+          args: Prisma.DirectMessageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DirectMessageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>[]
+        }
+        delete: {
+          args: Prisma.DirectMessageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>
+        }
+        update: {
+          args: Prisma.DirectMessageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>
+        }
+        deleteMany: {
+          args: Prisma.DirectMessageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DirectMessageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DirectMessageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>[]
+        }
+        upsert: {
+          args: Prisma.DirectMessageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DirectMessagePayload>
+        }
+        aggregate: {
+          args: Prisma.DirectMessageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDirectMessage>
+        }
+        groupBy: {
+          args: Prisma.DirectMessageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DirectMessageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DirectMessageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DirectMessageCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1270,6 +1283,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
+  platformRole: 'platformRole',
   name: 'name',
   username: 'username',
   bio: 'bio',
@@ -1279,11 +1293,128 @@ export const UserScalarFieldEnum = {
   city: 'city',
   district: 'district',
   favoritePosition: 'favoritePosition',
+  preferredFoot: 'preferredFoot',
   profileCompleted: 'profileCompleted',
   createdAt: 'createdAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const TournamentScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  city: 'city',
+  location: 'location',
+  logoUrl: 'logoUrl',
+  bannerUrl: 'bannerUrl',
+  sport: 'sport',
+  format: 'format',
+  status: 'status',
+  maxTeams: 'maxTeams',
+  price: 'price',
+  reward: 'reward',
+  registrationDeadline: 'registrationDeadline',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isPublic: 'isPublic',
+  isApproved: 'isApproved',
+  isFeatured: 'isFeatured',
+  deletedAt: 'deletedAt',
+  inviteCode: 'inviteCode',
+  adminId: 'adminId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TournamentScalarFieldEnum = (typeof TournamentScalarFieldEnum)[keyof typeof TournamentScalarFieldEnum]
+
+
+export const TournamentParticipantScalarFieldEnum = {
+  id: 'id',
+  role: 'role',
+  userId: 'userId',
+  tournamentId: 'tournamentId',
+  teamId: 'teamId',
+  createdAt: 'createdAt'
+} as const
+
+export type TournamentParticipantScalarFieldEnum = (typeof TournamentParticipantScalarFieldEnum)[keyof typeof TournamentParticipantScalarFieldEnum]
+
+
+export const TeamScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  logoUrl: 'logoUrl',
+  passcode: 'passcode',
+  tournamentId: 'tournamentId',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+} as const
+
+export type TeamScalarFieldEnum = (typeof TeamScalarFieldEnum)[keyof typeof TeamScalarFieldEnum]
+
+
+export const TeamMemberScalarFieldEnum = {
+  id: 'id',
+  role: 'role',
+  status: 'status',
+  teamId: 'teamId',
+  userId: 'userId'
+} as const
+
+export type TeamMemberScalarFieldEnum = (typeof TeamMemberScalarFieldEnum)[keyof typeof TeamMemberScalarFieldEnum]
+
+
+export const MatchScalarFieldEnum = {
+  id: 'id',
+  matchDate: 'matchDate',
+  tournamentId: 'tournamentId',
+  homeTeamId: 'homeTeamId',
+  awayTeamId: 'awayTeamId',
+  createdAt: 'createdAt'
+} as const
+
+export type MatchScalarFieldEnum = (typeof MatchScalarFieldEnum)[keyof typeof MatchScalarFieldEnum]
+
+
+export const LineupScalarFieldEnum = {
+  id: 'id',
+  createdBy: 'createdBy',
+  matchId: 'matchId',
+  teamId: 'teamId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LineupScalarFieldEnum = (typeof LineupScalarFieldEnum)[keyof typeof LineupScalarFieldEnum]
+
+
+export const LineupSlotScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  jerseyNumber: 'jerseyNumber',
+  position: 'position',
+  isStarter: 'isStarter',
+  lineupId: 'lineupId'
+} as const
+
+export type LineupSlotScalarFieldEnum = (typeof LineupSlotScalarFieldEnum)[keyof typeof LineupSlotScalarFieldEnum]
+
+
+export const MessageScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  content: 'content',
+  teamId: 'teamId',
+  senderId: 'senderId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
 
 
 export const ConversationScalarFieldEnum = {
@@ -1298,105 +1429,15 @@ export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[k
 
 export const DirectMessageScalarFieldEnum = {
   id: 'id',
-  conversationId: 'conversationId',
-  senderId: 'senderId',
   type: 'type',
   content: 'content',
-  createdAt: 'createdAt'
+  conversationId: 'conversationId',
+  senderId: 'senderId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type DirectMessageScalarFieldEnum = (typeof DirectMessageScalarFieldEnum)[keyof typeof DirectMessageScalarFieldEnum]
-
-
-export const TournamentScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  inviteCode: 'inviteCode',
-  adminId: 'adminId',
-  createdAt: 'createdAt'
-} as const
-
-export type TournamentScalarFieldEnum = (typeof TournamentScalarFieldEnum)[keyof typeof TournamentScalarFieldEnum]
-
-
-export const TournamentParticipantScalarFieldEnum = {
-  id: 'id',
-  tournamentId: 'tournamentId',
-  userId: 'userId',
-  role: 'role',
-  teamId: 'teamId'
-} as const
-
-export type TournamentParticipantScalarFieldEnum = (typeof TournamentParticipantScalarFieldEnum)[keyof typeof TournamentParticipantScalarFieldEnum]
-
-
-export const TeamScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  logoUrl: 'logoUrl',
-  tournamentId: 'tournamentId',
-  createdAt: 'createdAt'
-} as const
-
-export type TeamScalarFieldEnum = (typeof TeamScalarFieldEnum)[keyof typeof TeamScalarFieldEnum]
-
-
-export const TeamMemberScalarFieldEnum = {
-  id: 'id',
-  teamId: 'teamId',
-  userId: 'userId',
-  role: 'role'
-} as const
-
-export type TeamMemberScalarFieldEnum = (typeof TeamMemberScalarFieldEnum)[keyof typeof TeamMemberScalarFieldEnum]
-
-
-export const MatchScalarFieldEnum = {
-  id: 'id',
-  tournamentId: 'tournamentId',
-  homeTeamId: 'homeTeamId',
-  awayTeamId: 'awayTeamId',
-  matchDate: 'matchDate',
-  createdAt: 'createdAt'
-} as const
-
-export type MatchScalarFieldEnum = (typeof MatchScalarFieldEnum)[keyof typeof MatchScalarFieldEnum]
-
-
-export const LineupScalarFieldEnum = {
-  id: 'id',
-  matchId: 'matchId',
-  teamId: 'teamId',
-  createdBy: 'createdBy',
-  updatedAt: 'updatedAt',
-  createdAt: 'createdAt'
-} as const
-
-export type LineupScalarFieldEnum = (typeof LineupScalarFieldEnum)[keyof typeof LineupScalarFieldEnum]
-
-
-export const LineupSlotScalarFieldEnum = {
-  id: 'id',
-  lineupId: 'lineupId',
-  userId: 'userId',
-  jerseyNumber: 'jerseyNumber',
-  position: 'position',
-  isStarter: 'isStarter'
-} as const
-
-export type LineupSlotScalarFieldEnum = (typeof LineupSlotScalarFieldEnum)[keyof typeof LineupSlotScalarFieldEnum]
-
-
-export const MessageScalarFieldEnum = {
-  id: 'id',
-  teamId: 'teamId',
-  senderId: 'senderId',
-  type: 'type',
-  content: 'content',
-  createdAt: 'createdAt'
-} as const
-
-export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1458,6 +1499,20 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'PlatformRole'
+ */
+export type EnumPlatformRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlatformRole'>
+    
+
+
+/**
+ * Reference to a field of type 'PlatformRole[]'
+ */
+export type ListEnumPlatformRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlatformRole[]'>
+    
+
+
+/**
  * Reference to a field of type 'Gender'
  */
 export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender'>
@@ -1486,6 +1541,20 @@ export type ListEnumFavoritePositionFieldRefInput<$PrismaModel> = FieldRefInputT
 
 
 /**
+ * Reference to a field of type 'PreferredFoot'
+ */
+export type EnumPreferredFootFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreferredFoot'>
+    
+
+
+/**
+ * Reference to a field of type 'PreferredFoot[]'
+ */
+export type ListEnumPreferredFootFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreferredFoot[]'>
+    
+
+
+/**
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -1507,16 +1576,58 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 
 
 /**
- * Reference to a field of type 'MessageType'
+ * Reference to a field of type 'SportType'
  */
-export type EnumMessageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageType'>
+export type EnumSportTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SportType'>
     
 
 
 /**
- * Reference to a field of type 'MessageType[]'
+ * Reference to a field of type 'SportType[]'
  */
-export type ListEnumMessageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageType[]'>
+export type ListEnumSportTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SportType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TournamentFormat'
+ */
+export type EnumTournamentFormatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TournamentFormat'>
+    
+
+
+/**
+ * Reference to a field of type 'TournamentFormat[]'
+ */
+export type ListEnumTournamentFormatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TournamentFormat[]'>
+    
+
+
+/**
+ * Reference to a field of type 'TournamentStatus'
+ */
+export type EnumTournamentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TournamentStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'TournamentStatus[]'
+ */
+export type ListEnumTournamentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TournamentStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -1549,6 +1660,20 @@ export type ListEnumTeamRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
 
 
 /**
+ * Reference to a field of type 'JoinStatus'
+ */
+export type EnumJoinStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JoinStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'JoinStatus[]'
+ */
+export type ListEnumJoinStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JoinStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'Position'
  */
 export type EnumPositionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Position'>
@@ -1563,16 +1688,16 @@ export type ListEnumPositionFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
 
 
 /**
- * Reference to a field of type 'Float'
+ * Reference to a field of type 'MessageType'
  */
-export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+export type EnumMessageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageType'>
     
 
 
 /**
- * Reference to a field of type 'Float[]'
+ * Reference to a field of type 'MessageType[]'
  */
-export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+export type ListEnumMessageTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageType[]'>
     
 
 /**
@@ -1585,19 +1710,10 @@ export type BatchPayload = {
 export const defineExtension = runtime.Extensions.defineExtension as unknown as runtime.Types.Extensions.ExtendsHook<"define", TypeMapCb, runtime.Types.Extensions.DefaultArgs>
 export type DefaultPrismaClient = PrismaClient
 export type ErrorFormat = 'pretty' | 'colorless' | 'minimal'
-export type PrismaClientOptions = ({
-  /**
-   * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-pg`.
-   */
-  adapter: runtime.SqlDriverAdapterFactory
-  accelerateUrl?: never
-} | {
-  /**
-   * Prisma Accelerate URL allowing the client to connect through Accelerate instead of a direct database.
-   */
-  accelerateUrl: string
-  adapter?: never
-}) & {
+/**
+ * Options common to all variants of `PrismaClientOptions`, regardless of whether you connect to your database through a driver adapter or through Prisma Accelerate.
+ */
+export interface PrismaClientBaseOptions {
   /**
    * @default "colorless"
    */
@@ -1684,10 +1800,58 @@ export type PrismaClientOptions = ({
    */
   queryPlanCacheMaxSize?: number
 }
+
+/**
+ * `PrismaClient` options for connecting to your database through Prisma Accelerate instead of a driver adapter.
+ * 
+ * Learn more: https://pris.ly/d/accelerate
+ */
+export interface PrismaClientOptionsWithAccelerateUrl extends PrismaClientBaseOptions {
+  /**
+   * The Prisma Accelerate connection URL. Use this option to connect to your database through Prisma Accelerate instead of using a driver adapter to connect directly.
+   * 
+   * Learn more: https://pris.ly/d/accelerate
+   */
+  accelerateUrl: string
+  adapter?: never
+}
+
+/**
+ * `PrismaClient` options for connecting to your database through a driver adapter. This is the common case in Prisma 7.
+ * 
+ * Learn more: https://pris.ly/d/driver-adapters
+ */
+export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions {
+  /**
+   * A driver adapter that PrismaClient uses to connect to your database, such as the ones provided by `@prisma/adapter-pg`, `@prisma/adapter-libsql`, `@prisma/adapter-planetscale`, etc.
+   * 
+   * A driver adapter is **required** unless you connect to your database through Prisma Accelerate (in which case use `accelerateUrl` instead).
+   * 
+   * Learn more: https://pris.ly/d/driver-adapters
+   * 
+   * @example
+   * ```ts
+   * import { PrismaPg } from '@prisma/adapter-pg'
+   * import { PrismaClient } from './generated/prisma/client'
+   * 
+   * const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
+   * const prisma = new PrismaClient({ adapter })
+   * ```
+   */
+  adapter: runtime.SqlDriverAdapterFactory
+  accelerateUrl?: never
+}
+
+/**
+ * Options passed to the `PrismaClient` constructor.
+ * 
+ * A driver adapter (or, alternatively, a Prisma Accelerate URL) is **required**. See {@link PrismaClientOptionsWithAdapter} and {@link PrismaClientOptionsWithAccelerateUrl} for the two variants. All other properties live in {@link PrismaClientBaseOptions} and are optional.
+ * 
+ * Learn more about driver adapters: https://pris.ly/d/driver-adapters
+ */
+export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
-  conversation?: Prisma.ConversationOmit
-  directMessage?: Prisma.DirectMessageOmit
   tournament?: Prisma.TournamentOmit
   tournamentParticipant?: Prisma.TournamentParticipantOmit
   team?: Prisma.TeamOmit
@@ -1696,6 +1860,8 @@ export type GlobalOmitConfig = {
   lineup?: Prisma.LineupOmit
   lineupSlot?: Prisma.LineupSlotOmit
   message?: Prisma.MessageOmit
+  conversation?: Prisma.ConversationOmit
+  directMessage?: Prisma.DirectMessageOmit
 }
 
 /* Types for Logging */

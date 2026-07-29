@@ -11,55 +11,86 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { TournamentsService } from './tournaments.service';
+import { TournamentsCrudService } from './services/tournaments-crud.service';
+import { TournamentsParticipationService } from './services/tournaments-participation.service';
 import { CreateTournamentDto } from './dto/create-tournament.dto';
 import { PromoteParticipantDto } from './dto/promote-participant.dto';
+import { UpdateTournamentDto } from './dto/update-tournament.dto';
+import { JoinByCodeDto } from './dto/join-by-code.dto';
+import { AddParticipantDto } from './dto/add-participant.dto';
 
 @Controller('tournaments')
-@UseGuards(JwtAuthGuard) // toutes les routes nécessitent d'être connecté
+@UseGuards(JwtAuthGuard)
 export class TournamentsController {
-  constructor(private tournamentsService: TournamentsService) {}
+  constructor(
+    private crudService: TournamentsCrudService,
+    private participationService: TournamentsParticipationService,
+  ) {}
 
-  // POST /tournaments → crée un tournoi (l'utilisateur connecté devient admin)
   @Post()
   async create(@Req() req, @Body() dto: CreateTournamentDto) {
-    return this.tournamentsService.create(req.user.userId, dto);
+    return this.crudService.create(req.user.userId, dto);
   }
 
-  // GET /tournaments → liste mes tournois (admin ou participant)
   @Get()
   async findAll(@Req() req) {
-    return this.tournamentsService.findAllForUser(req.user.userId);
+    return this.crudService.findAllForUser(req.user.userId);
   }
 
-  // GET /tournaments/:id → détail d'un tournoi précis
-  @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.tournamentsService.findOne(id);
+  @Post(':id/join')
+  async joinById(@Param('id', ParseIntPipe) tournamentId: number, @Req() req) {
+    return this.participationService.joinById(tournamentId, req.user.userId);
   }
 
-  // DELETE /tournaments/:id → supprime le tournoi (admin uniquement)
-  @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id: number, @Req() req) {
-    return this.tournamentsService.remove(id, req.user.userId);
+  @Post('join-by-code')
+  async joinByCode(@Body() dto: JoinByCodeDto, @Req() req) {
+    return this.participationService.joinByCode(dto.inviteCode, req.user.userId);
   }
 
-  // PATCH /tournaments/:id/participants/:userId/promote
-  // → désigne un participant comme capitaine (admin uniquement)
-// Remplace l'ancienne route "promote" par celle-ci
-@Patch(':id/participants/:userId/promote')
-async promoteParticipant(
+@Post(':id/participants')
+async addParticipant(
   @Param('id', ParseIntPipe) tournamentId: number,
-  @Param('userId', ParseIntPipe) targetUserId: number,
-  @Body() dto: PromoteParticipantDto,
+  @Body() dto: AddParticipantDto,
   @Req() req,
 ) {
-  return this.tournamentsService.promoteParticipant(
+  return this.participationService.addParticipantByAdmin(
     tournamentId,
-    targetUserId,
+    dto.userId,
     req.user.userId,
-    dto.role,
   );
 }
 
+  @Get(':id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.crudService.findOne(id);
+  }
+
+  @Patch(':id')
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Req() req,
+    @Body() dto: UpdateTournamentDto,
+  ) {
+    return this.crudService.update(id, req.user.userId, dto);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id', ParseIntPipe) id: number, @Req() req) {
+    return this.crudService.remove(id, req.user.userId);
+  }
+
+  @Patch(':id/participants/:userId/promote')
+  async promoteParticipant(
+    @Param('id', ParseIntPipe) tournamentId: number,
+    @Param('userId', ParseIntPipe) targetUserId: number,
+    @Body() dto: PromoteParticipantDto,
+    @Req() req,
+  ) {
+    return this.participationService.promoteParticipant(
+      tournamentId,
+      targetUserId,
+      req.user.userId,
+      dto.role,
+    );
+  }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Patch, Param, Body, UseGuards, Req, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Patch, Param, Body, UseGuards, Req, ParseIntPipe,Query } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { UsersService } from './users.service';
 import { CompleteProfileDto } from './dto/complete-profile.dto';
@@ -18,6 +18,11 @@ export class UsersController {
   @Patch('me')
   async updateMe(@Req() req, @Body() dto: CompleteProfileDto) {
     return this.usersService.completeProfile(req.user.userId, dto);
+  }
+
+  @Get('phone')
+  async getUserByPhone(@Query('number') phoneNumber: string) {
+    return this.usersService.findByPhoneNumber(phoneNumber);
   }
 
   // GET /users/:id → consulte le profil PUBLIC d'un autre utilisateur

@@ -9,6 +9,50 @@
 * 🟢 You can import this file directly.
 */
 
+export const Gender = {
+  HOMME: 'HOMME',
+  FEMME: 'FEMME'
+} as const
+
+export type Gender = (typeof Gender)[keyof typeof Gender]
+
+
+export const JoinStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type JoinStatus = (typeof JoinStatus)[keyof typeof JoinStatus]
+
+
+export const PlatformRole = {
+  USER: 'USER',
+  SUPER_ADMIN: 'SUPER_ADMIN'
+} as const
+
+export type PlatformRole = (typeof PlatformRole)[keyof typeof PlatformRole]
+
+
+export const FavoritePosition = {
+  GARDIEN: 'GARDIEN',
+  DEFENSEUR: 'DEFENSEUR',
+  MILIEU: 'MILIEU',
+  ATTAQUANT: 'ATTAQUANT'
+} as const
+
+export type FavoritePosition = (typeof FavoritePosition)[keyof typeof FavoritePosition]
+
+
+export const PreferredFoot = {
+  DROIT: 'DROIT',
+  GAUCHE: 'GAUCHE',
+  DEUX_PIEDS: 'DEUX_PIEDS'
+} as const
+
+export type PreferredFoot = (typeof PreferredFoot)[keyof typeof PreferredFoot]
+
+
 export const TournamentRole = {
   PLAYER: 'PLAYER',
   CAPTAIN: 'CAPTAIN',
@@ -19,9 +63,9 @@ export type TournamentRole = (typeof TournamentRole)[keyof typeof TournamentRole
 
 
 export const TeamRole = {
+  PLAYER: 'PLAYER',
   CAPTAIN: 'CAPTAIN',
-  COACH: 'COACH',
-  PLAYER: 'PLAYER'
+  COACH: 'COACH'
 } as const
 
 export type TeamRole = (typeof TeamRole)[keyof typeof TeamRole]
@@ -43,29 +87,42 @@ export const Position = {
 export type Position = (typeof Position)[keyof typeof Position]
 
 
+export const SportType = {
+  FOOTBALL: 'FOOTBALL',
+  BASKETBALL: 'BASKETBALL',
+  TENNIS: 'TENNIS',
+  HANDBALL: 'HANDBALL',
+  VOLLEYBALL: 'VOLLEYBALL'
+} as const
+
+export type SportType = (typeof SportType)[keyof typeof SportType]
+
+
+export const TournamentFormat = {
+  KNOCKOUT: 'KNOCKOUT',
+  HYBRID: 'HYBRID'
+} as const
+
+export type TournamentFormat = (typeof TournamentFormat)[keyof typeof TournamentFormat]
+
+
+export const TournamentStatus = {
+  OPEN: 'OPEN',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type TournamentStatus = (typeof TournamentStatus)[keyof typeof TournamentStatus]
+
+
 export const MessageType = {
   TEXT: 'TEXT',
   IMAGE: 'IMAGE',
   VOICE: 'VOICE',
-  STICKER: 'STICKER'
+  STICKER: 'STICKER',
+  SYSTEM: 'SYSTEM',
+  FILE: 'FILE'
 } as const
 
 export type MessageType = (typeof MessageType)[keyof typeof MessageType]
-
-
-export const Gender = {
-  HOMME: 'HOMME',
-  FEMME: 'FEMME'
-} as const
-
-export type Gender = (typeof Gender)[keyof typeof Gender]
-
-
-export const FavoritePosition = {
-  GARDIEN: 'GARDIEN',
-  DEFENSEUR: 'DEFENSEUR',
-  MILIEU: 'MILIEU',
-  ATTAQUANT: 'ATTAQUANT'
-} as const
-
-export type FavoritePosition = (typeof FavoritePosition)[keyof typeof FavoritePosition]

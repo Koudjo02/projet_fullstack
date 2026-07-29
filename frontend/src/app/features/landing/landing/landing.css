@@ -1,0 +1,136 @@
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 700px;
+  background-color: #0a0e0f;
+  align-items: stretch;
+}
+
+.hero-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: brightness(0.75);
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 64px;
+}
+
+.hero-badge {
+  display: inline-block;
+  background-color: rgba(29, 185, 122, 0.15);
+  color: #1db97a;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  width: fit-content;
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  font-size: 72px;
+  font-weight: 800;
+  line-height: 1.05;
+  color: #ffffff;
+  margin: 0 0 24px;
+  letter-spacing: -0.02em;
+}
+
+.hero-title--accent {
+  color: #1db97a;
+}
+
+.hero-subtitle {
+  font-size: 19px;
+  color: #9ba6a3;
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 0 32px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.btn-primary {
+  background-color: #1db97a;
+  color: #0a0e0f;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 15px;
+  border: 1px solid #2a3532;
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .hero-image {
+    aspect-ratio: 16 / 10;
+  }
+
+  .hero-content {
+    padding: 32px 20px;
+  }
+
+  .hero-title {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-image {
+    aspect-ratio: 4 / 3;
+  }
+
+  .hero-content {
+    padding: 28px 16px;
+  }
+
+  .hero-title {
+    font-size: 30px;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}

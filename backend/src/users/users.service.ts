@@ -24,6 +24,7 @@ export class UsersService {
         name: true,
         bio: true,
         avatarUrl: true,
+        preferredFoot: true,
         favoritePosition: true,
         city: true,
         district: true,
@@ -35,28 +36,48 @@ export class UsersService {
 
   // Complète le profil après l'inscription OAuth (pseudo, genre, téléphone...)
   async completeProfile(userId: number, dto: CompleteProfileDto) {
-    // On vérifie que le pseudo n'est pas déjà pris par quelqu'un d'autre
-    const existingUsername = await this.prisma.user.findUnique({
-      where: { username: dto.username },
-    });
-    if (existingUsername && existingUsername.id !== userId) {
-      throw new ConflictException('Ce pseudo est déjà utilisé');
-    }
-
-    // Idem pour le numéro de téléphone (doit rester unique)
+  // Vérifie l'unicité du téléphone UNIQUEMENT s'il est fourni dans cette requête
+  if (dto.phoneNumber) {
     const existingPhone = await this.prisma.user.findUnique({
       where: { phoneNumber: dto.phoneNumber },
     });
     if (existingPhone && existingPhone.id !== userId) {
       throw new ConflictException('Ce numéro est déjà associé à un compte');
     }
+  }
 
-    return this.prisma.user.update({
-      where: { id: userId },
-      data: {
-        ...dto,
-        profileCompleted: true, // on marque le profil comme complété
+  const currentUser = await this.prisma.user.findUnique({ where: { id: userId } });
+
+  // profileCompleted passe à true dès que le téléphone est renseigné
+  // (le username a toujours une valeur, grâce au défaut "Inconnu")
+  const willHavePhone = dto.phoneNumber ?? currentUser?.phoneNumber;
+  const profileCompleted = !!willHavePhone;
+
+  return this.prisma.user.update({
+    where: { id: userId },
+    data: { ...dto, profileCompleted },
+  });
+}
+
+async findByPhoneNumber(phoneNumber: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { phoneNumber },
+      select: {
+        id: true,
+        username: true,
+        name: true,
+        avatarUrl: true,
+        favoritePosition: true,
+        preferredFoot: true,
+        city: true,
+        district: true,
       },
     });
+    if (!user) {
+      throw new NotFoundException('Aucun joueur trouvé avec ce numéro de téléphone');
+    }
+
+    return user;
   }
 }
+

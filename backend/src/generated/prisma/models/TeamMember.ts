@@ -40,23 +40,26 @@ export type TeamMemberSumAggregateOutputType = {
 
 export type TeamMemberMinAggregateOutputType = {
   id: number | null
+  role: $Enums.TeamRole | null
+  status: $Enums.JoinStatus | null
   teamId: number | null
   userId: number | null
-  role: $Enums.TeamRole | null
 }
 
 export type TeamMemberMaxAggregateOutputType = {
   id: number | null
+  role: $Enums.TeamRole | null
+  status: $Enums.JoinStatus | null
   teamId: number | null
   userId: number | null
-  role: $Enums.TeamRole | null
 }
 
 export type TeamMemberCountAggregateOutputType = {
   id: number
+  role: number
+  status: number
   teamId: number
   userId: number
-  role: number
   _all: number
 }
 
@@ -75,23 +78,26 @@ export type TeamMemberSumAggregateInputType = {
 
 export type TeamMemberMinAggregateInputType = {
   id?: true
+  role?: true
+  status?: true
   teamId?: true
   userId?: true
-  role?: true
 }
 
 export type TeamMemberMaxAggregateInputType = {
   id?: true
+  role?: true
+  status?: true
   teamId?: true
   userId?: true
-  role?: true
 }
 
 export type TeamMemberCountAggregateInputType = {
   id?: true
+  role?: true
+  status?: true
   teamId?: true
   userId?: true
-  role?: true
   _all?: true
 }
 
@@ -183,9 +189,10 @@ export type TeamMemberGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 
 export type TeamMemberGroupByOutputType = {
   id: number
+  role: $Enums.TeamRole
+  status: $Enums.JoinStatus
   teamId: number
   userId: number
-  role: $Enums.TeamRole
   _count: TeamMemberCountAggregateOutputType | null
   _avg: TeamMemberAvgAggregateOutputType | null
   _sum: TeamMemberSumAggregateOutputType | null
@@ -213,18 +220,20 @@ export type TeamMemberWhereInput = {
   OR?: Prisma.TeamMemberWhereInput[]
   NOT?: Prisma.TeamMemberWhereInput | Prisma.TeamMemberWhereInput[]
   id?: Prisma.IntFilter<"TeamMember"> | number
+  role?: Prisma.EnumTeamRoleFilter<"TeamMember"> | $Enums.TeamRole
+  status?: Prisma.EnumJoinStatusFilter<"TeamMember"> | $Enums.JoinStatus
   teamId?: Prisma.IntFilter<"TeamMember"> | number
   userId?: Prisma.IntFilter<"TeamMember"> | number
-  role?: Prisma.EnumTeamRoleFilter<"TeamMember"> | $Enums.TeamRole
   team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type TeamMemberOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   team?: Prisma.TeamOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
 }
@@ -235,18 +244,20 @@ export type TeamMemberWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.TeamMemberWhereInput | Prisma.TeamMemberWhereInput[]
   OR?: Prisma.TeamMemberWhereInput[]
   NOT?: Prisma.TeamMemberWhereInput | Prisma.TeamMemberWhereInput[]
+  role?: Prisma.EnumTeamRoleFilter<"TeamMember"> | $Enums.TeamRole
+  status?: Prisma.EnumJoinStatusFilter<"TeamMember"> | $Enums.JoinStatus
   teamId?: Prisma.IntFilter<"TeamMember"> | number
   userId?: Prisma.IntFilter<"TeamMember"> | number
-  role?: Prisma.EnumTeamRoleFilter<"TeamMember"> | $Enums.TeamRole
   team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "teamId_userId">
 
 export type TeamMemberOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  role?: Prisma.SortOrder
   _count?: Prisma.TeamMemberCountOrderByAggregateInput
   _avg?: Prisma.TeamMemberAvgOrderByAggregateInput
   _max?: Prisma.TeamMemberMaxOrderByAggregateInput
@@ -259,53 +270,61 @@ export type TeamMemberScalarWhereWithAggregatesInput = {
   OR?: Prisma.TeamMemberScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TeamMemberScalarWhereWithAggregatesInput | Prisma.TeamMemberScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"TeamMember"> | number
+  role?: Prisma.EnumTeamRoleWithAggregatesFilter<"TeamMember"> | $Enums.TeamRole
+  status?: Prisma.EnumJoinStatusWithAggregatesFilter<"TeamMember"> | $Enums.JoinStatus
   teamId?: Prisma.IntWithAggregatesFilter<"TeamMember"> | number
   userId?: Prisma.IntWithAggregatesFilter<"TeamMember"> | number
-  role?: Prisma.EnumTeamRoleWithAggregatesFilter<"TeamMember"> | $Enums.TeamRole
 }
 
 export type TeamMemberCreateInput = {
   role?: $Enums.TeamRole
+  status?: $Enums.JoinStatus
   team: Prisma.TeamCreateNestedOneWithoutMembersInput
   user: Prisma.UserCreateNestedOneWithoutTeamMembershipsInput
 }
 
 export type TeamMemberUncheckedCreateInput = {
   id?: number
+  role?: $Enums.TeamRole
+  status?: $Enums.JoinStatus
   teamId: number
   userId: number
-  role?: $Enums.TeamRole
 }
 
 export type TeamMemberUpdateInput = {
   role?: Prisma.EnumTeamRoleFieldUpdateOperationsInput | $Enums.TeamRole
+  status?: Prisma.EnumJoinStatusFieldUpdateOperationsInput | $Enums.JoinStatus
   team?: Prisma.TeamUpdateOneRequiredWithoutMembersNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutTeamMembershipsNestedInput
 }
 
 export type TeamMemberUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.EnumTeamRoleFieldUpdateOperationsInput | $Enums.TeamRole
+  status?: Prisma.EnumJoinStatusFieldUpdateOperationsInput | $Enums.JoinStatus
   teamId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  role?: Prisma.EnumTeamRoleFieldUpdateOperationsInput | $Enums.TeamRole
 }
 
 export type TeamMemberCreateManyInput = {
   id?: number
+  role?: $Enums.TeamRole
+  status?: $Enums.JoinStatus
   teamId: number
   userId: number
-  role?: $Enums.TeamRole
 }
 
 export type TeamMemberUpdateManyMutationInput = {
   role?: Prisma.EnumTeamRoleFieldUpdateOperationsInput | $Enums.TeamRole
+  status?: Prisma.EnumJoinStatusFieldUpdateOperationsInput | $Enums.JoinStatus
 }
 
 export type TeamMemberUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.EnumTeamRoleFieldUpdateOperationsInput | $Enums.TeamRole
+  status?: Prisma.EnumJoinStatusFieldUpdateOperationsInput | $Enums.JoinStatus
   teamId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
-  role?: Prisma.EnumTeamRoleFieldUpdateOperationsInput | $Enums.TeamRole
 }
 
 export type TeamMemberListRelationFilter = {
@@ -325,9 +344,10 @@ export type TeamMemberTeamIdUserIdCompoundUniqueInput = {
 
 export type TeamMemberCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  role?: Prisma.SortOrder
 }
 
 export type TeamMemberAvgOrderByAggregateInput = {
@@ -338,16 +358,18 @@ export type TeamMemberAvgOrderByAggregateInput = {
 
 export type TeamMemberMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  role?: Prisma.SortOrder
 }
 
 export type TeamMemberMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  role?: Prisma.SortOrder
 }
 
 export type TeamMemberSumOrderByAggregateInput = {
@@ -444,15 +466,21 @@ export type EnumTeamRoleFieldUpdateOperationsInput = {
   set?: $Enums.TeamRole
 }
 
+export type EnumJoinStatusFieldUpdateOperationsInput = {
+  set?: $Enums.JoinStatus
+}
+
 export type TeamMemberCreateWithoutUserInput = {
   role?: $Enums.TeamRole
+  status?: $Enums.JoinStatus
   team: Prisma.TeamCreateNestedOneWithoutMembersInput
 }
 
 export type TeamMemberUncheckedCreateWithoutUserInput = {
   id?: number
-  teamId: number
   role?: $Enums.TeamRole
+  status?: $Enums.JoinStatus
+  teamId: number
 }
 
 export type TeamMemberCreateOrConnectWithoutUserInput = {
@@ -486,20 +514,23 @@ export type TeamMemberScalarWhereInput = {
   OR?: Prisma.TeamMemberScalarWhereInput[]
   NOT?: Prisma.TeamMemberScalarWhereInput | Prisma.TeamMemberScalarWhereInput[]
   id?: Prisma.IntFilter<"TeamMember"> | number
+  role?: Prisma.EnumTeamRoleFilter<"TeamMember"> | $Enums.TeamRole
+  status?: Prisma.EnumJoinStatusFilter<"TeamMember"> | $Enums.JoinStatus
   teamId?: Prisma.IntFilter<"TeamMember"> | number
   userId?: Prisma.IntFilter<"TeamMember"> | number
-  role?: Prisma.EnumTeamRoleFilter<"TeamMember"> | $Enums.TeamRole
 }
 
 export type TeamMemberCreateWithoutTeamInput = {
   role?: $Enums.TeamRole
+  status?: $Enums.JoinStatus
   user: Prisma.UserCreateNestedOneWithoutTeamMembershipsInput
 }
 
 export type TeamMemberUncheckedCreateWithoutTeamInput = {
   id?: number
-  userId: number
   role?: $Enums.TeamRole
+  status?: $Enums.JoinStatus
+  userId: number
 }
 
 export type TeamMemberCreateOrConnectWithoutTeamInput = {
@@ -530,87 +561,99 @@ export type TeamMemberUpdateManyWithWhereWithoutTeamInput = {
 
 export type TeamMemberCreateManyUserInput = {
   id?: number
-  teamId: number
   role?: $Enums.TeamRole
+  status?: $Enums.JoinStatus
+  teamId: number
 }
 
 export type TeamMemberUpdateWithoutUserInput = {
   role?: Prisma.EnumTeamRoleFieldUpdateOperationsInput | $Enums.TeamRole
+  status?: Prisma.EnumJoinStatusFieldUpdateOperationsInput | $Enums.JoinStatus
   team?: Prisma.TeamUpdateOneRequiredWithoutMembersNestedInput
 }
 
 export type TeamMemberUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  teamId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumTeamRoleFieldUpdateOperationsInput | $Enums.TeamRole
+  status?: Prisma.EnumJoinStatusFieldUpdateOperationsInput | $Enums.JoinStatus
+  teamId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type TeamMemberUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  teamId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumTeamRoleFieldUpdateOperationsInput | $Enums.TeamRole
+  status?: Prisma.EnumJoinStatusFieldUpdateOperationsInput | $Enums.JoinStatus
+  teamId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type TeamMemberCreateManyTeamInput = {
   id?: number
-  userId: number
   role?: $Enums.TeamRole
+  status?: $Enums.JoinStatus
+  userId: number
 }
 
 export type TeamMemberUpdateWithoutTeamInput = {
   role?: Prisma.EnumTeamRoleFieldUpdateOperationsInput | $Enums.TeamRole
+  status?: Prisma.EnumJoinStatusFieldUpdateOperationsInput | $Enums.JoinStatus
   user?: Prisma.UserUpdateOneRequiredWithoutTeamMembershipsNestedInput
 }
 
 export type TeamMemberUncheckedUpdateWithoutTeamInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumTeamRoleFieldUpdateOperationsInput | $Enums.TeamRole
+  status?: Prisma.EnumJoinStatusFieldUpdateOperationsInput | $Enums.JoinStatus
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type TeamMemberUncheckedUpdateManyWithoutTeamInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumTeamRoleFieldUpdateOperationsInput | $Enums.TeamRole
+  status?: Prisma.EnumJoinStatusFieldUpdateOperationsInput | $Enums.JoinStatus
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
 
 export type TeamMemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  role?: boolean
+  status?: boolean
   teamId?: boolean
   userId?: boolean
-  role?: boolean
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["teamMember"]>
 
 export type TeamMemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  role?: boolean
+  status?: boolean
   teamId?: boolean
   userId?: boolean
-  role?: boolean
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["teamMember"]>
 
 export type TeamMemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  role?: boolean
+  status?: boolean
   teamId?: boolean
   userId?: boolean
-  role?: boolean
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["teamMember"]>
 
 export type TeamMemberSelectScalar = {
   id?: boolean
+  role?: boolean
+  status?: boolean
   teamId?: boolean
   userId?: boolean
-  role?: boolean
 }
 
-export type TeamMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "teamId" | "userId" | "role", ExtArgs["result"]["teamMember"]>
+export type TeamMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "role" | "status" | "teamId" | "userId", ExtArgs["result"]["teamMember"]>
 export type TeamMemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -632,9 +675,10 @@ export type $TeamMemberPayload<ExtArgs extends runtime.Types.Extensions.Internal
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
+    role: $Enums.TeamRole
+    status: $Enums.JoinStatus
     teamId: number
     userId: number
-    role: $Enums.TeamRole
   }, ExtArgs["result"]["teamMember"]>
   composites: {}
 }
@@ -1061,9 +1105,10 @@ export interface Prisma__TeamMemberClient<T, Null = never, ExtArgs extends runti
  */
 export interface TeamMemberFieldRefs {
   readonly id: Prisma.FieldRef<"TeamMember", 'Int'>
+  readonly role: Prisma.FieldRef<"TeamMember", 'TeamRole'>
+  readonly status: Prisma.FieldRef<"TeamMember", 'JoinStatus'>
   readonly teamId: Prisma.FieldRef<"TeamMember", 'Int'>
   readonly userId: Prisma.FieldRef<"TeamMember", 'Int'>
-  readonly role: Prisma.FieldRef<"TeamMember", 'TeamRole'>
 }
     
 

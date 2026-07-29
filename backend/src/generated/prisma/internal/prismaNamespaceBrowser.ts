@@ -52,8 +52,6 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Conversation: 'Conversation',
-  DirectMessage: 'DirectMessage',
   Tournament: 'Tournament',
   TournamentParticipant: 'TournamentParticipant',
   Team: 'Team',
@@ -61,7 +59,9 @@ export const ModelName = {
   Match: 'Match',
   Lineup: 'Lineup',
   LineupSlot: 'LineupSlot',
-  Message: 'Message'
+  Message: 'Message',
+  Conversation: 'Conversation',
+  DirectMessage: 'DirectMessage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -83,6 +83,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
+  platformRole: 'platformRole',
   name: 'name',
   username: 'username',
   bio: 'bio',
@@ -92,11 +93,128 @@ export const UserScalarFieldEnum = {
   city: 'city',
   district: 'district',
   favoritePosition: 'favoritePosition',
+  preferredFoot: 'preferredFoot',
   profileCompleted: 'profileCompleted',
   createdAt: 'createdAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const TournamentScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  city: 'city',
+  location: 'location',
+  logoUrl: 'logoUrl',
+  bannerUrl: 'bannerUrl',
+  sport: 'sport',
+  format: 'format',
+  status: 'status',
+  maxTeams: 'maxTeams',
+  price: 'price',
+  reward: 'reward',
+  registrationDeadline: 'registrationDeadline',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isPublic: 'isPublic',
+  isApproved: 'isApproved',
+  isFeatured: 'isFeatured',
+  deletedAt: 'deletedAt',
+  inviteCode: 'inviteCode',
+  adminId: 'adminId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TournamentScalarFieldEnum = (typeof TournamentScalarFieldEnum)[keyof typeof TournamentScalarFieldEnum]
+
+
+export const TournamentParticipantScalarFieldEnum = {
+  id: 'id',
+  role: 'role',
+  userId: 'userId',
+  tournamentId: 'tournamentId',
+  teamId: 'teamId',
+  createdAt: 'createdAt'
+} as const
+
+export type TournamentParticipantScalarFieldEnum = (typeof TournamentParticipantScalarFieldEnum)[keyof typeof TournamentParticipantScalarFieldEnum]
+
+
+export const TeamScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  logoUrl: 'logoUrl',
+  passcode: 'passcode',
+  tournamentId: 'tournamentId',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+} as const
+
+export type TeamScalarFieldEnum = (typeof TeamScalarFieldEnum)[keyof typeof TeamScalarFieldEnum]
+
+
+export const TeamMemberScalarFieldEnum = {
+  id: 'id',
+  role: 'role',
+  status: 'status',
+  teamId: 'teamId',
+  userId: 'userId'
+} as const
+
+export type TeamMemberScalarFieldEnum = (typeof TeamMemberScalarFieldEnum)[keyof typeof TeamMemberScalarFieldEnum]
+
+
+export const MatchScalarFieldEnum = {
+  id: 'id',
+  matchDate: 'matchDate',
+  tournamentId: 'tournamentId',
+  homeTeamId: 'homeTeamId',
+  awayTeamId: 'awayTeamId',
+  createdAt: 'createdAt'
+} as const
+
+export type MatchScalarFieldEnum = (typeof MatchScalarFieldEnum)[keyof typeof MatchScalarFieldEnum]
+
+
+export const LineupScalarFieldEnum = {
+  id: 'id',
+  createdBy: 'createdBy',
+  matchId: 'matchId',
+  teamId: 'teamId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LineupScalarFieldEnum = (typeof LineupScalarFieldEnum)[keyof typeof LineupScalarFieldEnum]
+
+
+export const LineupSlotScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  jerseyNumber: 'jerseyNumber',
+  position: 'position',
+  isStarter: 'isStarter',
+  lineupId: 'lineupId'
+} as const
+
+export type LineupSlotScalarFieldEnum = (typeof LineupSlotScalarFieldEnum)[keyof typeof LineupSlotScalarFieldEnum]
+
+
+export const MessageScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  content: 'content',
+  teamId: 'teamId',
+  senderId: 'senderId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
 
 
 export const ConversationScalarFieldEnum = {
@@ -111,105 +229,15 @@ export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[k
 
 export const DirectMessageScalarFieldEnum = {
   id: 'id',
-  conversationId: 'conversationId',
-  senderId: 'senderId',
   type: 'type',
   content: 'content',
-  createdAt: 'createdAt'
+  conversationId: 'conversationId',
+  senderId: 'senderId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type DirectMessageScalarFieldEnum = (typeof DirectMessageScalarFieldEnum)[keyof typeof DirectMessageScalarFieldEnum]
-
-
-export const TournamentScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  inviteCode: 'inviteCode',
-  adminId: 'adminId',
-  createdAt: 'createdAt'
-} as const
-
-export type TournamentScalarFieldEnum = (typeof TournamentScalarFieldEnum)[keyof typeof TournamentScalarFieldEnum]
-
-
-export const TournamentParticipantScalarFieldEnum = {
-  id: 'id',
-  tournamentId: 'tournamentId',
-  userId: 'userId',
-  role: 'role',
-  teamId: 'teamId'
-} as const
-
-export type TournamentParticipantScalarFieldEnum = (typeof TournamentParticipantScalarFieldEnum)[keyof typeof TournamentParticipantScalarFieldEnum]
-
-
-export const TeamScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  logoUrl: 'logoUrl',
-  tournamentId: 'tournamentId',
-  createdAt: 'createdAt'
-} as const
-
-export type TeamScalarFieldEnum = (typeof TeamScalarFieldEnum)[keyof typeof TeamScalarFieldEnum]
-
-
-export const TeamMemberScalarFieldEnum = {
-  id: 'id',
-  teamId: 'teamId',
-  userId: 'userId',
-  role: 'role'
-} as const
-
-export type TeamMemberScalarFieldEnum = (typeof TeamMemberScalarFieldEnum)[keyof typeof TeamMemberScalarFieldEnum]
-
-
-export const MatchScalarFieldEnum = {
-  id: 'id',
-  tournamentId: 'tournamentId',
-  homeTeamId: 'homeTeamId',
-  awayTeamId: 'awayTeamId',
-  matchDate: 'matchDate',
-  createdAt: 'createdAt'
-} as const
-
-export type MatchScalarFieldEnum = (typeof MatchScalarFieldEnum)[keyof typeof MatchScalarFieldEnum]
-
-
-export const LineupScalarFieldEnum = {
-  id: 'id',
-  matchId: 'matchId',
-  teamId: 'teamId',
-  createdBy: 'createdBy',
-  updatedAt: 'updatedAt',
-  createdAt: 'createdAt'
-} as const
-
-export type LineupScalarFieldEnum = (typeof LineupScalarFieldEnum)[keyof typeof LineupScalarFieldEnum]
-
-
-export const LineupSlotScalarFieldEnum = {
-  id: 'id',
-  lineupId: 'lineupId',
-  userId: 'userId',
-  jerseyNumber: 'jerseyNumber',
-  position: 'position',
-  isStarter: 'isStarter'
-} as const
-
-export type LineupSlotScalarFieldEnum = (typeof LineupSlotScalarFieldEnum)[keyof typeof LineupSlotScalarFieldEnum]
-
-
-export const MessageScalarFieldEnum = {
-  id: 'id',
-  teamId: 'teamId',
-  senderId: 'senderId',
-  type: 'type',
-  content: 'content',
-  createdAt: 'createdAt'
-} as const
-
-export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
 
 
 export const SortOrder = {

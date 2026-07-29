@@ -40,29 +40,32 @@ export type DirectMessageSumAggregateOutputType = {
 
 export type DirectMessageMinAggregateOutputType = {
   id: number | null
-  conversationId: number | null
-  senderId: number | null
   type: $Enums.MessageType | null
   content: string | null
+  conversationId: number | null
+  senderId: number | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type DirectMessageMaxAggregateOutputType = {
   id: number | null
-  conversationId: number | null
-  senderId: number | null
   type: $Enums.MessageType | null
   content: string | null
+  conversationId: number | null
+  senderId: number | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type DirectMessageCountAggregateOutputType = {
   id: number
-  conversationId: number
-  senderId: number
   type: number
   content: number
+  conversationId: number
+  senderId: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -81,29 +84,32 @@ export type DirectMessageSumAggregateInputType = {
 
 export type DirectMessageMinAggregateInputType = {
   id?: true
-  conversationId?: true
-  senderId?: true
   type?: true
   content?: true
+  conversationId?: true
+  senderId?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type DirectMessageMaxAggregateInputType = {
   id?: true
-  conversationId?: true
-  senderId?: true
   type?: true
   content?: true
+  conversationId?: true
+  senderId?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type DirectMessageCountAggregateInputType = {
   id?: true
-  conversationId?: true
-  senderId?: true
   type?: true
   content?: true
+  conversationId?: true
+  senderId?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -195,11 +201,12 @@ export type DirectMessageGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 
 export type DirectMessageGroupByOutputType = {
   id: number
-  conversationId: number
-  senderId: number
   type: $Enums.MessageType
   content: string | null
+  conversationId: number
+  senderId: number
   createdAt: Date
+  updatedAt: Date
   _count: DirectMessageCountAggregateOutputType | null
   _avg: DirectMessageAvgAggregateOutputType | null
   _sum: DirectMessageSumAggregateOutputType | null
@@ -227,22 +234,24 @@ export type DirectMessageWhereInput = {
   OR?: Prisma.DirectMessageWhereInput[]
   NOT?: Prisma.DirectMessageWhereInput | Prisma.DirectMessageWhereInput[]
   id?: Prisma.IntFilter<"DirectMessage"> | number
-  conversationId?: Prisma.IntFilter<"DirectMessage"> | number
-  senderId?: Prisma.IntFilter<"DirectMessage"> | number
   type?: Prisma.EnumMessageTypeFilter<"DirectMessage"> | $Enums.MessageType
   content?: Prisma.StringNullableFilter<"DirectMessage"> | string | null
+  conversationId?: Prisma.IntFilter<"DirectMessage"> | number
+  senderId?: Prisma.IntFilter<"DirectMessage"> | number
   createdAt?: Prisma.DateTimeFilter<"DirectMessage"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"DirectMessage"> | Date | string
   conversation?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
   sender?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type DirectMessageOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  conversationId?: Prisma.SortOrder
-  senderId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
+  conversationId?: Prisma.SortOrder
+  senderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   conversation?: Prisma.ConversationOrderByWithRelationInput
   sender?: Prisma.UserOrderByWithRelationInput
 }
@@ -252,22 +261,24 @@ export type DirectMessageWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.DirectMessageWhereInput | Prisma.DirectMessageWhereInput[]
   OR?: Prisma.DirectMessageWhereInput[]
   NOT?: Prisma.DirectMessageWhereInput | Prisma.DirectMessageWhereInput[]
-  conversationId?: Prisma.IntFilter<"DirectMessage"> | number
-  senderId?: Prisma.IntFilter<"DirectMessage"> | number
   type?: Prisma.EnumMessageTypeFilter<"DirectMessage"> | $Enums.MessageType
   content?: Prisma.StringNullableFilter<"DirectMessage"> | string | null
+  conversationId?: Prisma.IntFilter<"DirectMessage"> | number
+  senderId?: Prisma.IntFilter<"DirectMessage"> | number
   createdAt?: Prisma.DateTimeFilter<"DirectMessage"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"DirectMessage"> | Date | string
   conversation?: Prisma.XOR<Prisma.ConversationScalarRelationFilter, Prisma.ConversationWhereInput>
   sender?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type DirectMessageOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  conversationId?: Prisma.SortOrder
-  senderId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
+  conversationId?: Prisma.SortOrder
+  senderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.DirectMessageCountOrderByAggregateInput
   _avg?: Prisma.DirectMessageAvgOrderByAggregateInput
   _max?: Prisma.DirectMessageMaxOrderByAggregateInput
@@ -280,69 +291,77 @@ export type DirectMessageScalarWhereWithAggregatesInput = {
   OR?: Prisma.DirectMessageScalarWhereWithAggregatesInput[]
   NOT?: Prisma.DirectMessageScalarWhereWithAggregatesInput | Prisma.DirectMessageScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"DirectMessage"> | number
-  conversationId?: Prisma.IntWithAggregatesFilter<"DirectMessage"> | number
-  senderId?: Prisma.IntWithAggregatesFilter<"DirectMessage"> | number
   type?: Prisma.EnumMessageTypeWithAggregatesFilter<"DirectMessage"> | $Enums.MessageType
   content?: Prisma.StringNullableWithAggregatesFilter<"DirectMessage"> | string | null
+  conversationId?: Prisma.IntWithAggregatesFilter<"DirectMessage"> | number
+  senderId?: Prisma.IntWithAggregatesFilter<"DirectMessage"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"DirectMessage"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"DirectMessage"> | Date | string
 }
 
 export type DirectMessageCreateInput = {
   type?: $Enums.MessageType
   content?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   conversation: Prisma.ConversationCreateNestedOneWithoutMessagesInput
   sender: Prisma.UserCreateNestedOneWithoutDirectMessagesInput
 }
 
 export type DirectMessageUncheckedCreateInput = {
   id?: number
-  conversationId: number
-  senderId: number
   type?: $Enums.MessageType
   content?: string | null
+  conversationId: number
+  senderId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type DirectMessageUpdateInput = {
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversation?: Prisma.ConversationUpdateOneRequiredWithoutMessagesNestedInput
   sender?: Prisma.UserUpdateOneRequiredWithoutDirectMessagesNestedInput
 }
 
 export type DirectMessageUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  conversationId?: Prisma.IntFieldUpdateOperationsInput | number
-  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conversationId?: Prisma.IntFieldUpdateOperationsInput | number
+  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type DirectMessageCreateManyInput = {
   id?: number
-  conversationId: number
-  senderId: number
   type?: $Enums.MessageType
   content?: string | null
+  conversationId: number
+  senderId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type DirectMessageUpdateManyMutationInput = {
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type DirectMessageUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  conversationId?: Prisma.IntFieldUpdateOperationsInput | number
-  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conversationId?: Prisma.IntFieldUpdateOperationsInput | number
+  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type DirectMessageListRelationFilter = {
@@ -357,11 +376,12 @@ export type DirectMessageOrderByRelationAggregateInput = {
 
 export type DirectMessageCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  conversationId?: Prisma.SortOrder
-  senderId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  conversationId?: Prisma.SortOrder
+  senderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type DirectMessageAvgOrderByAggregateInput = {
@@ -372,20 +392,22 @@ export type DirectMessageAvgOrderByAggregateInput = {
 
 export type DirectMessageMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  conversationId?: Prisma.SortOrder
-  senderId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  conversationId?: Prisma.SortOrder
+  senderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type DirectMessageMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  conversationId?: Prisma.SortOrder
-  senderId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  conversationId?: Prisma.SortOrder
+  senderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type DirectMessageSumOrderByAggregateInput = {
@@ -478,23 +500,21 @@ export type DirectMessageUncheckedUpdateManyWithoutConversationNestedInput = {
   deleteMany?: Prisma.DirectMessageScalarWhereInput | Prisma.DirectMessageScalarWhereInput[]
 }
 
-export type EnumMessageTypeFieldUpdateOperationsInput = {
-  set?: $Enums.MessageType
-}
-
 export type DirectMessageCreateWithoutSenderInput = {
   type?: $Enums.MessageType
   content?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   conversation: Prisma.ConversationCreateNestedOneWithoutMessagesInput
 }
 
 export type DirectMessageUncheckedCreateWithoutSenderInput = {
   id?: number
-  conversationId: number
   type?: $Enums.MessageType
   content?: string | null
+  conversationId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type DirectMessageCreateOrConnectWithoutSenderInput = {
@@ -528,26 +548,29 @@ export type DirectMessageScalarWhereInput = {
   OR?: Prisma.DirectMessageScalarWhereInput[]
   NOT?: Prisma.DirectMessageScalarWhereInput | Prisma.DirectMessageScalarWhereInput[]
   id?: Prisma.IntFilter<"DirectMessage"> | number
-  conversationId?: Prisma.IntFilter<"DirectMessage"> | number
-  senderId?: Prisma.IntFilter<"DirectMessage"> | number
   type?: Prisma.EnumMessageTypeFilter<"DirectMessage"> | $Enums.MessageType
   content?: Prisma.StringNullableFilter<"DirectMessage"> | string | null
+  conversationId?: Prisma.IntFilter<"DirectMessage"> | number
+  senderId?: Prisma.IntFilter<"DirectMessage"> | number
   createdAt?: Prisma.DateTimeFilter<"DirectMessage"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"DirectMessage"> | Date | string
 }
 
 export type DirectMessageCreateWithoutConversationInput = {
   type?: $Enums.MessageType
   content?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   sender: Prisma.UserCreateNestedOneWithoutDirectMessagesInput
 }
 
 export type DirectMessageUncheckedCreateWithoutConversationInput = {
   id?: number
-  senderId: number
   type?: $Enums.MessageType
   content?: string | null
+  senderId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type DirectMessageCreateOrConnectWithoutConversationInput = {
@@ -578,111 +601,123 @@ export type DirectMessageUpdateManyWithWhereWithoutConversationInput = {
 
 export type DirectMessageCreateManySenderInput = {
   id?: number
-  conversationId: number
   type?: $Enums.MessageType
   content?: string | null
+  conversationId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type DirectMessageUpdateWithoutSenderInput = {
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conversation?: Prisma.ConversationUpdateOneRequiredWithoutMessagesNestedInput
 }
 
 export type DirectMessageUncheckedUpdateWithoutSenderInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  conversationId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conversationId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type DirectMessageUncheckedUpdateManyWithoutSenderInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  conversationId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  conversationId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type DirectMessageCreateManyConversationInput = {
   id?: number
-  senderId: number
   type?: $Enums.MessageType
   content?: string | null
+  senderId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type DirectMessageUpdateWithoutConversationInput = {
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.UserUpdateOneRequiredWithoutDirectMessagesNestedInput
 }
 
 export type DirectMessageUncheckedUpdateWithoutConversationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type DirectMessageUncheckedUpdateManyWithoutConversationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
 
 export type DirectMessageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  conversationId?: boolean
-  senderId?: boolean
   type?: boolean
   content?: boolean
+  conversationId?: boolean
+  senderId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
   sender?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["directMessage"]>
 
 export type DirectMessageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  conversationId?: boolean
-  senderId?: boolean
   type?: boolean
   content?: boolean
+  conversationId?: boolean
+  senderId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
   sender?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["directMessage"]>
 
 export type DirectMessageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  conversationId?: boolean
-  senderId?: boolean
   type?: boolean
   content?: boolean
+  conversationId?: boolean
+  senderId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
   sender?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["directMessage"]>
 
 export type DirectMessageSelectScalar = {
   id?: boolean
-  conversationId?: boolean
-  senderId?: boolean
   type?: boolean
   content?: boolean
+  conversationId?: boolean
+  senderId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type DirectMessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "conversationId" | "senderId" | "type" | "content" | "createdAt", ExtArgs["result"]["directMessage"]>
+export type DirectMessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "content" | "conversationId" | "senderId" | "createdAt" | "updatedAt", ExtArgs["result"]["directMessage"]>
 export type DirectMessageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   conversation?: boolean | Prisma.ConversationDefaultArgs<ExtArgs>
   sender?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -704,11 +739,12 @@ export type $DirectMessagePayload<ExtArgs extends runtime.Types.Extensions.Inter
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    conversationId: number
-    senderId: number
     type: $Enums.MessageType
     content: string | null
+    conversationId: number
+    senderId: number
     createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["directMessage"]>
   composites: {}
 }
@@ -1135,11 +1171,12 @@ export interface Prisma__DirectMessageClient<T, Null = never, ExtArgs extends ru
  */
 export interface DirectMessageFieldRefs {
   readonly id: Prisma.FieldRef<"DirectMessage", 'Int'>
-  readonly conversationId: Prisma.FieldRef<"DirectMessage", 'Int'>
-  readonly senderId: Prisma.FieldRef<"DirectMessage", 'Int'>
   readonly type: Prisma.FieldRef<"DirectMessage", 'MessageType'>
   readonly content: Prisma.FieldRef<"DirectMessage", 'String'>
+  readonly conversationId: Prisma.FieldRef<"DirectMessage", 'Int'>
+  readonly senderId: Prisma.FieldRef<"DirectMessage", 'Int'>
   readonly createdAt: Prisma.FieldRef<"DirectMessage", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"DirectMessage", 'DateTime'>
 }
     
 

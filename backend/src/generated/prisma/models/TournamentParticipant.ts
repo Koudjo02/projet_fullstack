@@ -28,80 +28,86 @@ export type AggregateTournamentParticipant = {
 
 export type TournamentParticipantAvgAggregateOutputType = {
   id: number | null
-  tournamentId: number | null
   userId: number | null
+  tournamentId: number | null
   teamId: number | null
 }
 
 export type TournamentParticipantSumAggregateOutputType = {
   id: number | null
-  tournamentId: number | null
   userId: number | null
+  tournamentId: number | null
   teamId: number | null
 }
 
 export type TournamentParticipantMinAggregateOutputType = {
   id: number | null
-  tournamentId: number | null
-  userId: number | null
   role: $Enums.TournamentRole | null
+  userId: number | null
+  tournamentId: number | null
   teamId: number | null
+  createdAt: Date | null
 }
 
 export type TournamentParticipantMaxAggregateOutputType = {
   id: number | null
-  tournamentId: number | null
-  userId: number | null
   role: $Enums.TournamentRole | null
+  userId: number | null
+  tournamentId: number | null
   teamId: number | null
+  createdAt: Date | null
 }
 
 export type TournamentParticipantCountAggregateOutputType = {
   id: number
-  tournamentId: number
-  userId: number
   role: number
+  userId: number
+  tournamentId: number
   teamId: number
+  createdAt: number
   _all: number
 }
 
 
 export type TournamentParticipantAvgAggregateInputType = {
   id?: true
-  tournamentId?: true
   userId?: true
+  tournamentId?: true
   teamId?: true
 }
 
 export type TournamentParticipantSumAggregateInputType = {
   id?: true
-  tournamentId?: true
   userId?: true
+  tournamentId?: true
   teamId?: true
 }
 
 export type TournamentParticipantMinAggregateInputType = {
   id?: true
-  tournamentId?: true
-  userId?: true
   role?: true
+  userId?: true
+  tournamentId?: true
   teamId?: true
+  createdAt?: true
 }
 
 export type TournamentParticipantMaxAggregateInputType = {
   id?: true
-  tournamentId?: true
-  userId?: true
   role?: true
+  userId?: true
+  tournamentId?: true
   teamId?: true
+  createdAt?: true
 }
 
 export type TournamentParticipantCountAggregateInputType = {
   id?: true
-  tournamentId?: true
-  userId?: true
   role?: true
+  userId?: true
+  tournamentId?: true
   teamId?: true
+  createdAt?: true
   _all?: true
 }
 
@@ -193,10 +199,11 @@ export type TournamentParticipantGroupByArgs<ExtArgs extends runtime.Types.Exten
 
 export type TournamentParticipantGroupByOutputType = {
   id: number
-  tournamentId: number
-  userId: number
   role: $Enums.TournamentRole
+  userId: number
+  tournamentId: number
   teamId: number | null
+  createdAt: Date
   _count: TournamentParticipantCountAggregateOutputType | null
   _avg: TournamentParticipantAvgAggregateOutputType | null
   _sum: TournamentParticipantSumAggregateOutputType | null
@@ -224,23 +231,25 @@ export type TournamentParticipantWhereInput = {
   OR?: Prisma.TournamentParticipantWhereInput[]
   NOT?: Prisma.TournamentParticipantWhereInput | Prisma.TournamentParticipantWhereInput[]
   id?: Prisma.IntFilter<"TournamentParticipant"> | number
-  tournamentId?: Prisma.IntFilter<"TournamentParticipant"> | number
-  userId?: Prisma.IntFilter<"TournamentParticipant"> | number
   role?: Prisma.EnumTournamentRoleFilter<"TournamentParticipant"> | $Enums.TournamentRole
+  userId?: Prisma.IntFilter<"TournamentParticipant"> | number
+  tournamentId?: Prisma.IntFilter<"TournamentParticipant"> | number
   teamId?: Prisma.IntNullableFilter<"TournamentParticipant"> | number | null
-  tournament?: Prisma.XOR<Prisma.TournamentScalarRelationFilter, Prisma.TournamentWhereInput>
+  createdAt?: Prisma.DateTimeFilter<"TournamentParticipant"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  tournament?: Prisma.XOR<Prisma.TournamentScalarRelationFilter, Prisma.TournamentWhereInput>
   team?: Prisma.XOR<Prisma.TeamNullableScalarRelationFilter, Prisma.TeamWhereInput> | null
 }
 
 export type TournamentParticipantOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  tournamentId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  tournamentId?: Prisma.SortOrder
   teamId?: Prisma.SortOrderInput | Prisma.SortOrder
-  tournament?: Prisma.TournamentOrderByWithRelationInput
+  createdAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  tournament?: Prisma.TournamentOrderByWithRelationInput
   team?: Prisma.TeamOrderByWithRelationInput
 }
 
@@ -250,21 +259,23 @@ export type TournamentParticipantWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.TournamentParticipantWhereInput | Prisma.TournamentParticipantWhereInput[]
   OR?: Prisma.TournamentParticipantWhereInput[]
   NOT?: Prisma.TournamentParticipantWhereInput | Prisma.TournamentParticipantWhereInput[]
-  tournamentId?: Prisma.IntFilter<"TournamentParticipant"> | number
-  userId?: Prisma.IntFilter<"TournamentParticipant"> | number
   role?: Prisma.EnumTournamentRoleFilter<"TournamentParticipant"> | $Enums.TournamentRole
+  userId?: Prisma.IntFilter<"TournamentParticipant"> | number
+  tournamentId?: Prisma.IntFilter<"TournamentParticipant"> | number
   teamId?: Prisma.IntNullableFilter<"TournamentParticipant"> | number | null
-  tournament?: Prisma.XOR<Prisma.TournamentScalarRelationFilter, Prisma.TournamentWhereInput>
+  createdAt?: Prisma.DateTimeFilter<"TournamentParticipant"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  tournament?: Prisma.XOR<Prisma.TournamentScalarRelationFilter, Prisma.TournamentWhereInput>
   team?: Prisma.XOR<Prisma.TeamNullableScalarRelationFilter, Prisma.TeamWhereInput> | null
 }, "id" | "tournamentId_userId">
 
 export type TournamentParticipantOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  tournamentId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  tournamentId?: Prisma.SortOrder
   teamId?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   _count?: Prisma.TournamentParticipantCountOrderByAggregateInput
   _avg?: Prisma.TournamentParticipantAvgOrderByAggregateInput
   _max?: Prisma.TournamentParticipantMaxOrderByAggregateInput
@@ -277,60 +288,68 @@ export type TournamentParticipantScalarWhereWithAggregatesInput = {
   OR?: Prisma.TournamentParticipantScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TournamentParticipantScalarWhereWithAggregatesInput | Prisma.TournamentParticipantScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"TournamentParticipant"> | number
-  tournamentId?: Prisma.IntWithAggregatesFilter<"TournamentParticipant"> | number
-  userId?: Prisma.IntWithAggregatesFilter<"TournamentParticipant"> | number
   role?: Prisma.EnumTournamentRoleWithAggregatesFilter<"TournamentParticipant"> | $Enums.TournamentRole
+  userId?: Prisma.IntWithAggregatesFilter<"TournamentParticipant"> | number
+  tournamentId?: Prisma.IntWithAggregatesFilter<"TournamentParticipant"> | number
   teamId?: Prisma.IntNullableWithAggregatesFilter<"TournamentParticipant"> | number | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"TournamentParticipant"> | Date | string
 }
 
 export type TournamentParticipantCreateInput = {
   role?: $Enums.TournamentRole
-  tournament: Prisma.TournamentCreateNestedOneWithoutParticipantsInput
+  createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutParticipationsInput
+  tournament: Prisma.TournamentCreateNestedOneWithoutParticipantsInput
   team?: Prisma.TeamCreateNestedOneWithoutParticipantsInput
 }
 
 export type TournamentParticipantUncheckedCreateInput = {
   id?: number
-  tournamentId: number
-  userId: number
   role?: $Enums.TournamentRole
+  userId: number
+  tournamentId: number
   teamId?: number | null
+  createdAt?: Date | string
 }
 
 export type TournamentParticipantUpdateInput = {
   role?: Prisma.EnumTournamentRoleFieldUpdateOperationsInput | $Enums.TournamentRole
-  tournament?: Prisma.TournamentUpdateOneRequiredWithoutParticipantsNestedInput
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutParticipationsNestedInput
+  tournament?: Prisma.TournamentUpdateOneRequiredWithoutParticipantsNestedInput
   team?: Prisma.TeamUpdateOneWithoutParticipantsNestedInput
 }
 
 export type TournamentParticipantUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  tournamentId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumTournamentRoleFieldUpdateOperationsInput | $Enums.TournamentRole
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  tournamentId?: Prisma.IntFieldUpdateOperationsInput | number
   teamId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TournamentParticipantCreateManyInput = {
   id?: number
-  tournamentId: number
-  userId: number
   role?: $Enums.TournamentRole
+  userId: number
+  tournamentId: number
   teamId?: number | null
+  createdAt?: Date | string
 }
 
 export type TournamentParticipantUpdateManyMutationInput = {
   role?: Prisma.EnumTournamentRoleFieldUpdateOperationsInput | $Enums.TournamentRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TournamentParticipantUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  tournamentId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumTournamentRoleFieldUpdateOperationsInput | $Enums.TournamentRole
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  tournamentId?: Prisma.IntFieldUpdateOperationsInput | number
   teamId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TournamentParticipantListRelationFilter = {
@@ -350,39 +369,42 @@ export type TournamentParticipantTournamentIdUserIdCompoundUniqueInput = {
 
 export type TournamentParticipantCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  tournamentId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  tournamentId?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type TournamentParticipantAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  tournamentId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  tournamentId?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
 }
 
 export type TournamentParticipantMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  tournamentId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  tournamentId?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type TournamentParticipantMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  tournamentId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  tournamentId?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type TournamentParticipantSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  tournamentId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  tournamentId?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
 }
 
@@ -526,15 +548,17 @@ export type TournamentParticipantUncheckedUpdateManyWithoutTeamNestedInput = {
 
 export type TournamentParticipantCreateWithoutUserInput = {
   role?: $Enums.TournamentRole
+  createdAt?: Date | string
   tournament: Prisma.TournamentCreateNestedOneWithoutParticipantsInput
   team?: Prisma.TeamCreateNestedOneWithoutParticipantsInput
 }
 
 export type TournamentParticipantUncheckedCreateWithoutUserInput = {
   id?: number
-  tournamentId: number
   role?: $Enums.TournamentRole
+  tournamentId: number
   teamId?: number | null
+  createdAt?: Date | string
 }
 
 export type TournamentParticipantCreateOrConnectWithoutUserInput = {
@@ -568,23 +592,26 @@ export type TournamentParticipantScalarWhereInput = {
   OR?: Prisma.TournamentParticipantScalarWhereInput[]
   NOT?: Prisma.TournamentParticipantScalarWhereInput | Prisma.TournamentParticipantScalarWhereInput[]
   id?: Prisma.IntFilter<"TournamentParticipant"> | number
-  tournamentId?: Prisma.IntFilter<"TournamentParticipant"> | number
-  userId?: Prisma.IntFilter<"TournamentParticipant"> | number
   role?: Prisma.EnumTournamentRoleFilter<"TournamentParticipant"> | $Enums.TournamentRole
+  userId?: Prisma.IntFilter<"TournamentParticipant"> | number
+  tournamentId?: Prisma.IntFilter<"TournamentParticipant"> | number
   teamId?: Prisma.IntNullableFilter<"TournamentParticipant"> | number | null
+  createdAt?: Prisma.DateTimeFilter<"TournamentParticipant"> | Date | string
 }
 
 export type TournamentParticipantCreateWithoutTournamentInput = {
   role?: $Enums.TournamentRole
+  createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutParticipationsInput
   team?: Prisma.TeamCreateNestedOneWithoutParticipantsInput
 }
 
 export type TournamentParticipantUncheckedCreateWithoutTournamentInput = {
   id?: number
-  userId: number
   role?: $Enums.TournamentRole
+  userId: number
   teamId?: number | null
+  createdAt?: Date | string
 }
 
 export type TournamentParticipantCreateOrConnectWithoutTournamentInput = {
@@ -615,15 +642,17 @@ export type TournamentParticipantUpdateManyWithWhereWithoutTournamentInput = {
 
 export type TournamentParticipantCreateWithoutTeamInput = {
   role?: $Enums.TournamentRole
-  tournament: Prisma.TournamentCreateNestedOneWithoutParticipantsInput
+  createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutParticipationsInput
+  tournament: Prisma.TournamentCreateNestedOneWithoutParticipantsInput
 }
 
 export type TournamentParticipantUncheckedCreateWithoutTeamInput = {
   id?: number
-  tournamentId: number
-  userId: number
   role?: $Enums.TournamentRole
+  userId: number
+  tournamentId: number
+  createdAt?: Date | string
 }
 
 export type TournamentParticipantCreateOrConnectWithoutTeamInput = {
@@ -654,158 +683,175 @@ export type TournamentParticipantUpdateManyWithWhereWithoutTeamInput = {
 
 export type TournamentParticipantCreateManyUserInput = {
   id?: number
-  tournamentId: number
   role?: $Enums.TournamentRole
+  tournamentId: number
   teamId?: number | null
+  createdAt?: Date | string
 }
 
 export type TournamentParticipantUpdateWithoutUserInput = {
   role?: Prisma.EnumTournamentRoleFieldUpdateOperationsInput | $Enums.TournamentRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tournament?: Prisma.TournamentUpdateOneRequiredWithoutParticipantsNestedInput
   team?: Prisma.TeamUpdateOneWithoutParticipantsNestedInput
 }
 
 export type TournamentParticipantUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  tournamentId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumTournamentRoleFieldUpdateOperationsInput | $Enums.TournamentRole
+  tournamentId?: Prisma.IntFieldUpdateOperationsInput | number
   teamId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TournamentParticipantUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  tournamentId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumTournamentRoleFieldUpdateOperationsInput | $Enums.TournamentRole
+  tournamentId?: Prisma.IntFieldUpdateOperationsInput | number
   teamId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TournamentParticipantCreateManyTournamentInput = {
   id?: number
-  userId: number
   role?: $Enums.TournamentRole
+  userId: number
   teamId?: number | null
+  createdAt?: Date | string
 }
 
 export type TournamentParticipantUpdateWithoutTournamentInput = {
   role?: Prisma.EnumTournamentRoleFieldUpdateOperationsInput | $Enums.TournamentRole
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutParticipationsNestedInput
   team?: Prisma.TeamUpdateOneWithoutParticipantsNestedInput
 }
 
 export type TournamentParticipantUncheckedUpdateWithoutTournamentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumTournamentRoleFieldUpdateOperationsInput | $Enums.TournamentRole
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   teamId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TournamentParticipantUncheckedUpdateManyWithoutTournamentInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumTournamentRoleFieldUpdateOperationsInput | $Enums.TournamentRole
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
   teamId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TournamentParticipantCreateManyTeamInput = {
   id?: number
-  tournamentId: number
-  userId: number
   role?: $Enums.TournamentRole
+  userId: number
+  tournamentId: number
+  createdAt?: Date | string
 }
 
 export type TournamentParticipantUpdateWithoutTeamInput = {
   role?: Prisma.EnumTournamentRoleFieldUpdateOperationsInput | $Enums.TournamentRole
-  tournament?: Prisma.TournamentUpdateOneRequiredWithoutParticipantsNestedInput
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutParticipationsNestedInput
+  tournament?: Prisma.TournamentUpdateOneRequiredWithoutParticipantsNestedInput
 }
 
 export type TournamentParticipantUncheckedUpdateWithoutTeamInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  tournamentId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumTournamentRoleFieldUpdateOperationsInput | $Enums.TournamentRole
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  tournamentId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TournamentParticipantUncheckedUpdateManyWithoutTeamInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  tournamentId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
   role?: Prisma.EnumTournamentRoleFieldUpdateOperationsInput | $Enums.TournamentRole
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  tournamentId?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
 
 export type TournamentParticipantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  tournamentId?: boolean
-  userId?: boolean
   role?: boolean
+  userId?: boolean
+  tournamentId?: boolean
   teamId?: boolean
-  tournament?: boolean | Prisma.TournamentDefaultArgs<ExtArgs>
+  createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  tournament?: boolean | Prisma.TournamentDefaultArgs<ExtArgs>
   team?: boolean | Prisma.TournamentParticipant$teamArgs<ExtArgs>
 }, ExtArgs["result"]["tournamentParticipant"]>
 
 export type TournamentParticipantSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  tournamentId?: boolean
-  userId?: boolean
   role?: boolean
+  userId?: boolean
+  tournamentId?: boolean
   teamId?: boolean
-  tournament?: boolean | Prisma.TournamentDefaultArgs<ExtArgs>
+  createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  tournament?: boolean | Prisma.TournamentDefaultArgs<ExtArgs>
   team?: boolean | Prisma.TournamentParticipant$teamArgs<ExtArgs>
 }, ExtArgs["result"]["tournamentParticipant"]>
 
 export type TournamentParticipantSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  tournamentId?: boolean
-  userId?: boolean
   role?: boolean
+  userId?: boolean
+  tournamentId?: boolean
   teamId?: boolean
-  tournament?: boolean | Prisma.TournamentDefaultArgs<ExtArgs>
+  createdAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  tournament?: boolean | Prisma.TournamentDefaultArgs<ExtArgs>
   team?: boolean | Prisma.TournamentParticipant$teamArgs<ExtArgs>
 }, ExtArgs["result"]["tournamentParticipant"]>
 
 export type TournamentParticipantSelectScalar = {
   id?: boolean
-  tournamentId?: boolean
-  userId?: boolean
   role?: boolean
+  userId?: boolean
+  tournamentId?: boolean
   teamId?: boolean
+  createdAt?: boolean
 }
 
-export type TournamentParticipantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "tournamentId" | "userId" | "role" | "teamId", ExtArgs["result"]["tournamentParticipant"]>
+export type TournamentParticipantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "role" | "userId" | "tournamentId" | "teamId" | "createdAt", ExtArgs["result"]["tournamentParticipant"]>
 export type TournamentParticipantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  tournament?: boolean | Prisma.TournamentDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  tournament?: boolean | Prisma.TournamentDefaultArgs<ExtArgs>
   team?: boolean | Prisma.TournamentParticipant$teamArgs<ExtArgs>
 }
 export type TournamentParticipantIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  tournament?: boolean | Prisma.TournamentDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  tournament?: boolean | Prisma.TournamentDefaultArgs<ExtArgs>
   team?: boolean | Prisma.TournamentParticipant$teamArgs<ExtArgs>
 }
 export type TournamentParticipantIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  tournament?: boolean | Prisma.TournamentDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  tournament?: boolean | Prisma.TournamentDefaultArgs<ExtArgs>
   team?: boolean | Prisma.TournamentParticipant$teamArgs<ExtArgs>
 }
 
 export type $TournamentParticipantPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "TournamentParticipant"
   objects: {
-    tournament: Prisma.$TournamentPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
+    tournament: Prisma.$TournamentPayload<ExtArgs>
     team: Prisma.$TeamPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    tournamentId: number
-    userId: number
     role: $Enums.TournamentRole
+    userId: number
+    tournamentId: number
     teamId: number | null
+    createdAt: Date
   }, ExtArgs["result"]["tournamentParticipant"]>
   composites: {}
 }
@@ -1200,8 +1246,8 @@ readonly fields: TournamentParticipantFieldRefs;
  */
 export interface Prisma__TournamentParticipantClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  tournament<T extends Prisma.TournamentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TournamentDefaultArgs<ExtArgs>>): Prisma.Prisma__TournamentClient<runtime.Types.Result.GetResult<Prisma.$TournamentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  tournament<T extends Prisma.TournamentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TournamentDefaultArgs<ExtArgs>>): Prisma.Prisma__TournamentClient<runtime.Types.Result.GetResult<Prisma.$TournamentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   team<T extends Prisma.TournamentParticipant$teamArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TournamentParticipant$teamArgs<ExtArgs>>): Prisma.Prisma__TeamClient<runtime.Types.Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1233,10 +1279,11 @@ export interface Prisma__TournamentParticipantClient<T, Null = never, ExtArgs ex
  */
 export interface TournamentParticipantFieldRefs {
   readonly id: Prisma.FieldRef<"TournamentParticipant", 'Int'>
-  readonly tournamentId: Prisma.FieldRef<"TournamentParticipant", 'Int'>
-  readonly userId: Prisma.FieldRef<"TournamentParticipant", 'Int'>
   readonly role: Prisma.FieldRef<"TournamentParticipant", 'TournamentRole'>
+  readonly userId: Prisma.FieldRef<"TournamentParticipant", 'Int'>
+  readonly tournamentId: Prisma.FieldRef<"TournamentParticipant", 'Int'>
   readonly teamId: Prisma.FieldRef<"TournamentParticipant", 'Int'>
+  readonly createdAt: Prisma.FieldRef<"TournamentParticipant", 'DateTime'>
 }
     
 

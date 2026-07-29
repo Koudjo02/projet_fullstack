@@ -40,29 +40,32 @@ export type MessageSumAggregateOutputType = {
 
 export type MessageMinAggregateOutputType = {
   id: number | null
-  teamId: number | null
-  senderId: number | null
   type: $Enums.MessageType | null
   content: string | null
+  teamId: number | null
+  senderId: number | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type MessageMaxAggregateOutputType = {
   id: number | null
-  teamId: number | null
-  senderId: number | null
   type: $Enums.MessageType | null
   content: string | null
+  teamId: number | null
+  senderId: number | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type MessageCountAggregateOutputType = {
   id: number
-  teamId: number
-  senderId: number
   type: number
   content: number
+  teamId: number
+  senderId: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -81,29 +84,32 @@ export type MessageSumAggregateInputType = {
 
 export type MessageMinAggregateInputType = {
   id?: true
-  teamId?: true
-  senderId?: true
   type?: true
   content?: true
+  teamId?: true
+  senderId?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type MessageMaxAggregateInputType = {
   id?: true
-  teamId?: true
-  senderId?: true
   type?: true
   content?: true
+  teamId?: true
+  senderId?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type MessageCountAggregateInputType = {
   id?: true
-  teamId?: true
-  senderId?: true
   type?: true
   content?: true
+  teamId?: true
+  senderId?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -195,11 +201,12 @@ export type MessageGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type MessageGroupByOutputType = {
   id: number
-  teamId: number
-  senderId: number
   type: $Enums.MessageType
   content: string | null
+  teamId: number
+  senderId: number
   createdAt: Date
+  updatedAt: Date
   _count: MessageCountAggregateOutputType | null
   _avg: MessageAvgAggregateOutputType | null
   _sum: MessageSumAggregateOutputType | null
@@ -227,22 +234,24 @@ export type MessageWhereInput = {
   OR?: Prisma.MessageWhereInput[]
   NOT?: Prisma.MessageWhereInput | Prisma.MessageWhereInput[]
   id?: Prisma.IntFilter<"Message"> | number
-  teamId?: Prisma.IntFilter<"Message"> | number
-  senderId?: Prisma.IntFilter<"Message"> | number
   type?: Prisma.EnumMessageTypeFilter<"Message"> | $Enums.MessageType
   content?: Prisma.StringNullableFilter<"Message"> | string | null
+  teamId?: Prisma.IntFilter<"Message"> | number
+  senderId?: Prisma.IntFilter<"Message"> | number
   createdAt?: Prisma.DateTimeFilter<"Message"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Message"> | Date | string
   team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
   sender?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type MessageOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  teamId?: Prisma.SortOrder
-  senderId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
+  teamId?: Prisma.SortOrder
+  senderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   team?: Prisma.TeamOrderByWithRelationInput
   sender?: Prisma.UserOrderByWithRelationInput
 }
@@ -252,22 +261,24 @@ export type MessageWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.MessageWhereInput | Prisma.MessageWhereInput[]
   OR?: Prisma.MessageWhereInput[]
   NOT?: Prisma.MessageWhereInput | Prisma.MessageWhereInput[]
-  teamId?: Prisma.IntFilter<"Message"> | number
-  senderId?: Prisma.IntFilter<"Message"> | number
   type?: Prisma.EnumMessageTypeFilter<"Message"> | $Enums.MessageType
   content?: Prisma.StringNullableFilter<"Message"> | string | null
+  teamId?: Prisma.IntFilter<"Message"> | number
+  senderId?: Prisma.IntFilter<"Message"> | number
   createdAt?: Prisma.DateTimeFilter<"Message"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Message"> | Date | string
   team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
   sender?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
 export type MessageOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  teamId?: Prisma.SortOrder
-  senderId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
+  teamId?: Prisma.SortOrder
+  senderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.MessageCountOrderByAggregateInput
   _avg?: Prisma.MessageAvgOrderByAggregateInput
   _max?: Prisma.MessageMaxOrderByAggregateInput
@@ -280,69 +291,77 @@ export type MessageScalarWhereWithAggregatesInput = {
   OR?: Prisma.MessageScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MessageScalarWhereWithAggregatesInput | Prisma.MessageScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Message"> | number
-  teamId?: Prisma.IntWithAggregatesFilter<"Message"> | number
-  senderId?: Prisma.IntWithAggregatesFilter<"Message"> | number
   type?: Prisma.EnumMessageTypeWithAggregatesFilter<"Message"> | $Enums.MessageType
   content?: Prisma.StringNullableWithAggregatesFilter<"Message"> | string | null
+  teamId?: Prisma.IntWithAggregatesFilter<"Message"> | number
+  senderId?: Prisma.IntWithAggregatesFilter<"Message"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Message"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Message"> | Date | string
 }
 
 export type MessageCreateInput = {
   type?: $Enums.MessageType
   content?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   team: Prisma.TeamCreateNestedOneWithoutMessagesInput
   sender: Prisma.UserCreateNestedOneWithoutMessagesInput
 }
 
 export type MessageUncheckedCreateInput = {
   id?: number
-  teamId: number
-  senderId: number
   type?: $Enums.MessageType
   content?: string | null
+  teamId: number
+  senderId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type MessageUpdateInput = {
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   team?: Prisma.TeamUpdateOneRequiredWithoutMessagesNestedInput
   sender?: Prisma.UserUpdateOneRequiredWithoutMessagesNestedInput
 }
 
 export type MessageUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  teamId?: Prisma.IntFieldUpdateOperationsInput | number
-  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  teamId?: Prisma.IntFieldUpdateOperationsInput | number
+  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MessageCreateManyInput = {
   id?: number
-  teamId: number
-  senderId: number
   type?: $Enums.MessageType
   content?: string | null
+  teamId: number
+  senderId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type MessageUpdateManyMutationInput = {
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MessageUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  teamId?: Prisma.IntFieldUpdateOperationsInput | number
-  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  teamId?: Prisma.IntFieldUpdateOperationsInput | number
+  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MessageListRelationFilter = {
@@ -357,11 +376,12 @@ export type MessageOrderByRelationAggregateInput = {
 
 export type MessageCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  teamId?: Prisma.SortOrder
-  senderId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  teamId?: Prisma.SortOrder
+  senderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type MessageAvgOrderByAggregateInput = {
@@ -372,20 +392,22 @@ export type MessageAvgOrderByAggregateInput = {
 
 export type MessageMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  teamId?: Prisma.SortOrder
-  senderId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  teamId?: Prisma.SortOrder
+  senderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type MessageMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  teamId?: Prisma.SortOrder
-  senderId?: Prisma.SortOrder
   type?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  teamId?: Prisma.SortOrder
+  senderId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type MessageSumOrderByAggregateInput = {
@@ -478,19 +500,25 @@ export type MessageUncheckedUpdateManyWithoutTeamNestedInput = {
   deleteMany?: Prisma.MessageScalarWhereInput | Prisma.MessageScalarWhereInput[]
 }
 
+export type EnumMessageTypeFieldUpdateOperationsInput = {
+  set?: $Enums.MessageType
+}
+
 export type MessageCreateWithoutSenderInput = {
   type?: $Enums.MessageType
   content?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   team: Prisma.TeamCreateNestedOneWithoutMessagesInput
 }
 
 export type MessageUncheckedCreateWithoutSenderInput = {
   id?: number
-  teamId: number
   type?: $Enums.MessageType
   content?: string | null
+  teamId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type MessageCreateOrConnectWithoutSenderInput = {
@@ -524,26 +552,29 @@ export type MessageScalarWhereInput = {
   OR?: Prisma.MessageScalarWhereInput[]
   NOT?: Prisma.MessageScalarWhereInput | Prisma.MessageScalarWhereInput[]
   id?: Prisma.IntFilter<"Message"> | number
-  teamId?: Prisma.IntFilter<"Message"> | number
-  senderId?: Prisma.IntFilter<"Message"> | number
   type?: Prisma.EnumMessageTypeFilter<"Message"> | $Enums.MessageType
   content?: Prisma.StringNullableFilter<"Message"> | string | null
+  teamId?: Prisma.IntFilter<"Message"> | number
+  senderId?: Prisma.IntFilter<"Message"> | number
   createdAt?: Prisma.DateTimeFilter<"Message"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Message"> | Date | string
 }
 
 export type MessageCreateWithoutTeamInput = {
   type?: $Enums.MessageType
   content?: string | null
   createdAt?: Date | string
+  updatedAt?: Date | string
   sender: Prisma.UserCreateNestedOneWithoutMessagesInput
 }
 
 export type MessageUncheckedCreateWithoutTeamInput = {
   id?: number
-  senderId: number
   type?: $Enums.MessageType
   content?: string | null
+  senderId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type MessageCreateOrConnectWithoutTeamInput = {
@@ -574,111 +605,123 @@ export type MessageUpdateManyWithWhereWithoutTeamInput = {
 
 export type MessageCreateManySenderInput = {
   id?: number
-  teamId: number
   type?: $Enums.MessageType
   content?: string | null
+  teamId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type MessageUpdateWithoutSenderInput = {
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   team?: Prisma.TeamUpdateOneRequiredWithoutMessagesNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutSenderInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  teamId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  teamId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MessageUncheckedUpdateManyWithoutSenderInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  teamId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  teamId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MessageCreateManyTeamInput = {
   id?: number
-  senderId: number
   type?: $Enums.MessageType
   content?: string | null
+  senderId: number
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type MessageUpdateWithoutTeamInput = {
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sender?: Prisma.UserUpdateOneRequiredWithoutMessagesNestedInput
 }
 
 export type MessageUncheckedUpdateWithoutTeamInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type MessageUncheckedUpdateManyWithoutTeamInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.EnumMessageTypeFieldUpdateOperationsInput | $Enums.MessageType
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senderId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
 
 export type MessageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  teamId?: boolean
-  senderId?: boolean
   type?: boolean
   content?: boolean
+  teamId?: boolean
+  senderId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
   sender?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["message"]>
 
 export type MessageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  teamId?: boolean
-  senderId?: boolean
   type?: boolean
   content?: boolean
+  teamId?: boolean
+  senderId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
   sender?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["message"]>
 
 export type MessageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  teamId?: boolean
-  senderId?: boolean
   type?: boolean
   content?: boolean
+  teamId?: boolean
+  senderId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
   sender?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["message"]>
 
 export type MessageSelectScalar = {
   id?: boolean
-  teamId?: boolean
-  senderId?: boolean
   type?: boolean
   content?: boolean
+  teamId?: boolean
+  senderId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type MessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "teamId" | "senderId" | "type" | "content" | "createdAt", ExtArgs["result"]["message"]>
+export type MessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "content" | "teamId" | "senderId" | "createdAt" | "updatedAt", ExtArgs["result"]["message"]>
 export type MessageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
   sender?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -700,11 +743,12 @@ export type $MessagePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    teamId: number
-    senderId: number
     type: $Enums.MessageType
     content: string | null
+    teamId: number
+    senderId: number
     createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["message"]>
   composites: {}
 }
@@ -1131,11 +1175,12 @@ export interface Prisma__MessageClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface MessageFieldRefs {
   readonly id: Prisma.FieldRef<"Message", 'Int'>
-  readonly teamId: Prisma.FieldRef<"Message", 'Int'>
-  readonly senderId: Prisma.FieldRef<"Message", 'Int'>
   readonly type: Prisma.FieldRef<"Message", 'MessageType'>
   readonly content: Prisma.FieldRef<"Message", 'String'>
+  readonly teamId: Prisma.FieldRef<"Message", 'Int'>
+  readonly senderId: Prisma.FieldRef<"Message", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Message", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Message", 'DateTime'>
 }
     
 

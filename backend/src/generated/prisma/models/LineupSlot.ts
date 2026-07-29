@@ -28,86 +28,86 @@ export type AggregateLineupSlot = {
 
 export type LineupSlotAvgAggregateOutputType = {
   id: number | null
-  lineupId: number | null
   userId: number | null
   jerseyNumber: number | null
+  lineupId: number | null
 }
 
 export type LineupSlotSumAggregateOutputType = {
   id: number | null
-  lineupId: number | null
   userId: number | null
   jerseyNumber: number | null
+  lineupId: number | null
 }
 
 export type LineupSlotMinAggregateOutputType = {
   id: number | null
-  lineupId: number | null
   userId: number | null
   jerseyNumber: number | null
   position: $Enums.Position | null
   isStarter: boolean | null
+  lineupId: number | null
 }
 
 export type LineupSlotMaxAggregateOutputType = {
   id: number | null
-  lineupId: number | null
   userId: number | null
   jerseyNumber: number | null
   position: $Enums.Position | null
   isStarter: boolean | null
+  lineupId: number | null
 }
 
 export type LineupSlotCountAggregateOutputType = {
   id: number
-  lineupId: number
   userId: number
   jerseyNumber: number
   position: number
   isStarter: number
+  lineupId: number
   _all: number
 }
 
 
 export type LineupSlotAvgAggregateInputType = {
   id?: true
-  lineupId?: true
   userId?: true
   jerseyNumber?: true
+  lineupId?: true
 }
 
 export type LineupSlotSumAggregateInputType = {
   id?: true
-  lineupId?: true
   userId?: true
   jerseyNumber?: true
+  lineupId?: true
 }
 
 export type LineupSlotMinAggregateInputType = {
   id?: true
-  lineupId?: true
   userId?: true
   jerseyNumber?: true
   position?: true
   isStarter?: true
+  lineupId?: true
 }
 
 export type LineupSlotMaxAggregateInputType = {
   id?: true
-  lineupId?: true
   userId?: true
   jerseyNumber?: true
   position?: true
   isStarter?: true
+  lineupId?: true
 }
 
 export type LineupSlotCountAggregateInputType = {
   id?: true
-  lineupId?: true
   userId?: true
   jerseyNumber?: true
   position?: true
   isStarter?: true
+  lineupId?: true
   _all?: true
 }
 
@@ -199,11 +199,11 @@ export type LineupSlotGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 
 export type LineupSlotGroupByOutputType = {
   id: number
-  lineupId: number
   userId: number
   jerseyNumber: number | null
   position: $Enums.Position | null
   isStarter: boolean
+  lineupId: number
   _count: LineupSlotCountAggregateOutputType | null
   _avg: LineupSlotAvgAggregateOutputType | null
   _sum: LineupSlotSumAggregateOutputType | null
@@ -231,21 +231,21 @@ export type LineupSlotWhereInput = {
   OR?: Prisma.LineupSlotWhereInput[]
   NOT?: Prisma.LineupSlotWhereInput | Prisma.LineupSlotWhereInput[]
   id?: Prisma.IntFilter<"LineupSlot"> | number
-  lineupId?: Prisma.IntFilter<"LineupSlot"> | number
   userId?: Prisma.IntFilter<"LineupSlot"> | number
   jerseyNumber?: Prisma.IntNullableFilter<"LineupSlot"> | number | null
   position?: Prisma.EnumPositionNullableFilter<"LineupSlot"> | $Enums.Position | null
   isStarter?: Prisma.BoolFilter<"LineupSlot"> | boolean
+  lineupId?: Prisma.IntFilter<"LineupSlot"> | number
   lineup?: Prisma.XOR<Prisma.LineupScalarRelationFilter, Prisma.LineupWhereInput>
 }
 
 export type LineupSlotOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  lineupId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   jerseyNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   position?: Prisma.SortOrderInput | Prisma.SortOrder
   isStarter?: Prisma.SortOrder
+  lineupId?: Prisma.SortOrder
   lineup?: Prisma.LineupOrderByWithRelationInput
 }
 
@@ -254,21 +254,21 @@ export type LineupSlotWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.LineupSlotWhereInput | Prisma.LineupSlotWhereInput[]
   OR?: Prisma.LineupSlotWhereInput[]
   NOT?: Prisma.LineupSlotWhereInput | Prisma.LineupSlotWhereInput[]
-  lineupId?: Prisma.IntFilter<"LineupSlot"> | number
   userId?: Prisma.IntFilter<"LineupSlot"> | number
   jerseyNumber?: Prisma.IntNullableFilter<"LineupSlot"> | number | null
   position?: Prisma.EnumPositionNullableFilter<"LineupSlot"> | $Enums.Position | null
   isStarter?: Prisma.BoolFilter<"LineupSlot"> | boolean
+  lineupId?: Prisma.IntFilter<"LineupSlot"> | number
   lineup?: Prisma.XOR<Prisma.LineupScalarRelationFilter, Prisma.LineupWhereInput>
 }, "id">
 
 export type LineupSlotOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  lineupId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   jerseyNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   position?: Prisma.SortOrderInput | Prisma.SortOrder
   isStarter?: Prisma.SortOrder
+  lineupId?: Prisma.SortOrder
   _count?: Prisma.LineupSlotCountOrderByAggregateInput
   _avg?: Prisma.LineupSlotAvgOrderByAggregateInput
   _max?: Prisma.LineupSlotMaxOrderByAggregateInput
@@ -281,11 +281,11 @@ export type LineupSlotScalarWhereWithAggregatesInput = {
   OR?: Prisma.LineupSlotScalarWhereWithAggregatesInput[]
   NOT?: Prisma.LineupSlotScalarWhereWithAggregatesInput | Prisma.LineupSlotScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"LineupSlot"> | number
-  lineupId?: Prisma.IntWithAggregatesFilter<"LineupSlot"> | number
   userId?: Prisma.IntWithAggregatesFilter<"LineupSlot"> | number
   jerseyNumber?: Prisma.IntNullableWithAggregatesFilter<"LineupSlot"> | number | null
   position?: Prisma.EnumPositionNullableWithAggregatesFilter<"LineupSlot"> | $Enums.Position | null
   isStarter?: Prisma.BoolWithAggregatesFilter<"LineupSlot"> | boolean
+  lineupId?: Prisma.IntWithAggregatesFilter<"LineupSlot"> | number
 }
 
 export type LineupSlotCreateInput = {
@@ -298,11 +298,11 @@ export type LineupSlotCreateInput = {
 
 export type LineupSlotUncheckedCreateInput = {
   id?: number
-  lineupId: number
   userId: number
   jerseyNumber?: number | null
   position?: $Enums.Position | null
   isStarter?: boolean
+  lineupId: number
 }
 
 export type LineupSlotUpdateInput = {
@@ -315,20 +315,20 @@ export type LineupSlotUpdateInput = {
 
 export type LineupSlotUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  lineupId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   jerseyNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   position?: Prisma.NullableEnumPositionFieldUpdateOperationsInput | $Enums.Position | null
   isStarter?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lineupId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LineupSlotCreateManyInput = {
   id?: number
-  lineupId: number
   userId: number
   jerseyNumber?: number | null
   position?: $Enums.Position | null
   isStarter?: boolean
+  lineupId: number
 }
 
 export type LineupSlotUpdateManyMutationInput = {
@@ -340,11 +340,11 @@ export type LineupSlotUpdateManyMutationInput = {
 
 export type LineupSlotUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  lineupId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   jerseyNumber?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   position?: Prisma.NullableEnumPositionFieldUpdateOperationsInput | $Enums.Position | null
   isStarter?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lineupId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LineupSlotListRelationFilter = {
@@ -359,43 +359,43 @@ export type LineupSlotOrderByRelationAggregateInput = {
 
 export type LineupSlotCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  lineupId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   jerseyNumber?: Prisma.SortOrder
   position?: Prisma.SortOrder
   isStarter?: Prisma.SortOrder
+  lineupId?: Prisma.SortOrder
 }
 
 export type LineupSlotAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  lineupId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   jerseyNumber?: Prisma.SortOrder
+  lineupId?: Prisma.SortOrder
 }
 
 export type LineupSlotMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  lineupId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   jerseyNumber?: Prisma.SortOrder
   position?: Prisma.SortOrder
   isStarter?: Prisma.SortOrder
+  lineupId?: Prisma.SortOrder
 }
 
 export type LineupSlotMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  lineupId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   jerseyNumber?: Prisma.SortOrder
   position?: Prisma.SortOrder
   isStarter?: Prisma.SortOrder
+  lineupId?: Prisma.SortOrder
 }
 
 export type LineupSlotSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  lineupId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   jerseyNumber?: Prisma.SortOrder
+  lineupId?: Prisma.SortOrder
 }
 
 export type LineupSlotCreateNestedManyWithoutLineupInput = {
@@ -490,11 +490,11 @@ export type LineupSlotScalarWhereInput = {
   OR?: Prisma.LineupSlotScalarWhereInput[]
   NOT?: Prisma.LineupSlotScalarWhereInput | Prisma.LineupSlotScalarWhereInput[]
   id?: Prisma.IntFilter<"LineupSlot"> | number
-  lineupId?: Prisma.IntFilter<"LineupSlot"> | number
   userId?: Prisma.IntFilter<"LineupSlot"> | number
   jerseyNumber?: Prisma.IntNullableFilter<"LineupSlot"> | number | null
   position?: Prisma.EnumPositionNullableFilter<"LineupSlot"> | $Enums.Position | null
   isStarter?: Prisma.BoolFilter<"LineupSlot"> | boolean
+  lineupId?: Prisma.IntFilter<"LineupSlot"> | number
 }
 
 export type LineupSlotCreateManyLineupInput = {
@@ -532,44 +532,44 @@ export type LineupSlotUncheckedUpdateManyWithoutLineupInput = {
 
 export type LineupSlotSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  lineupId?: boolean
   userId?: boolean
   jerseyNumber?: boolean
   position?: boolean
   isStarter?: boolean
+  lineupId?: boolean
   lineup?: boolean | Prisma.LineupDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lineupSlot"]>
 
 export type LineupSlotSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  lineupId?: boolean
   userId?: boolean
   jerseyNumber?: boolean
   position?: boolean
   isStarter?: boolean
+  lineupId?: boolean
   lineup?: boolean | Prisma.LineupDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lineupSlot"]>
 
 export type LineupSlotSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  lineupId?: boolean
   userId?: boolean
   jerseyNumber?: boolean
   position?: boolean
   isStarter?: boolean
+  lineupId?: boolean
   lineup?: boolean | Prisma.LineupDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lineupSlot"]>
 
 export type LineupSlotSelectScalar = {
   id?: boolean
-  lineupId?: boolean
   userId?: boolean
   jerseyNumber?: boolean
   position?: boolean
   isStarter?: boolean
+  lineupId?: boolean
 }
 
-export type LineupSlotOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lineupId" | "userId" | "jerseyNumber" | "position" | "isStarter", ExtArgs["result"]["lineupSlot"]>
+export type LineupSlotOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "jerseyNumber" | "position" | "isStarter" | "lineupId", ExtArgs["result"]["lineupSlot"]>
 export type LineupSlotInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lineup?: boolean | Prisma.LineupDefaultArgs<ExtArgs>
 }
@@ -587,11 +587,11 @@ export type $LineupSlotPayload<ExtArgs extends runtime.Types.Extensions.Internal
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    lineupId: number
     userId: number
     jerseyNumber: number | null
     position: $Enums.Position | null
     isStarter: boolean
+    lineupId: number
   }, ExtArgs["result"]["lineupSlot"]>
   composites: {}
 }
@@ -1017,11 +1017,11 @@ export interface Prisma__LineupSlotClient<T, Null = never, ExtArgs extends runti
  */
 export interface LineupSlotFieldRefs {
   readonly id: Prisma.FieldRef<"LineupSlot", 'Int'>
-  readonly lineupId: Prisma.FieldRef<"LineupSlot", 'Int'>
   readonly userId: Prisma.FieldRef<"LineupSlot", 'Int'>
   readonly jerseyNumber: Prisma.FieldRef<"LineupSlot", 'Int'>
   readonly position: Prisma.FieldRef<"LineupSlot", 'Position'>
   readonly isStarter: Prisma.FieldRef<"LineupSlot", 'Boolean'>
+  readonly lineupId: Prisma.FieldRef<"LineupSlot", 'Int'>
 }
     
 

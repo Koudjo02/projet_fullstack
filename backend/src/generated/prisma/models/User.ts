@@ -37,6 +37,7 @@ export type UserSumAggregateOutputType = {
 export type UserMinAggregateOutputType = {
   id: number | null
   email: string | null
+  platformRole: $Enums.PlatformRole | null
   name: string | null
   username: string | null
   bio: string | null
@@ -46,6 +47,7 @@ export type UserMinAggregateOutputType = {
   city: string | null
   district: string | null
   favoritePosition: $Enums.FavoritePosition | null
+  preferredFoot: $Enums.PreferredFoot | null
   profileCompleted: boolean | null
   createdAt: Date | null
 }
@@ -53,6 +55,7 @@ export type UserMinAggregateOutputType = {
 export type UserMaxAggregateOutputType = {
   id: number | null
   email: string | null
+  platformRole: $Enums.PlatformRole | null
   name: string | null
   username: string | null
   bio: string | null
@@ -62,6 +65,7 @@ export type UserMaxAggregateOutputType = {
   city: string | null
   district: string | null
   favoritePosition: $Enums.FavoritePosition | null
+  preferredFoot: $Enums.PreferredFoot | null
   profileCompleted: boolean | null
   createdAt: Date | null
 }
@@ -69,6 +73,7 @@ export type UserMaxAggregateOutputType = {
 export type UserCountAggregateOutputType = {
   id: number
   email: number
+  platformRole: number
   name: number
   username: number
   bio: number
@@ -78,6 +83,7 @@ export type UserCountAggregateOutputType = {
   city: number
   district: number
   favoritePosition: number
+  preferredFoot: number
   profileCompleted: number
   createdAt: number
   _all: number
@@ -95,6 +101,7 @@ export type UserSumAggregateInputType = {
 export type UserMinAggregateInputType = {
   id?: true
   email?: true
+  platformRole?: true
   name?: true
   username?: true
   bio?: true
@@ -104,6 +111,7 @@ export type UserMinAggregateInputType = {
   city?: true
   district?: true
   favoritePosition?: true
+  preferredFoot?: true
   profileCompleted?: true
   createdAt?: true
 }
@@ -111,6 +119,7 @@ export type UserMinAggregateInputType = {
 export type UserMaxAggregateInputType = {
   id?: true
   email?: true
+  platformRole?: true
   name?: true
   username?: true
   bio?: true
@@ -120,6 +129,7 @@ export type UserMaxAggregateInputType = {
   city?: true
   district?: true
   favoritePosition?: true
+  preferredFoot?: true
   profileCompleted?: true
   createdAt?: true
 }
@@ -127,6 +137,7 @@ export type UserMaxAggregateInputType = {
 export type UserCountAggregateInputType = {
   id?: true
   email?: true
+  platformRole?: true
   name?: true
   username?: true
   bio?: true
@@ -136,6 +147,7 @@ export type UserCountAggregateInputType = {
   city?: true
   district?: true
   favoritePosition?: true
+  preferredFoot?: true
   profileCompleted?: true
   createdAt?: true
   _all?: true
@@ -230,6 +242,7 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type UserGroupByOutputType = {
   id: number
   email: string
+  platformRole: $Enums.PlatformRole
   name: string | null
   username: string | null
   bio: string | null
@@ -239,6 +252,7 @@ export type UserGroupByOutputType = {
   city: string | null
   district: string | null
   favoritePosition: $Enums.FavoritePosition | null
+  preferredFoot: $Enums.PreferredFoot | null
   profileCompleted: boolean
   createdAt: Date
   _count: UserCountAggregateOutputType | null
@@ -269,6 +283,7 @@ export type UserWhereInput = {
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   id?: Prisma.IntFilter<"User"> | number
   email?: Prisma.StringFilter<"User"> | string
+  platformRole?: Prisma.EnumPlatformRoleFilter<"User"> | $Enums.PlatformRole
   name?: Prisma.StringNullableFilter<"User"> | string | null
   username?: Prisma.StringNullableFilter<"User"> | string | null
   bio?: Prisma.StringNullableFilter<"User"> | string | null
@@ -278,9 +293,11 @@ export type UserWhereInput = {
   city?: Prisma.StringNullableFilter<"User"> | string | null
   district?: Prisma.StringNullableFilter<"User"> | string | null
   favoritePosition?: Prisma.EnumFavoritePositionNullableFilter<"User"> | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.EnumPreferredFootNullableFilter<"User"> | $Enums.PreferredFoot | null
   profileCompleted?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   createdTournaments?: Prisma.TournamentListRelationFilter
+  createdTeams?: Prisma.TeamListRelationFilter
   participations?: Prisma.TournamentParticipantListRelationFilter
   teamMemberships?: Prisma.TeamMemberListRelationFilter
   messages?: Prisma.MessageListRelationFilter
@@ -292,6 +309,7 @@ export type UserWhereInput = {
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  platformRole?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   username?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -301,9 +319,11 @@ export type UserOrderByWithRelationInput = {
   city?: Prisma.SortOrderInput | Prisma.SortOrder
   district?: Prisma.SortOrderInput | Prisma.SortOrder
   favoritePosition?: Prisma.SortOrderInput | Prisma.SortOrder
+  preferredFoot?: Prisma.SortOrderInput | Prisma.SortOrder
   profileCompleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdTournaments?: Prisma.TournamentOrderByRelationAggregateInput
+  createdTeams?: Prisma.TeamOrderByRelationAggregateInput
   participations?: Prisma.TournamentParticipantOrderByRelationAggregateInput
   teamMemberships?: Prisma.TeamMemberOrderByRelationAggregateInput
   messages?: Prisma.MessageOrderByRelationAggregateInput
@@ -315,32 +335,36 @@ export type UserOrderByWithRelationInput = {
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: number
   email?: string
-  username?: string
   phoneNumber?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
+  platformRole?: Prisma.EnumPlatformRoleFilter<"User"> | $Enums.PlatformRole
   name?: Prisma.StringNullableFilter<"User"> | string | null
+  username?: Prisma.StringNullableFilter<"User"> | string | null
   bio?: Prisma.StringNullableFilter<"User"> | string | null
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   gender?: Prisma.EnumGenderNullableFilter<"User"> | $Enums.Gender | null
   city?: Prisma.StringNullableFilter<"User"> | string | null
   district?: Prisma.StringNullableFilter<"User"> | string | null
   favoritePosition?: Prisma.EnumFavoritePositionNullableFilter<"User"> | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.EnumPreferredFootNullableFilter<"User"> | $Enums.PreferredFoot | null
   profileCompleted?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   createdTournaments?: Prisma.TournamentListRelationFilter
+  createdTeams?: Prisma.TeamListRelationFilter
   participations?: Prisma.TournamentParticipantListRelationFilter
   teamMemberships?: Prisma.TeamMemberListRelationFilter
   messages?: Prisma.MessageListRelationFilter
   directMessages?: Prisma.DirectMessageListRelationFilter
   conversationsAsA?: Prisma.ConversationListRelationFilter
   conversationsAsB?: Prisma.ConversationListRelationFilter
-}, "id" | "email" | "username" | "phoneNumber">
+}, "id" | "email" | "phoneNumber">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  platformRole?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   username?: Prisma.SortOrderInput | Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -350,6 +374,7 @@ export type UserOrderByWithAggregationInput = {
   city?: Prisma.SortOrderInput | Prisma.SortOrder
   district?: Prisma.SortOrderInput | Prisma.SortOrder
   favoritePosition?: Prisma.SortOrderInput | Prisma.SortOrder
+  preferredFoot?: Prisma.SortOrderInput | Prisma.SortOrder
   profileCompleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -365,6 +390,7 @@ export type UserScalarWhereWithAggregatesInput = {
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"User"> | number
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
+  platformRole?: Prisma.EnumPlatformRoleWithAggregatesFilter<"User"> | $Enums.PlatformRole
   name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   username?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   bio?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -374,12 +400,14 @@ export type UserScalarWhereWithAggregatesInput = {
   city?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   district?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   favoritePosition?: Prisma.EnumFavoritePositionNullableWithAggregatesFilter<"User"> | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.EnumPreferredFootNullableWithAggregatesFilter<"User"> | $Enums.PreferredFoot | null
   profileCompleted?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
 export type UserCreateInput = {
   email: string
+  platformRole?: $Enums.PlatformRole
   name?: string | null
   username?: string | null
   bio?: string | null
@@ -389,9 +417,11 @@ export type UserCreateInput = {
   city?: string | null
   district?: string | null
   favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
   profileCompleted?: boolean
   createdAt?: Date | string
   createdTournaments?: Prisma.TournamentCreateNestedManyWithoutAdminInput
+  createdTeams?: Prisma.TeamCreateNestedManyWithoutCreatedByInput
   participations?: Prisma.TournamentParticipantCreateNestedManyWithoutUserInput
   teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
@@ -403,6 +433,7 @@ export type UserCreateInput = {
 export type UserUncheckedCreateInput = {
   id?: number
   email: string
+  platformRole?: $Enums.PlatformRole
   name?: string | null
   username?: string | null
   bio?: string | null
@@ -412,9 +443,11 @@ export type UserUncheckedCreateInput = {
   city?: string | null
   district?: string | null
   favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
   profileCompleted?: boolean
   createdAt?: Date | string
   createdTournaments?: Prisma.TournamentUncheckedCreateNestedManyWithoutAdminInput
+  createdTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatedByInput
   participations?: Prisma.TournamentParticipantUncheckedCreateNestedManyWithoutUserInput
   teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
@@ -425,6 +458,7 @@ export type UserUncheckedCreateInput = {
 
 export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -434,9 +468,11 @@ export type UserUpdateInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdTournaments?: Prisma.TournamentUpdateManyWithoutAdminNestedInput
+  createdTeams?: Prisma.TeamUpdateManyWithoutCreatedByNestedInput
   participations?: Prisma.TournamentParticipantUpdateManyWithoutUserNestedInput
   teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
@@ -448,6 +484,7 @@ export type UserUpdateInput = {
 export type UserUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -457,9 +494,11 @@ export type UserUncheckedUpdateInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdTournaments?: Prisma.TournamentUncheckedUpdateManyWithoutAdminNestedInput
+  createdTeams?: Prisma.TeamUncheckedUpdateManyWithoutCreatedByNestedInput
   participations?: Prisma.TournamentParticipantUncheckedUpdateManyWithoutUserNestedInput
   teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -471,6 +510,7 @@ export type UserUncheckedUpdateInput = {
 export type UserCreateManyInput = {
   id?: number
   email: string
+  platformRole?: $Enums.PlatformRole
   name?: string | null
   username?: string | null
   bio?: string | null
@@ -480,12 +520,14 @@ export type UserCreateManyInput = {
   city?: string | null
   district?: string | null
   favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
   profileCompleted?: boolean
   createdAt?: Date | string
 }
 
 export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -495,6 +537,7 @@ export type UserUpdateManyMutationInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -502,6 +545,7 @@ export type UserUpdateManyMutationInput = {
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -511,6 +555,7 @@ export type UserUncheckedUpdateManyInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -518,6 +563,7 @@ export type UserUncheckedUpdateManyInput = {
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  platformRole?: Prisma.SortOrder
   name?: Prisma.SortOrder
   username?: Prisma.SortOrder
   bio?: Prisma.SortOrder
@@ -527,6 +573,7 @@ export type UserCountOrderByAggregateInput = {
   city?: Prisma.SortOrder
   district?: Prisma.SortOrder
   favoritePosition?: Prisma.SortOrder
+  preferredFoot?: Prisma.SortOrder
   profileCompleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -538,6 +585,7 @@ export type UserAvgOrderByAggregateInput = {
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  platformRole?: Prisma.SortOrder
   name?: Prisma.SortOrder
   username?: Prisma.SortOrder
   bio?: Prisma.SortOrder
@@ -547,6 +595,7 @@ export type UserMaxOrderByAggregateInput = {
   city?: Prisma.SortOrder
   district?: Prisma.SortOrder
   favoritePosition?: Prisma.SortOrder
+  preferredFoot?: Prisma.SortOrder
   profileCompleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -554,6 +603,7 @@ export type UserMaxOrderByAggregateInput = {
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  platformRole?: Prisma.SortOrder
   name?: Prisma.SortOrder
   username?: Prisma.SortOrder
   bio?: Prisma.SortOrder
@@ -563,6 +613,7 @@ export type UserMinOrderByAggregateInput = {
   city?: Prisma.SortOrder
   district?: Prisma.SortOrder
   favoritePosition?: Prisma.SortOrder
+  preferredFoot?: Prisma.SortOrder
   profileCompleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -576,8 +627,17 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type EnumPlatformRoleFieldUpdateOperationsInput = {
+  set?: $Enums.PlatformRole
 }
 
 export type NullableStringFieldUpdateOperationsInput = {
@@ -590,6 +650,10 @@ export type NullableEnumGenderFieldUpdateOperationsInput = {
 
 export type NullableEnumFavoritePositionFieldUpdateOperationsInput = {
   set?: $Enums.FavoritePosition | null
+}
+
+export type NullableEnumPreferredFootFieldUpdateOperationsInput = {
+  set?: $Enums.PreferredFoot | null
 }
 
 export type BoolFieldUpdateOperationsInput = {
@@ -606,6 +670,78 @@ export type IntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type UserCreateNestedOneWithoutCreatedTournamentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedTournamentsInput, Prisma.UserUncheckedCreateWithoutCreatedTournamentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedTournamentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCreatedTournamentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedTournamentsInput, Prisma.UserUncheckedCreateWithoutCreatedTournamentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedTournamentsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedTournamentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedTournamentsInput, Prisma.UserUpdateWithoutCreatedTournamentsInput>, Prisma.UserUncheckedUpdateWithoutCreatedTournamentsInput>
+}
+
+export type UserCreateNestedOneWithoutParticipationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutParticipationsInput, Prisma.UserUncheckedCreateWithoutParticipationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutParticipationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutParticipationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutParticipationsInput, Prisma.UserUncheckedCreateWithoutParticipationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutParticipationsInput
+  upsert?: Prisma.UserUpsertWithoutParticipationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutParticipationsInput, Prisma.UserUpdateWithoutParticipationsInput>, Prisma.UserUncheckedUpdateWithoutParticipationsInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedTeamsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedTeamsInput, Prisma.UserUncheckedCreateWithoutCreatedTeamsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedTeamsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutCreatedTeamsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedTeamsInput, Prisma.UserUncheckedCreateWithoutCreatedTeamsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedTeamsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedTeamsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedTeamsInput, Prisma.UserUpdateWithoutCreatedTeamsInput>, Prisma.UserUncheckedUpdateWithoutCreatedTeamsInput>
+}
+
+export type UserCreateNestedOneWithoutTeamMembershipsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTeamMembershipsInput, Prisma.UserUncheckedCreateWithoutTeamMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTeamMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutTeamMembershipsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutTeamMembershipsInput, Prisma.UserUncheckedCreateWithoutTeamMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTeamMembershipsInput
+  upsert?: Prisma.UserUpsertWithoutTeamMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTeamMembershipsInput, Prisma.UserUpdateWithoutTeamMembershipsInput>, Prisma.UserUncheckedUpdateWithoutTeamMembershipsInput>
+}
+
+export type UserCreateNestedOneWithoutMessagesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMessagesInput, Prisma.UserUncheckedCreateWithoutMessagesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMessagesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMessagesInput, Prisma.UserUncheckedCreateWithoutMessagesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMessagesInput
+  upsert?: Prisma.UserUpsertWithoutMessagesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMessagesInput, Prisma.UserUpdateWithoutMessagesInput>, Prisma.UserUncheckedUpdateWithoutMessagesInput>
 }
 
 export type UserCreateNestedOneWithoutConversationsAsAInput = {
@@ -650,370 +786,9 @@ export type UserUpdateOneRequiredWithoutDirectMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDirectMessagesInput, Prisma.UserUpdateWithoutDirectMessagesInput>, Prisma.UserUncheckedUpdateWithoutDirectMessagesInput>
 }
 
-export type UserCreateNestedOneWithoutCreatedTournamentsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedTournamentsInput, Prisma.UserUncheckedCreateWithoutCreatedTournamentsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedTournamentsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutCreatedTournamentsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedTournamentsInput, Prisma.UserUncheckedCreateWithoutCreatedTournamentsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedTournamentsInput
-  upsert?: Prisma.UserUpsertWithoutCreatedTournamentsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedTournamentsInput, Prisma.UserUpdateWithoutCreatedTournamentsInput>, Prisma.UserUncheckedUpdateWithoutCreatedTournamentsInput>
-}
-
-export type UserCreateNestedOneWithoutParticipationsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutParticipationsInput, Prisma.UserUncheckedCreateWithoutParticipationsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutParticipationsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutParticipationsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutParticipationsInput, Prisma.UserUncheckedCreateWithoutParticipationsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutParticipationsInput
-  upsert?: Prisma.UserUpsertWithoutParticipationsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutParticipationsInput, Prisma.UserUpdateWithoutParticipationsInput>, Prisma.UserUncheckedUpdateWithoutParticipationsInput>
-}
-
-export type UserCreateNestedOneWithoutTeamMembershipsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutTeamMembershipsInput, Prisma.UserUncheckedCreateWithoutTeamMembershipsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTeamMembershipsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutTeamMembershipsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutTeamMembershipsInput, Prisma.UserUncheckedCreateWithoutTeamMembershipsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutTeamMembershipsInput
-  upsert?: Prisma.UserUpsertWithoutTeamMembershipsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTeamMembershipsInput, Prisma.UserUpdateWithoutTeamMembershipsInput>, Prisma.UserUncheckedUpdateWithoutTeamMembershipsInput>
-}
-
-export type UserCreateNestedOneWithoutMessagesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutMessagesInput, Prisma.UserUncheckedCreateWithoutMessagesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMessagesInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutMessagesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutMessagesInput, Prisma.UserUncheckedCreateWithoutMessagesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMessagesInput
-  upsert?: Prisma.UserUpsertWithoutMessagesInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMessagesInput, Prisma.UserUpdateWithoutMessagesInput>, Prisma.UserUncheckedUpdateWithoutMessagesInput>
-}
-
-export type UserCreateWithoutConversationsAsAInput = {
-  email: string
-  name?: string | null
-  username?: string | null
-  bio?: string | null
-  avatarUrl?: string | null
-  phoneNumber?: string | null
-  gender?: $Enums.Gender | null
-  city?: string | null
-  district?: string | null
-  favoritePosition?: $Enums.FavoritePosition | null
-  profileCompleted?: boolean
-  createdAt?: Date | string
-  createdTournaments?: Prisma.TournamentCreateNestedManyWithoutAdminInput
-  participations?: Prisma.TournamentParticipantCreateNestedManyWithoutUserInput
-  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
-  messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  directMessages?: Prisma.DirectMessageCreateNestedManyWithoutSenderInput
-  conversationsAsB?: Prisma.ConversationCreateNestedManyWithoutUserBInput
-}
-
-export type UserUncheckedCreateWithoutConversationsAsAInput = {
-  id?: number
-  email: string
-  name?: string | null
-  username?: string | null
-  bio?: string | null
-  avatarUrl?: string | null
-  phoneNumber?: string | null
-  gender?: $Enums.Gender | null
-  city?: string | null
-  district?: string | null
-  favoritePosition?: $Enums.FavoritePosition | null
-  profileCompleted?: boolean
-  createdAt?: Date | string
-  createdTournaments?: Prisma.TournamentUncheckedCreateNestedManyWithoutAdminInput
-  participations?: Prisma.TournamentParticipantUncheckedCreateNestedManyWithoutUserInput
-  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
-  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  directMessages?: Prisma.DirectMessageUncheckedCreateNestedManyWithoutSenderInput
-  conversationsAsB?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserBInput
-}
-
-export type UserCreateOrConnectWithoutConversationsAsAInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutConversationsAsAInput, Prisma.UserUncheckedCreateWithoutConversationsAsAInput>
-}
-
-export type UserCreateWithoutConversationsAsBInput = {
-  email: string
-  name?: string | null
-  username?: string | null
-  bio?: string | null
-  avatarUrl?: string | null
-  phoneNumber?: string | null
-  gender?: $Enums.Gender | null
-  city?: string | null
-  district?: string | null
-  favoritePosition?: $Enums.FavoritePosition | null
-  profileCompleted?: boolean
-  createdAt?: Date | string
-  createdTournaments?: Prisma.TournamentCreateNestedManyWithoutAdminInput
-  participations?: Prisma.TournamentParticipantCreateNestedManyWithoutUserInput
-  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
-  messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  directMessages?: Prisma.DirectMessageCreateNestedManyWithoutSenderInput
-  conversationsAsA?: Prisma.ConversationCreateNestedManyWithoutUserAInput
-}
-
-export type UserUncheckedCreateWithoutConversationsAsBInput = {
-  id?: number
-  email: string
-  name?: string | null
-  username?: string | null
-  bio?: string | null
-  avatarUrl?: string | null
-  phoneNumber?: string | null
-  gender?: $Enums.Gender | null
-  city?: string | null
-  district?: string | null
-  favoritePosition?: $Enums.FavoritePosition | null
-  profileCompleted?: boolean
-  createdAt?: Date | string
-  createdTournaments?: Prisma.TournamentUncheckedCreateNestedManyWithoutAdminInput
-  participations?: Prisma.TournamentParticipantUncheckedCreateNestedManyWithoutUserInput
-  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
-  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  directMessages?: Prisma.DirectMessageUncheckedCreateNestedManyWithoutSenderInput
-  conversationsAsA?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserAInput
-}
-
-export type UserCreateOrConnectWithoutConversationsAsBInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutConversationsAsBInput, Prisma.UserUncheckedCreateWithoutConversationsAsBInput>
-}
-
-export type UserUpsertWithoutConversationsAsAInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutConversationsAsAInput, Prisma.UserUncheckedUpdateWithoutConversationsAsAInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutConversationsAsAInput, Prisma.UserUncheckedCreateWithoutConversationsAsAInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutConversationsAsAInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutConversationsAsAInput, Prisma.UserUncheckedUpdateWithoutConversationsAsAInput>
-}
-
-export type UserUpdateWithoutConversationsAsAInput = {
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
-  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdTournaments?: Prisma.TournamentUpdateManyWithoutAdminNestedInput
-  participations?: Prisma.TournamentParticipantUpdateManyWithoutUserNestedInput
-  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
-  messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  directMessages?: Prisma.DirectMessageUpdateManyWithoutSenderNestedInput
-  conversationsAsB?: Prisma.ConversationUpdateManyWithoutUserBNestedInput
-}
-
-export type UserUncheckedUpdateWithoutConversationsAsAInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
-  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdTournaments?: Prisma.TournamentUncheckedUpdateManyWithoutAdminNestedInput
-  participations?: Prisma.TournamentParticipantUncheckedUpdateManyWithoutUserNestedInput
-  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
-  messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  directMessages?: Prisma.DirectMessageUncheckedUpdateManyWithoutSenderNestedInput
-  conversationsAsB?: Prisma.ConversationUncheckedUpdateManyWithoutUserBNestedInput
-}
-
-export type UserUpsertWithoutConversationsAsBInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutConversationsAsBInput, Prisma.UserUncheckedUpdateWithoutConversationsAsBInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutConversationsAsBInput, Prisma.UserUncheckedCreateWithoutConversationsAsBInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutConversationsAsBInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutConversationsAsBInput, Prisma.UserUncheckedUpdateWithoutConversationsAsBInput>
-}
-
-export type UserUpdateWithoutConversationsAsBInput = {
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
-  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdTournaments?: Prisma.TournamentUpdateManyWithoutAdminNestedInput
-  participations?: Prisma.TournamentParticipantUpdateManyWithoutUserNestedInput
-  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
-  messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  directMessages?: Prisma.DirectMessageUpdateManyWithoutSenderNestedInput
-  conversationsAsA?: Prisma.ConversationUpdateManyWithoutUserANestedInput
-}
-
-export type UserUncheckedUpdateWithoutConversationsAsBInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
-  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdTournaments?: Prisma.TournamentUncheckedUpdateManyWithoutAdminNestedInput
-  participations?: Prisma.TournamentParticipantUncheckedUpdateManyWithoutUserNestedInput
-  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
-  messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  directMessages?: Prisma.DirectMessageUncheckedUpdateManyWithoutSenderNestedInput
-  conversationsAsA?: Prisma.ConversationUncheckedUpdateManyWithoutUserANestedInput
-}
-
-export type UserCreateWithoutDirectMessagesInput = {
-  email: string
-  name?: string | null
-  username?: string | null
-  bio?: string | null
-  avatarUrl?: string | null
-  phoneNumber?: string | null
-  gender?: $Enums.Gender | null
-  city?: string | null
-  district?: string | null
-  favoritePosition?: $Enums.FavoritePosition | null
-  profileCompleted?: boolean
-  createdAt?: Date | string
-  createdTournaments?: Prisma.TournamentCreateNestedManyWithoutAdminInput
-  participations?: Prisma.TournamentParticipantCreateNestedManyWithoutUserInput
-  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
-  messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  conversationsAsA?: Prisma.ConversationCreateNestedManyWithoutUserAInput
-  conversationsAsB?: Prisma.ConversationCreateNestedManyWithoutUserBInput
-}
-
-export type UserUncheckedCreateWithoutDirectMessagesInput = {
-  id?: number
-  email: string
-  name?: string | null
-  username?: string | null
-  bio?: string | null
-  avatarUrl?: string | null
-  phoneNumber?: string | null
-  gender?: $Enums.Gender | null
-  city?: string | null
-  district?: string | null
-  favoritePosition?: $Enums.FavoritePosition | null
-  profileCompleted?: boolean
-  createdAt?: Date | string
-  createdTournaments?: Prisma.TournamentUncheckedCreateNestedManyWithoutAdminInput
-  participations?: Prisma.TournamentParticipantUncheckedCreateNestedManyWithoutUserInput
-  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
-  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  conversationsAsA?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserAInput
-  conversationsAsB?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserBInput
-}
-
-export type UserCreateOrConnectWithoutDirectMessagesInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutDirectMessagesInput, Prisma.UserUncheckedCreateWithoutDirectMessagesInput>
-}
-
-export type UserUpsertWithoutDirectMessagesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutDirectMessagesInput, Prisma.UserUncheckedUpdateWithoutDirectMessagesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutDirectMessagesInput, Prisma.UserUncheckedCreateWithoutDirectMessagesInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutDirectMessagesInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutDirectMessagesInput, Prisma.UserUncheckedUpdateWithoutDirectMessagesInput>
-}
-
-export type UserUpdateWithoutDirectMessagesInput = {
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
-  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdTournaments?: Prisma.TournamentUpdateManyWithoutAdminNestedInput
-  participations?: Prisma.TournamentParticipantUpdateManyWithoutUserNestedInput
-  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
-  messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  conversationsAsA?: Prisma.ConversationUpdateManyWithoutUserANestedInput
-  conversationsAsB?: Prisma.ConversationUpdateManyWithoutUserBNestedInput
-}
-
-export type UserUncheckedUpdateWithoutDirectMessagesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
-  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
-  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  createdTournaments?: Prisma.TournamentUncheckedUpdateManyWithoutAdminNestedInput
-  participations?: Prisma.TournamentParticipantUncheckedUpdateManyWithoutUserNestedInput
-  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
-  messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  conversationsAsA?: Prisma.ConversationUncheckedUpdateManyWithoutUserANestedInput
-  conversationsAsB?: Prisma.ConversationUncheckedUpdateManyWithoutUserBNestedInput
-}
-
 export type UserCreateWithoutCreatedTournamentsInput = {
   email: string
+  platformRole?: $Enums.PlatformRole
   name?: string | null
   username?: string | null
   bio?: string | null
@@ -1023,8 +798,10 @@ export type UserCreateWithoutCreatedTournamentsInput = {
   city?: string | null
   district?: string | null
   favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
   profileCompleted?: boolean
   createdAt?: Date | string
+  createdTeams?: Prisma.TeamCreateNestedManyWithoutCreatedByInput
   participations?: Prisma.TournamentParticipantCreateNestedManyWithoutUserInput
   teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
@@ -1036,6 +813,7 @@ export type UserCreateWithoutCreatedTournamentsInput = {
 export type UserUncheckedCreateWithoutCreatedTournamentsInput = {
   id?: number
   email: string
+  platformRole?: $Enums.PlatformRole
   name?: string | null
   username?: string | null
   bio?: string | null
@@ -1045,8 +823,10 @@ export type UserUncheckedCreateWithoutCreatedTournamentsInput = {
   city?: string | null
   district?: string | null
   favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
   profileCompleted?: boolean
   createdAt?: Date | string
+  createdTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatedByInput
   participations?: Prisma.TournamentParticipantUncheckedCreateNestedManyWithoutUserInput
   teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
@@ -1073,6 +853,7 @@ export type UserUpdateToOneWithWhereWithoutCreatedTournamentsInput = {
 
 export type UserUpdateWithoutCreatedTournamentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1082,8 +863,10 @@ export type UserUpdateWithoutCreatedTournamentsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdTeams?: Prisma.TeamUpdateManyWithoutCreatedByNestedInput
   participations?: Prisma.TournamentParticipantUpdateManyWithoutUserNestedInput
   teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
@@ -1095,6 +878,7 @@ export type UserUpdateWithoutCreatedTournamentsInput = {
 export type UserUncheckedUpdateWithoutCreatedTournamentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1104,8 +888,10 @@ export type UserUncheckedUpdateWithoutCreatedTournamentsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdTeams?: Prisma.TeamUncheckedUpdateManyWithoutCreatedByNestedInput
   participations?: Prisma.TournamentParticipantUncheckedUpdateManyWithoutUserNestedInput
   teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -1116,6 +902,7 @@ export type UserUncheckedUpdateWithoutCreatedTournamentsInput = {
 
 export type UserCreateWithoutParticipationsInput = {
   email: string
+  platformRole?: $Enums.PlatformRole
   name?: string | null
   username?: string | null
   bio?: string | null
@@ -1125,9 +912,11 @@ export type UserCreateWithoutParticipationsInput = {
   city?: string | null
   district?: string | null
   favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
   profileCompleted?: boolean
   createdAt?: Date | string
   createdTournaments?: Prisma.TournamentCreateNestedManyWithoutAdminInput
+  createdTeams?: Prisma.TeamCreateNestedManyWithoutCreatedByInput
   teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   directMessages?: Prisma.DirectMessageCreateNestedManyWithoutSenderInput
@@ -1138,6 +927,7 @@ export type UserCreateWithoutParticipationsInput = {
 export type UserUncheckedCreateWithoutParticipationsInput = {
   id?: number
   email: string
+  platformRole?: $Enums.PlatformRole
   name?: string | null
   username?: string | null
   bio?: string | null
@@ -1147,9 +937,11 @@ export type UserUncheckedCreateWithoutParticipationsInput = {
   city?: string | null
   district?: string | null
   favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
   profileCompleted?: boolean
   createdAt?: Date | string
   createdTournaments?: Prisma.TournamentUncheckedCreateNestedManyWithoutAdminInput
+  createdTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatedByInput
   teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   directMessages?: Prisma.DirectMessageUncheckedCreateNestedManyWithoutSenderInput
@@ -1175,6 +967,7 @@ export type UserUpdateToOneWithWhereWithoutParticipationsInput = {
 
 export type UserUpdateWithoutParticipationsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1184,9 +977,11 @@ export type UserUpdateWithoutParticipationsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdTournaments?: Prisma.TournamentUpdateManyWithoutAdminNestedInput
+  createdTeams?: Prisma.TeamUpdateManyWithoutCreatedByNestedInput
   teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   directMessages?: Prisma.DirectMessageUpdateManyWithoutSenderNestedInput
@@ -1197,6 +992,7 @@ export type UserUpdateWithoutParticipationsInput = {
 export type UserUncheckedUpdateWithoutParticipationsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1206,9 +1002,11 @@ export type UserUncheckedUpdateWithoutParticipationsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdTournaments?: Prisma.TournamentUncheckedUpdateManyWithoutAdminNestedInput
+  createdTeams?: Prisma.TeamUncheckedUpdateManyWithoutCreatedByNestedInput
   teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   directMessages?: Prisma.DirectMessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -1216,8 +1014,9 @@ export type UserUncheckedUpdateWithoutParticipationsInput = {
   conversationsAsB?: Prisma.ConversationUncheckedUpdateManyWithoutUserBNestedInput
 }
 
-export type UserCreateWithoutTeamMembershipsInput = {
+export type UserCreateWithoutCreatedTeamsInput = {
   email: string
+  platformRole?: $Enums.PlatformRole
   name?: string | null
   username?: string | null
   bio?: string | null
@@ -1227,9 +1026,125 @@ export type UserCreateWithoutTeamMembershipsInput = {
   city?: string | null
   district?: string | null
   favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
   profileCompleted?: boolean
   createdAt?: Date | string
   createdTournaments?: Prisma.TournamentCreateNestedManyWithoutAdminInput
+  participations?: Prisma.TournamentParticipantCreateNestedManyWithoutUserInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  directMessages?: Prisma.DirectMessageCreateNestedManyWithoutSenderInput
+  conversationsAsA?: Prisma.ConversationCreateNestedManyWithoutUserAInput
+  conversationsAsB?: Prisma.ConversationCreateNestedManyWithoutUserBInput
+}
+
+export type UserUncheckedCreateWithoutCreatedTeamsInput = {
+  id?: number
+  email: string
+  platformRole?: $Enums.PlatformRole
+  name?: string | null
+  username?: string | null
+  bio?: string | null
+  avatarUrl?: string | null
+  phoneNumber?: string | null
+  gender?: $Enums.Gender | null
+  city?: string | null
+  district?: string | null
+  favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
+  profileCompleted?: boolean
+  createdAt?: Date | string
+  createdTournaments?: Prisma.TournamentUncheckedCreateNestedManyWithoutAdminInput
+  participations?: Prisma.TournamentParticipantUncheckedCreateNestedManyWithoutUserInput
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  directMessages?: Prisma.DirectMessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsA?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserAInput
+  conversationsAsB?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserBInput
+}
+
+export type UserCreateOrConnectWithoutCreatedTeamsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedTeamsInput, Prisma.UserUncheckedCreateWithoutCreatedTeamsInput>
+}
+
+export type UserUpsertWithoutCreatedTeamsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedTeamsInput, Prisma.UserUncheckedUpdateWithoutCreatedTeamsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedTeamsInput, Prisma.UserUncheckedCreateWithoutCreatedTeamsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedTeamsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedTeamsInput, Prisma.UserUncheckedUpdateWithoutCreatedTeamsInput>
+}
+
+export type UserUpdateWithoutCreatedTeamsInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
+  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdTournaments?: Prisma.TournamentUpdateManyWithoutAdminNestedInput
+  participations?: Prisma.TournamentParticipantUpdateManyWithoutUserNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  directMessages?: Prisma.DirectMessageUpdateManyWithoutSenderNestedInput
+  conversationsAsA?: Prisma.ConversationUpdateManyWithoutUserANestedInput
+  conversationsAsB?: Prisma.ConversationUpdateManyWithoutUserBNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedTeamsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
+  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdTournaments?: Prisma.TournamentUncheckedUpdateManyWithoutAdminNestedInput
+  participations?: Prisma.TournamentParticipantUncheckedUpdateManyWithoutUserNestedInput
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  directMessages?: Prisma.DirectMessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsA?: Prisma.ConversationUncheckedUpdateManyWithoutUserANestedInput
+  conversationsAsB?: Prisma.ConversationUncheckedUpdateManyWithoutUserBNestedInput
+}
+
+export type UserCreateWithoutTeamMembershipsInput = {
+  email: string
+  platformRole?: $Enums.PlatformRole
+  name?: string | null
+  username?: string | null
+  bio?: string | null
+  avatarUrl?: string | null
+  phoneNumber?: string | null
+  gender?: $Enums.Gender | null
+  city?: string | null
+  district?: string | null
+  favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
+  profileCompleted?: boolean
+  createdAt?: Date | string
+  createdTournaments?: Prisma.TournamentCreateNestedManyWithoutAdminInput
+  createdTeams?: Prisma.TeamCreateNestedManyWithoutCreatedByInput
   participations?: Prisma.TournamentParticipantCreateNestedManyWithoutUserInput
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   directMessages?: Prisma.DirectMessageCreateNestedManyWithoutSenderInput
@@ -1240,6 +1155,7 @@ export type UserCreateWithoutTeamMembershipsInput = {
 export type UserUncheckedCreateWithoutTeamMembershipsInput = {
   id?: number
   email: string
+  platformRole?: $Enums.PlatformRole
   name?: string | null
   username?: string | null
   bio?: string | null
@@ -1249,9 +1165,11 @@ export type UserUncheckedCreateWithoutTeamMembershipsInput = {
   city?: string | null
   district?: string | null
   favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
   profileCompleted?: boolean
   createdAt?: Date | string
   createdTournaments?: Prisma.TournamentUncheckedCreateNestedManyWithoutAdminInput
+  createdTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatedByInput
   participations?: Prisma.TournamentParticipantUncheckedCreateNestedManyWithoutUserInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   directMessages?: Prisma.DirectMessageUncheckedCreateNestedManyWithoutSenderInput
@@ -1277,6 +1195,7 @@ export type UserUpdateToOneWithWhereWithoutTeamMembershipsInput = {
 
 export type UserUpdateWithoutTeamMembershipsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1286,9 +1205,11 @@ export type UserUpdateWithoutTeamMembershipsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdTournaments?: Prisma.TournamentUpdateManyWithoutAdminNestedInput
+  createdTeams?: Prisma.TeamUpdateManyWithoutCreatedByNestedInput
   participations?: Prisma.TournamentParticipantUpdateManyWithoutUserNestedInput
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   directMessages?: Prisma.DirectMessageUpdateManyWithoutSenderNestedInput
@@ -1299,6 +1220,7 @@ export type UserUpdateWithoutTeamMembershipsInput = {
 export type UserUncheckedUpdateWithoutTeamMembershipsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1308,9 +1230,11 @@ export type UserUncheckedUpdateWithoutTeamMembershipsInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdTournaments?: Prisma.TournamentUncheckedUpdateManyWithoutAdminNestedInput
+  createdTeams?: Prisma.TeamUncheckedUpdateManyWithoutCreatedByNestedInput
   participations?: Prisma.TournamentParticipantUncheckedUpdateManyWithoutUserNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   directMessages?: Prisma.DirectMessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -1320,6 +1244,7 @@ export type UserUncheckedUpdateWithoutTeamMembershipsInput = {
 
 export type UserCreateWithoutMessagesInput = {
   email: string
+  platformRole?: $Enums.PlatformRole
   name?: string | null
   username?: string | null
   bio?: string | null
@@ -1329,9 +1254,11 @@ export type UserCreateWithoutMessagesInput = {
   city?: string | null
   district?: string | null
   favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
   profileCompleted?: boolean
   createdAt?: Date | string
   createdTournaments?: Prisma.TournamentCreateNestedManyWithoutAdminInput
+  createdTeams?: Prisma.TeamCreateNestedManyWithoutCreatedByInput
   participations?: Prisma.TournamentParticipantCreateNestedManyWithoutUserInput
   teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
   directMessages?: Prisma.DirectMessageCreateNestedManyWithoutSenderInput
@@ -1342,6 +1269,7 @@ export type UserCreateWithoutMessagesInput = {
 export type UserUncheckedCreateWithoutMessagesInput = {
   id?: number
   email: string
+  platformRole?: $Enums.PlatformRole
   name?: string | null
   username?: string | null
   bio?: string | null
@@ -1351,9 +1279,11 @@ export type UserUncheckedCreateWithoutMessagesInput = {
   city?: string | null
   district?: string | null
   favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
   profileCompleted?: boolean
   createdAt?: Date | string
   createdTournaments?: Prisma.TournamentUncheckedCreateNestedManyWithoutAdminInput
+  createdTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatedByInput
   participations?: Prisma.TournamentParticipantUncheckedCreateNestedManyWithoutUserInput
   teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
   directMessages?: Prisma.DirectMessageUncheckedCreateNestedManyWithoutSenderInput
@@ -1379,6 +1309,7 @@ export type UserUpdateToOneWithWhereWithoutMessagesInput = {
 
 export type UserUpdateWithoutMessagesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1388,9 +1319,11 @@ export type UserUpdateWithoutMessagesInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdTournaments?: Prisma.TournamentUpdateManyWithoutAdminNestedInput
+  createdTeams?: Prisma.TeamUpdateManyWithoutCreatedByNestedInput
   participations?: Prisma.TournamentParticipantUpdateManyWithoutUserNestedInput
   teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
   directMessages?: Prisma.DirectMessageUpdateManyWithoutSenderNestedInput
@@ -1401,6 +1334,7 @@ export type UserUpdateWithoutMessagesInput = {
 export type UserUncheckedUpdateWithoutMessagesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1410,12 +1344,356 @@ export type UserUncheckedUpdateWithoutMessagesInput = {
   city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
   profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdTournaments?: Prisma.TournamentUncheckedUpdateManyWithoutAdminNestedInput
+  createdTeams?: Prisma.TeamUncheckedUpdateManyWithoutCreatedByNestedInput
   participations?: Prisma.TournamentParticipantUncheckedUpdateManyWithoutUserNestedInput
   teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
   directMessages?: Prisma.DirectMessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsA?: Prisma.ConversationUncheckedUpdateManyWithoutUserANestedInput
+  conversationsAsB?: Prisma.ConversationUncheckedUpdateManyWithoutUserBNestedInput
+}
+
+export type UserCreateWithoutConversationsAsAInput = {
+  email: string
+  platformRole?: $Enums.PlatformRole
+  name?: string | null
+  username?: string | null
+  bio?: string | null
+  avatarUrl?: string | null
+  phoneNumber?: string | null
+  gender?: $Enums.Gender | null
+  city?: string | null
+  district?: string | null
+  favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
+  profileCompleted?: boolean
+  createdAt?: Date | string
+  createdTournaments?: Prisma.TournamentCreateNestedManyWithoutAdminInput
+  createdTeams?: Prisma.TeamCreateNestedManyWithoutCreatedByInput
+  participations?: Prisma.TournamentParticipantCreateNestedManyWithoutUserInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  directMessages?: Prisma.DirectMessageCreateNestedManyWithoutSenderInput
+  conversationsAsB?: Prisma.ConversationCreateNestedManyWithoutUserBInput
+}
+
+export type UserUncheckedCreateWithoutConversationsAsAInput = {
+  id?: number
+  email: string
+  platformRole?: $Enums.PlatformRole
+  name?: string | null
+  username?: string | null
+  bio?: string | null
+  avatarUrl?: string | null
+  phoneNumber?: string | null
+  gender?: $Enums.Gender | null
+  city?: string | null
+  district?: string | null
+  favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
+  profileCompleted?: boolean
+  createdAt?: Date | string
+  createdTournaments?: Prisma.TournamentUncheckedCreateNestedManyWithoutAdminInput
+  createdTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatedByInput
+  participations?: Prisma.TournamentParticipantUncheckedCreateNestedManyWithoutUserInput
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  directMessages?: Prisma.DirectMessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsB?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserBInput
+}
+
+export type UserCreateOrConnectWithoutConversationsAsAInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutConversationsAsAInput, Prisma.UserUncheckedCreateWithoutConversationsAsAInput>
+}
+
+export type UserCreateWithoutConversationsAsBInput = {
+  email: string
+  platformRole?: $Enums.PlatformRole
+  name?: string | null
+  username?: string | null
+  bio?: string | null
+  avatarUrl?: string | null
+  phoneNumber?: string | null
+  gender?: $Enums.Gender | null
+  city?: string | null
+  district?: string | null
+  favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
+  profileCompleted?: boolean
+  createdAt?: Date | string
+  createdTournaments?: Prisma.TournamentCreateNestedManyWithoutAdminInput
+  createdTeams?: Prisma.TeamCreateNestedManyWithoutCreatedByInput
+  participations?: Prisma.TournamentParticipantCreateNestedManyWithoutUserInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  directMessages?: Prisma.DirectMessageCreateNestedManyWithoutSenderInput
+  conversationsAsA?: Prisma.ConversationCreateNestedManyWithoutUserAInput
+}
+
+export type UserUncheckedCreateWithoutConversationsAsBInput = {
+  id?: number
+  email: string
+  platformRole?: $Enums.PlatformRole
+  name?: string | null
+  username?: string | null
+  bio?: string | null
+  avatarUrl?: string | null
+  phoneNumber?: string | null
+  gender?: $Enums.Gender | null
+  city?: string | null
+  district?: string | null
+  favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
+  profileCompleted?: boolean
+  createdAt?: Date | string
+  createdTournaments?: Prisma.TournamentUncheckedCreateNestedManyWithoutAdminInput
+  createdTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatedByInput
+  participations?: Prisma.TournamentParticipantUncheckedCreateNestedManyWithoutUserInput
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  directMessages?: Prisma.DirectMessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsA?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserAInput
+}
+
+export type UserCreateOrConnectWithoutConversationsAsBInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutConversationsAsBInput, Prisma.UserUncheckedCreateWithoutConversationsAsBInput>
+}
+
+export type UserUpsertWithoutConversationsAsAInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutConversationsAsAInput, Prisma.UserUncheckedUpdateWithoutConversationsAsAInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutConversationsAsAInput, Prisma.UserUncheckedCreateWithoutConversationsAsAInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutConversationsAsAInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutConversationsAsAInput, Prisma.UserUncheckedUpdateWithoutConversationsAsAInput>
+}
+
+export type UserUpdateWithoutConversationsAsAInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
+  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdTournaments?: Prisma.TournamentUpdateManyWithoutAdminNestedInput
+  createdTeams?: Prisma.TeamUpdateManyWithoutCreatedByNestedInput
+  participations?: Prisma.TournamentParticipantUpdateManyWithoutUserNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  directMessages?: Prisma.DirectMessageUpdateManyWithoutSenderNestedInput
+  conversationsAsB?: Prisma.ConversationUpdateManyWithoutUserBNestedInput
+}
+
+export type UserUncheckedUpdateWithoutConversationsAsAInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
+  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdTournaments?: Prisma.TournamentUncheckedUpdateManyWithoutAdminNestedInput
+  createdTeams?: Prisma.TeamUncheckedUpdateManyWithoutCreatedByNestedInput
+  participations?: Prisma.TournamentParticipantUncheckedUpdateManyWithoutUserNestedInput
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  directMessages?: Prisma.DirectMessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsB?: Prisma.ConversationUncheckedUpdateManyWithoutUserBNestedInput
+}
+
+export type UserUpsertWithoutConversationsAsBInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutConversationsAsBInput, Prisma.UserUncheckedUpdateWithoutConversationsAsBInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutConversationsAsBInput, Prisma.UserUncheckedCreateWithoutConversationsAsBInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutConversationsAsBInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutConversationsAsBInput, Prisma.UserUncheckedUpdateWithoutConversationsAsBInput>
+}
+
+export type UserUpdateWithoutConversationsAsBInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
+  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdTournaments?: Prisma.TournamentUpdateManyWithoutAdminNestedInput
+  createdTeams?: Prisma.TeamUpdateManyWithoutCreatedByNestedInput
+  participations?: Prisma.TournamentParticipantUpdateManyWithoutUserNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  directMessages?: Prisma.DirectMessageUpdateManyWithoutSenderNestedInput
+  conversationsAsA?: Prisma.ConversationUpdateManyWithoutUserANestedInput
+}
+
+export type UserUncheckedUpdateWithoutConversationsAsBInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
+  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdTournaments?: Prisma.TournamentUncheckedUpdateManyWithoutAdminNestedInput
+  createdTeams?: Prisma.TeamUncheckedUpdateManyWithoutCreatedByNestedInput
+  participations?: Prisma.TournamentParticipantUncheckedUpdateManyWithoutUserNestedInput
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  directMessages?: Prisma.DirectMessageUncheckedUpdateManyWithoutSenderNestedInput
+  conversationsAsA?: Prisma.ConversationUncheckedUpdateManyWithoutUserANestedInput
+}
+
+export type UserCreateWithoutDirectMessagesInput = {
+  email: string
+  platformRole?: $Enums.PlatformRole
+  name?: string | null
+  username?: string | null
+  bio?: string | null
+  avatarUrl?: string | null
+  phoneNumber?: string | null
+  gender?: $Enums.Gender | null
+  city?: string | null
+  district?: string | null
+  favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
+  profileCompleted?: boolean
+  createdAt?: Date | string
+  createdTournaments?: Prisma.TournamentCreateNestedManyWithoutAdminInput
+  createdTeams?: Prisma.TeamCreateNestedManyWithoutCreatedByInput
+  participations?: Prisma.TournamentParticipantCreateNestedManyWithoutUserInput
+  teamMemberships?: Prisma.TeamMemberCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  conversationsAsA?: Prisma.ConversationCreateNestedManyWithoutUserAInput
+  conversationsAsB?: Prisma.ConversationCreateNestedManyWithoutUserBInput
+}
+
+export type UserUncheckedCreateWithoutDirectMessagesInput = {
+  id?: number
+  email: string
+  platformRole?: $Enums.PlatformRole
+  name?: string | null
+  username?: string | null
+  bio?: string | null
+  avatarUrl?: string | null
+  phoneNumber?: string | null
+  gender?: $Enums.Gender | null
+  city?: string | null
+  district?: string | null
+  favoritePosition?: $Enums.FavoritePosition | null
+  preferredFoot?: $Enums.PreferredFoot | null
+  profileCompleted?: boolean
+  createdAt?: Date | string
+  createdTournaments?: Prisma.TournamentUncheckedCreateNestedManyWithoutAdminInput
+  createdTeams?: Prisma.TeamUncheckedCreateNestedManyWithoutCreatedByInput
+  participations?: Prisma.TournamentParticipantUncheckedCreateNestedManyWithoutUserInput
+  teamMemberships?: Prisma.TeamMemberUncheckedCreateNestedManyWithoutUserInput
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  conversationsAsA?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserAInput
+  conversationsAsB?: Prisma.ConversationUncheckedCreateNestedManyWithoutUserBInput
+}
+
+export type UserCreateOrConnectWithoutDirectMessagesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDirectMessagesInput, Prisma.UserUncheckedCreateWithoutDirectMessagesInput>
+}
+
+export type UserUpsertWithoutDirectMessagesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDirectMessagesInput, Prisma.UserUncheckedUpdateWithoutDirectMessagesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDirectMessagesInput, Prisma.UserUncheckedCreateWithoutDirectMessagesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDirectMessagesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDirectMessagesInput, Prisma.UserUncheckedUpdateWithoutDirectMessagesInput>
+}
+
+export type UserUpdateWithoutDirectMessagesInput = {
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
+  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdTournaments?: Prisma.TournamentUpdateManyWithoutAdminNestedInput
+  createdTeams?: Prisma.TeamUpdateManyWithoutCreatedByNestedInput
+  participations?: Prisma.TournamentParticipantUpdateManyWithoutUserNestedInput
+  teamMemberships?: Prisma.TeamMemberUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  conversationsAsA?: Prisma.ConversationUpdateManyWithoutUserANestedInput
+  conversationsAsB?: Prisma.ConversationUpdateManyWithoutUserBNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDirectMessagesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  platformRole?: Prisma.EnumPlatformRoleFieldUpdateOperationsInput | $Enums.PlatformRole
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  district?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favoritePosition?: Prisma.NullableEnumFavoritePositionFieldUpdateOperationsInput | $Enums.FavoritePosition | null
+  preferredFoot?: Prisma.NullableEnumPreferredFootFieldUpdateOperationsInput | $Enums.PreferredFoot | null
+  profileCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdTournaments?: Prisma.TournamentUncheckedUpdateManyWithoutAdminNestedInput
+  createdTeams?: Prisma.TeamUncheckedUpdateManyWithoutCreatedByNestedInput
+  participations?: Prisma.TournamentParticipantUncheckedUpdateManyWithoutUserNestedInput
+  teamMemberships?: Prisma.TeamMemberUncheckedUpdateManyWithoutUserNestedInput
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationsAsA?: Prisma.ConversationUncheckedUpdateManyWithoutUserANestedInput
   conversationsAsB?: Prisma.ConversationUncheckedUpdateManyWithoutUserBNestedInput
 }
@@ -1427,6 +1705,7 @@ export type UserUncheckedUpdateWithoutMessagesInput = {
 
 export type UserCountOutputType = {
   createdTournaments: number
+  createdTeams: number
   participations: number
   teamMemberships: number
   messages: number
@@ -1437,6 +1716,7 @@ export type UserCountOutputType = {
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdTournaments?: boolean | UserCountOutputTypeCountCreatedTournamentsArgs
+  createdTeams?: boolean | UserCountOutputTypeCountCreatedTeamsArgs
   participations?: boolean | UserCountOutputTypeCountParticipationsArgs
   teamMemberships?: boolean | UserCountOutputTypeCountTeamMembershipsArgs
   messages?: boolean | UserCountOutputTypeCountMessagesArgs
@@ -1460,6 +1740,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
  */
 export type UserCountOutputTypeCountCreatedTournamentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TournamentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TeamWhereInput
 }
 
 /**
@@ -1508,6 +1795,7 @@ export type UserCountOutputTypeCountConversationsAsBArgs<ExtArgs extends runtime
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
+  platformRole?: boolean
   name?: boolean
   username?: boolean
   bio?: boolean
@@ -1517,9 +1805,11 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   city?: boolean
   district?: boolean
   favoritePosition?: boolean
+  preferredFoot?: boolean
   profileCompleted?: boolean
   createdAt?: boolean
   createdTournaments?: boolean | Prisma.User$createdTournamentsArgs<ExtArgs>
+  createdTeams?: boolean | Prisma.User$createdTeamsArgs<ExtArgs>
   participations?: boolean | Prisma.User$participationsArgs<ExtArgs>
   teamMemberships?: boolean | Prisma.User$teamMembershipsArgs<ExtArgs>
   messages?: boolean | Prisma.User$messagesArgs<ExtArgs>
@@ -1532,6 +1822,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
+  platformRole?: boolean
   name?: boolean
   username?: boolean
   bio?: boolean
@@ -1541,6 +1832,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   city?: boolean
   district?: boolean
   favoritePosition?: boolean
+  preferredFoot?: boolean
   profileCompleted?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -1548,6 +1840,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
+  platformRole?: boolean
   name?: boolean
   username?: boolean
   bio?: boolean
@@ -1557,6 +1850,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   city?: boolean
   district?: boolean
   favoritePosition?: boolean
+  preferredFoot?: boolean
   profileCompleted?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -1564,6 +1858,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type UserSelectScalar = {
   id?: boolean
   email?: boolean
+  platformRole?: boolean
   name?: boolean
   username?: boolean
   bio?: boolean
@@ -1573,13 +1868,15 @@ export type UserSelectScalar = {
   city?: boolean
   district?: boolean
   favoritePosition?: boolean
+  preferredFoot?: boolean
   profileCompleted?: boolean
   createdAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "username" | "bio" | "avatarUrl" | "phoneNumber" | "gender" | "city" | "district" | "favoritePosition" | "profileCompleted" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "platformRole" | "name" | "username" | "bio" | "avatarUrl" | "phoneNumber" | "gender" | "city" | "district" | "favoritePosition" | "preferredFoot" | "profileCompleted" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdTournaments?: boolean | Prisma.User$createdTournamentsArgs<ExtArgs>
+  createdTeams?: boolean | Prisma.User$createdTeamsArgs<ExtArgs>
   participations?: boolean | Prisma.User$participationsArgs<ExtArgs>
   teamMemberships?: boolean | Prisma.User$teamMembershipsArgs<ExtArgs>
   messages?: boolean | Prisma.User$messagesArgs<ExtArgs>
@@ -1595,6 +1892,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     createdTournaments: Prisma.$TournamentPayload<ExtArgs>[]
+    createdTeams: Prisma.$TeamPayload<ExtArgs>[]
     participations: Prisma.$TournamentParticipantPayload<ExtArgs>[]
     teamMemberships: Prisma.$TeamMemberPayload<ExtArgs>[]
     messages: Prisma.$MessagePayload<ExtArgs>[]
@@ -1605,6 +1903,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     email: string
+    platformRole: $Enums.PlatformRole
     name: string | null
     username: string | null
     bio: string | null
@@ -1614,6 +1913,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     city: string | null
     district: string | null
     favoritePosition: $Enums.FavoritePosition | null
+    preferredFoot: $Enums.PreferredFoot | null
     profileCompleted: boolean
     createdAt: Date
   }, ExtArgs["result"]["user"]>
@@ -2011,6 +2311,7 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   createdTournaments<T extends Prisma.User$createdTournamentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdTournamentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TournamentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdTeams<T extends Prisma.User$createdTeamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdTeamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   participations<T extends Prisma.User$participationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$participationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TournamentParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   teamMemberships<T extends Prisma.User$teamMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$teamMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   messages<T extends Prisma.User$messagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2048,6 +2349,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'Int'>
   readonly email: Prisma.FieldRef<"User", 'String'>
+  readonly platformRole: Prisma.FieldRef<"User", 'PlatformRole'>
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly username: Prisma.FieldRef<"User", 'String'>
   readonly bio: Prisma.FieldRef<"User", 'String'>
@@ -2057,6 +2359,7 @@ export interface UserFieldRefs {
   readonly city: Prisma.FieldRef<"User", 'String'>
   readonly district: Prisma.FieldRef<"User", 'String'>
   readonly favoritePosition: Prisma.FieldRef<"User", 'FavoritePosition'>
+  readonly preferredFoot: Prisma.FieldRef<"User", 'PreferredFoot'>
   readonly profileCompleted: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
 }
@@ -2473,6 +2776,30 @@ export type User$createdTournamentsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.TournamentScalarFieldEnum | Prisma.TournamentScalarFieldEnum[]
+}
+
+/**
+ * User.createdTeams
+ */
+export type User$createdTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Team
+   */
+  select?: Prisma.TeamSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Team
+   */
+  omit?: Prisma.TeamOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TeamInclude<ExtArgs> | null
+  where?: Prisma.TeamWhereInput
+  orderBy?: Prisma.TeamOrderByWithRelationInput | Prisma.TeamOrderByWithRelationInput[]
+  cursor?: Prisma.TeamWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TeamScalarFieldEnum | Prisma.TeamScalarFieldEnum[]
 }
 
 /**

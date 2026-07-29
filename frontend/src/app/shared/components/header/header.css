@@ -1,0 +1,76 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  background-color: #0a0e0f;
+  border-bottom: 1px solid #1a2422;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+
+.brand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: #1db97a;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.nav {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-link {
+  color: #c7d1cf;
+  text-decoration: none;
+  font-size: 15px;
+  transition: color 0.15s ease;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+}
+
+.nav-link--soon {
+  color: #4a5451;
+  cursor: default;
+}
+
+.btn-login {
+  background-color: #1db97a;
+  color: #0a0e0f;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: opacity 0.15s ease;
+}
+
+.btn-login:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+
+  .header {
+    padding: 16px 20px;
+  }
+}

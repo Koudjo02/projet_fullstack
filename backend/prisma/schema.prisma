@@ -8,6 +8,39 @@ datasource db {
   provider = "postgresql"
 }
 
+// ============================================================
+// ENUMS
+// ============================================================
+
+enum Gender {
+  HOMME
+  FEMME
+}
+
+enum JoinStatus {
+  PENDING  // En attente de validation par le capitaine
+  ACCEPTED // Membre officiel de l'équipe
+  REJECTED // Demande refusée
+}
+
+enum PlatformRole {
+  USER
+  SUPER_ADMIN
+}
+
+enum FavoritePosition {
+  GARDIEN
+  DEFENSEUR
+  MILIEU
+  ATTAQUANT
+}
+
+enum PreferredFoot {
+  DROIT
+  GAUCHE
+  DEUX_PIEDS
+}
+
 enum TournamentRole {
   PLAYER
   CAPTAIN
@@ -15,9 +48,9 @@ enum TournamentRole {
 }
 
 enum TeamRole {
+  PLAYER
   CAPTAIN
   COACH
-  PLAYER
 }
 
 enum Position {
@@ -33,183 +66,270 @@ enum Position {
   ATT
 }
 
+enum SportType {
+  FOOTBALL
+  BASKETBALL
+  TENNIS
+  HANDBALL
+  VOLLEYBALL
+}
+
+enum TournamentFormat {
+  KNOCKOUT    // Élimination directe
+  HYBRID      // Poules + phase finale
+}
+
+enum TournamentStatus {
+  OPEN         // Inscriptions ouvertes
+  IN_PROGRESS  // En cours
+  COMPLETED    // Terminé
+  CANCELLED    // Annulé
+}
+
 enum MessageType {
   TEXT
   IMAGE
   VOICE
   STICKER
+  SYSTEM
+  FILE
 }
 
-enum Gender {
-  HOMME
-  FEMME
-}
-
-enum FavoritePosition {
-  GARDIEN
-  DEFENSEUR
-  MILIEU
-  ATTAQUANT
-}
+// ============================================================
+// USER
+// ============================================================
 
 model User {
-  id                 Int                      @id @default(autoincrement())
-  email              String                   @unique
-  name               String?
-  username            String?                 @unique
-  bio                String?
-  avatarUrl          String?
-  phoneNumber        String?                  @unique
-  gender             Gender?
-  city               String?
-  district           String?
-  favoritePosition   FavoritePosition?
-  profileCompleted   Boolean                  @default(false)
-  createdTournaments Tournament[]             @relation("TournamentAdmin")
+  id               Int               @id @default(autoincrement())
+  email            String            @unique
+  platformRole     PlatformRole      @default(USER)
+  name             String?
+  username         String?
+  bio              String?
+  avatarUrl        String?
+  phoneNumber      String?           @unique
+  gender           Gender?
+  city             String?
+  district         String?
+  favoritePosition FavoritePosition?
+  preferredFoot    PreferredFoot?
+  profileCompleted Boolean           @default(false)
+  createdAt        DateTime          @default(now())
+
+  // Relations
+  createdTournaments Tournament[]            @relation("TournamentAdmin")
+  createdTeams       Team[]                  @relation("TeamCreator") // 👈 AJOUTÉ : Relation vers les équipes créées
   participations     TournamentParticipant[]
   teamMemberships    TeamMember[]
   messages           Message[]
-  directMessages     DirectMessage[]          // messages privés envoyés
-  conversationsAsA   Conversation[]           @relation("ConversationUserA")
-  conversationsAsB   Conversation[]           @relation("ConversationUserB")
-  createdAt          DateTime                 @default(now())
+  directMessages     DirectMessage[]
+  conversationsAsA   Conversation[]          @relation("ConversationUserA")
+  conversationsAsB   Conversation[]          @relation("ConversationUserB")
 }
 
-// Une conversation privée entre exactement 2 utilisateurs.
-// userA/userB sont toujours ordonnés par id croissant (géré dans le service)
-// pour éviter d'avoir 2 conversations différentes entre les mêmes personnes.
-model Conversation {
-  id        Int             @id @default(autoincrement())
-  userA     User            @relation("ConversationUserA", fields: [userAId], references: [id])
-  userAId   Int
-  userB     User            @relation("ConversationUserB", fields: [userBId], references: [id])
-  userBId   Int
-  messages  DirectMessage[]
-  createdAt DateTime        @default(now())
-
-  @@unique([userAId, userBId])
-}
-model Message {
-  id        Int         @id @default(autoincrement())
-  team      Team        @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  teamId    Int
-  sender    User        @relation(fields: [senderId], references: [id])
-  senderId  Int
-  type      MessageType @default(TEXT)
-  content   String?
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-}
-
-model DirectMessage {
-  id             Int          @id @default(autoincrement())
-  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
-  conversationId Int
-  sender         User         @relation(fields: [senderId], references: [id])
-  senderId       Int
-  type           MessageType  @default(TEXT)
-  content        String?
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-}
-
+// ============================================================
+// TOURNAMENT
+// ============================================================
 
 model Tournament {
-  id           Int                      @id @default(autoincrement())
-  name         String
-  inviteCode   String                   @unique
-  admin        User                     @relation("TournamentAdmin", fields: [adminId], references: [id])
-  adminId      Int
+  id          Int     @id @default(autoincrement())
+  name        String
+  slug        String  @unique
+  description String? @db.Text
+
+  // Localisation
+  city     String?
+  location String? // ex: "Stade municipal de Yopougon"
+
+  // Visuels
+  logoUrl   String?
+  bannerUrl String?
+
+  // Paramètres du tournoi
+  sport  SportType        @default(FOOTBALL)
+  format TournamentFormat @default(KNOCKOUT)
+  status TournamentStatus @default(OPEN)
+
+  // Inscriptions & récompense
+  maxTeams Int    @default(10)
+  price    Float? @default(0)
+  reward   String? // ex: "500 000 FCFA + Trophée"
+
+  // Calendrier
+  registrationDeadline DateTime?
+  startDate            DateTime  @default(now())
+  endDate              DateTime?
+
+  // Visibilité, promotion & modération
+  isPublic   Boolean   @default(true)  // L'organisateur souhaite rendre son tournoi public
+  isApproved Boolean   @default(false) // Validation obligatoire par le SUPER_ADMIN !
+  isFeatured Boolean   @default(false)
+  deletedAt  DateTime?                 // Pour le Soft Delete (archivage/suppression propre)
+
+  // Accès & administration
+  inviteCode String @unique
+  adminId    Int
+  admin      User   @relation("TournamentAdmin", fields: [adminId], references: [id])
+
+  // Relations
   participants TournamentParticipant[]
   teams        Team[]
   matches      Match[]
-  createdAt    DateTime                 @default(now())
-}
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Index pour accélérer les filtres du catalogue public
+  @@index([status, isPublic, isApproved])
+  @@index([city])
+  @@index([sport])
+}
 
 model TournamentParticipant {
-  id           Int            @id @default(autoincrement())
-  tournament   Tournament     @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
-  tournamentId Int
-  user         User           @relation(fields: [userId], references: [id])
-  userId       Int
-  role         TournamentRole @default(PLAYER)
-  team         Team?          @relation(fields: [teamId], references: [id])
-  teamId       Int?
+  id   Int            @id @default(autoincrement())
+  role TournamentRole @default(PLAYER)
 
-  @@unique([tournamentId, userId])
+  userId       Int
+  user         User       @relation(fields: [userId], references: [id])
+  tournamentId Int
+  tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+
+  teamId Int?
+  team   Team? @relation(fields: [teamId], references: [id])
+
+  createdAt DateTime @default(now())
+
+@@unique([tournamentId, userId])
 }
 
+// ============================================================
+// TEAM
+// ============================================================
+
 model Team {
-  id           Int                     @id @default(autoincrement())
+  id           Int          @id @default(autoincrement())
   name         String
   logoUrl      String?
-  tournament   Tournament              @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  passcode     String?
+  
+  // Relations d'appartenance
   tournamentId Int
+  tournament   Tournament   @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  
+  // Traçabilité du créateur (Super Admin ou Joueur)
+  createdById  Int?         // 👈 AJOUTÉ
+  createdBy    User?        @relation("TeamCreator", fields: [createdById], references: [id]) // 👈 AJOUTÉ
+
   members      TeamMember[]
   participants TournamentParticipant[]
-  homeMatches  Match[]                 @relation("HomeMatches")
-  awayMatches  Match[]                 @relation("AwayMatches")
+  homeMatches  Match[]      @relation("HomeMatches")
+  awayMatches  Match[]      @relation("AwayMatches")
   lineups      Lineup[]
   messages     Message[]
-  createdAt    DateTime                @default(now())
+  
+  createdAt    DateTime     @default(now())
 }
 
 model TeamMember {
-  id     Int      @id @default(autoincrement())
-  team   Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  id     Int        @id @default(autoincrement())
+  role   TeamRole   @default(PLAYER) // Tolère plusieurs CAPTAIN (max 3 géré au niveau NestJS)
+  status JoinStatus @default(ACCEPTED)
+
   teamId Int
-  user   User     @relation(fields: [userId], references: [id])
+  team   Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
   userId Int
-  role   TeamRole @default(PLAYER)
+  user   User @relation(fields: [userId], references: [id])
 
   @@unique([teamId, userId])
 }
 
+// ============================================================
+// MATCH & LINEUP
+// ============================================================
+
 model Match {
-  id           Int        @id @default(autoincrement())
-  tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  id        Int       @id @default(autoincrement())
+  matchDate DateTime?
+
   tournamentId Int
-  homeTeam     Team       @relation("HomeMatches", fields: [homeTeamId], references: [id])
+  tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
   homeTeamId   Int
-  awayTeam     Team       @relation("AwayMatches", fields: [awayTeamId], references: [id])
+  homeTeam     Team       @relation("HomeMatches", fields: [homeTeamId], references: [id])
   awayTeamId   Int
-  matchDate    DateTime?
-  lineups      Lineup[]
-  createdAt    DateTime   @default(now())
+  awayTeam     Team       @relation("AwayMatches", fields: [awayTeamId], references: [id])
+
+  lineups   Lineup[]
+  createdAt DateTime @default(now())
 }
 
 model Lineup {
-  id        Int          @id @default(autoincrement())
-  match     Match        @relation(fields: [matchId], references: [id], onDelete: Cascade)
-  matchId   Int
-  team      Team         @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  teamId    Int
+  id        Int @id @default(autoincrement())
   createdBy Int
+
+  matchId Int
+  match   Match @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  teamId  Int
+  team    Team  @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
   slots     LineupSlot[]
-  updatedAt DateTime     @updatedAt
   createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
 
   @@unique([matchId, teamId])
 }
 
 model LineupSlot {
   id           Int       @id @default(autoincrement())
-  lineup       Lineup    @relation(fields: [lineupId], references: [id], onDelete: Cascade)
-  lineupId     Int
   userId       Int
   jerseyNumber Int?
   position     Position?
   isStarter    Boolean   @default(true)
+
+  lineupId Int
+  lineup   Lineup @relation(fields: [lineupId], references: [id], onDelete: Cascade)
 }
 
+// ============================================================
+// MESSAGING
+// ============================================================
+
 model Message {
-  id        Int         @id @default(autoincrement())
-  team      Team        @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  teamId    Int
-  sender    User        @relation(fields: [senderId], references: [id])
-  senderId  Int
-  type      MessageType @default(TEXT)
-  content   String?
-  createdAt DateTime    @default(now())
+  id      Int         @id @default(autoincrement())
+  type    MessageType @default(TEXT)
+  content String?
+
+  teamId   Int
+  team     Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  senderId Int
+  sender   User @relation(fields: [senderId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Conversation {
+  id      Int  @id @default(autoincrement())
+  userAId Int
+  userA   User @relation("ConversationUserA", fields: [userAId], references: [id])
+  userBId Int
+  userB   User @relation("ConversationUserB", fields: [userBId], references: [id])
+
+  messages  DirectMessage[]
+  createdAt DateTime        @default(now())
+
+  @@unique([userAId, userBId])
+}
+
+model DirectMessage {
+  id      Int         @id @default(autoincrement())
+  type    MessageType @default(TEXT)
+  content String?
+
+  conversationId Int
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       Int
+  sender         User         @relation(fields: [senderId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
